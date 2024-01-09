@@ -24,18 +24,30 @@ public class SelectionManager
 
     private SelectionManager() { }
 
-    public void Select(SelectableUnit Unit)
+    public void Select(SelectableUnit unit)
     {
-        SelectedUnits.Add(Unit);
+        unit.OnSelected();
+        SelectedUnits.Add(unit);
     }
 
-    public void Deselect(SelectableUnit Unit)
+    public void Deselect(SelectableUnit unit)
     {
-        SelectedUnits.Remove(Unit);
+        unit.OnDeselected();
+        SelectedUnits.Remove(unit);
     }
 
     public void DeselectAll()
     {
+        foreach (SelectableUnit unit in SelectedUnits)
+        {
+            unit.OnDeselected();
+        }
+        
         SelectedUnits.Clear();
+    }
+
+    public bool IsSelected(SelectableUnit unit)
+    {
+        return SelectedUnits.Contains(unit);
     }
 }
