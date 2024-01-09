@@ -15,12 +15,10 @@ public class SelectionManager
 
             return _instance;
         }
-
-        private set => _instance = value;
     }
 
-    public HashSet<SelectableUnit> SelectedUnits = new HashSet<SelectableUnit>();
-    public List<SelectableUnit> AvailableUnits = new List<SelectableUnit>();
+    public readonly HashSet<SelectableUnit> SelectedUnits = new HashSet<SelectableUnit>();
+    public readonly List<SelectableUnit> AvailableUnits = new List<SelectableUnit>();
 
     private SelectionManager() { }
 

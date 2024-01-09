@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         HandleSelectionInputs();
-        HandleMovementInnputs();
+        HandleMovementInputs();
     }
 
     private void HandleSelectionInputs()
@@ -69,7 +69,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void HandleMovementInnputs()
+    private void HandleMovementInputs()
     {
         if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
         {
