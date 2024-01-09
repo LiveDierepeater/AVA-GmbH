@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public DayCounter dayCounter;
+    
     private TextMeshProUGUI timerUI;
     private Image clockIcon;
     
@@ -30,6 +32,7 @@ public class Timer : MonoBehaviour
         else if (remainingTime < 0)
         {
             remainingTime = 0;
+            dayCounter.CurrentDay++;
             return;
         }
         

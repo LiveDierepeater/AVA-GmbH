@@ -723,6 +723,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   dragDelay: 0
+--- !u!1 &1214515547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7570051059713850600, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
+  m_PrefabInstance: {fileID: 1494702382154676944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1214515551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214515547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f35dc719e7df714e84c8def9aac8161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1478122388
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +951,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5396955639297046207, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
+      propertyPath: dayCounter
+      value: 
+      objectReference: {fileID: 1214515551}
+    - target: {fileID: 8091112162824014568, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
+      propertyPath: m_text
+      value: 'Day: 1'
+      objectReference: {fileID: 0}
     - target: {fileID: 9101197817396826834, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1017,7 +1042,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7570051059713850600, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214515551}
   m_SourcePrefab: {fileID: 100100000, guid: 6cbda9fcb3c596c48a99ec5733764399, type: 3}
 --- !u!1001 &1956239307838652420
 PrefabInstance:
