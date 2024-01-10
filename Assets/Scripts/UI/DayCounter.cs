@@ -1,31 +1,34 @@
 using TMPro;
 using UnityEngine;
 
-public class DayCounter : MonoBehaviour
+namespace UI
 {
-    private TextMeshProUGUI dayCounterUI;
-    
-    private int internalCurrentDay = 1;
-    private const string dayLABEL = "Day: ";
-
-    public int CurrentDay
+    public class DayCounter : MonoBehaviour
     {
-        get => internalCurrentDay;
-        set
+        private TextMeshProUGUI dayCounterUI;
+    
+        private int internalCurrentDay = 1;
+        private const string dayLABEL = "Day: ";
+
+        public int CurrentDay
         {
-            internalCurrentDay = value;
+            get => internalCurrentDay;
+            set
+            {
+                internalCurrentDay = value;
+                UpdateUI();
+            }
+        }
+
+        private void Awake()
+        {
+            dayCounterUI = GetComponent<TextMeshProUGUI>();
             UpdateUI();
         }
-    }
 
-    private void Awake()
-    {
-        dayCounterUI = GetComponent<TextMeshProUGUI>();
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        dayCounterUI.text = dayLABEL + CurrentDay;
+        private void UpdateUI()
+        {
+            dayCounterUI.text = dayLABEL + CurrentDay;
+        }
     }
 }

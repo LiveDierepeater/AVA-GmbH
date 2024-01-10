@@ -2,42 +2,45 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+namespace UI
 {
-    public DayCounter dayCounter;
-    
-    private TextMeshProUGUI timerUI;
-    private Image clockIcon;
-    
-    public float remainingTime;
-
-    public Color emergencyColor = Color.red;
-
-    private void Awake()
+    public class Timer : MonoBehaviour
     {
-        timerUI = GetComponent<TextMeshProUGUI>();
-        clockIcon = GetComponentInChildren<Image>();
-    }
+        public DayCounter dayCounter;
+    
+        private TextMeshProUGUI timerUI;
+        private Image clockIcon;
+    
+        public float remainingTime;
 
-    private void Update()
-    {
-        if (remainingTime < 11)
+        public Color emergencyColor = Color.red;
+
+        private void Awake()
         {
-            timerUI.color = emergencyColor;
-            clockIcon.color = emergencyColor;
+            timerUI = GetComponent<TextMeshProUGUI>();
+            clockIcon = GetComponentInChildren<Image>();
         }
-        
-        if (remainingTime > 0)
-            remainingTime -= Time.deltaTime;
-        else if (remainingTime < 0)
+
+        private void Update()
         {
-            remainingTime = 0;
-            dayCounter.CurrentDay++;
-            return;
-        }
+            if (remainingTime < 11)
+            {
+                timerUI.color = emergencyColor;
+                clockIcon.color = emergencyColor;
+            }
         
-        float minutes = Mathf.FloorToInt(remainingTime / 60);
-        float seconds = Mathf.FloorToInt(remainingTime % 60);
-        timerUI.text = $"{minutes:00}:{seconds:00}";
+            if (remainingTime > 0)
+                remainingTime -= Time.deltaTime;
+            else if (remainingTime < 0)
+            {
+                remainingTime = 0;
+                dayCounter.CurrentDay++;
+                return;
+            }
+        
+            float minutes = Mathf.FloorToInt(remainingTime / 60);
+            float seconds = Mathf.FloorToInt(remainingTime % 60);
+            timerUI.text = $"{minutes:00}:{seconds:00}";
+        }
     }
 }

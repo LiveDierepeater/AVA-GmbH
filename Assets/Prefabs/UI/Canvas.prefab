@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayCounter: {fileID: 242972172693797303}
-  remainingTime: 14
+  remainingTime: 100
   emergencyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5615230003585543191
 GameObject:

@@ -1,4 +1,6 @@
 using System;
+using Karts;
+using Task;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +16,7 @@ namespace Charcters
         private GoKart currentGoKart;
         
         private Transform toolSlot;
+        private Tool equippedTool;
 
         public enum States
         {
@@ -62,10 +65,6 @@ namespace Charcters
         {
             currentState = States.RepairKart;
             agent.SetDestination(newDestination);
-            
-            // TODO: Implement Repair Kart Mechanic
-            
-            
         }
 
         private void Update()
@@ -107,13 +106,19 @@ namespace Charcters
             // Check if Unit already has a tool in hand.
             if (toolSlot.transform.childCount != 0)
             {
-                if (toolSlot.transform.GetChild(0).GetComponent<Tool>().toolType == Tool.Type.Wrench)
+                // Check if equipped Tool is from this ToolStation.
+                if (toolSlot.transform.GetChild(0).GetComponent<Tool>().toolType ==
+                    lastToolStationToReach.toolPrefab.GetComponent<Tool>().toolType)
+                {
                     Destroy(toolSlot.transform.GetChild(0).gameObject);
+                    equippedTool = null;
+                }
                 return;
             }
             
             // Add Tool to Unit's Tool Slot (transform)
             Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
+            equippedTool = lastToolStationToReach.toolPrefab.GetComponent<Tool>();
         }
 
         private void RepairCarComponents()
@@ -121,12 +126,22 @@ namespace Charcters
             if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
             
             if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
-
-            CarComponent currentPart = currentGoKart.damagedParts.ToArray()[0];
             
-            currentGoKart.damagedParts.Remove(currentPart);
-            currentGoKart.intactParts.Add(currentPart);
-            TaskManager.Instance.RemoveDamagedPart(currentPart);
+            CarComponent partToRepair = null;                               // Creates place for partToRepair
+
+            // Goes through all damaged parts.
+            // The last damaged part which toolToGetRepaired matches the equipped tool gets saved.
+            foreach (CarComponent damagedPart in TaskManager.Instance.damagedParts)
+                if (damagedPart.toolToRepair.name == equippedTool.name)
+                    partToRepair = damagedPart;
+            
+            // If there is no part which could get repaired witch the currently equipped tool -> return.
+            if (partToRepair == null) return;
+            
+            // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
+            currentGoKart.damagedParts.Remove(partToRepair);
+            currentGoKart.intactParts.Add(partToRepair);
+            TaskManager.Instance.RemoveDamagedPart(partToRepair);
         }
     }
 }

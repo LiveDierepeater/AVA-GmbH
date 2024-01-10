@@ -112,4 +112,4 @@ MonoBehaviour:
   goundAndToolLayerMask:
     serializedVersion: 2
     m_Bits: 384
-  dragDelay: 0
+  dragDelay: 0.1
