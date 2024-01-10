@@ -1,3 +1,4 @@
+using Charcters;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -5,7 +6,7 @@ public class PlayerInput : MonoBehaviour
     private new Camera camera;
     [SerializeField] private RectTransform selectionBox;
     [SerializeField] private LayerMask unitLayers;
-    [SerializeField] private LayerMask groundLayers;
+    [SerializeField] private LayerMask goundAndToolLayerMask;
     [SerializeField] private float dragDelay = 0.1f;
 
     private float mouseDownTime;
@@ -73,11 +74,22 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
         {
-            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundLayers))
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, goundAndToolLayerMask))
             {
-                foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                // If we clicked on a tool.
+                if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools")
                 {
-                    unit.MoveToDestination(hit.point);
+                    foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        unit.GetTool(hit.point, hit.transform);
+                    }
+                }
+                else
+                {
+                    foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        unit.MoveToDestination(hit.point);
+                    }
                 }
             }
         }

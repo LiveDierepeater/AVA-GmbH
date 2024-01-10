@@ -1,51 +1,54 @@
 using System.Collections.Generic;
 
-public class SelectionManager
+namespace Charcters
 {
-    private static SelectionManager _instance;
-
-    public static SelectionManager Instance
+    public class SelectionManager
     {
-        get
+        private static SelectionManager _instance;
+
+        public static SelectionManager Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = new SelectionManager();
+                if (_instance == null)
+                {
+                    _instance = new SelectionManager();
+                }
+
+                return _instance;
             }
-
-            return _instance;
         }
-    }
 
-    public readonly HashSet<SelectableUnit> SelectedUnits = new HashSet<SelectableUnit>();
-    public readonly List<SelectableUnit> AvailableUnits = new List<SelectableUnit>();
+        public readonly HashSet<SelectableUnit> SelectedUnits = new HashSet<SelectableUnit>();
+        public readonly List<SelectableUnit> AvailableUnits = new List<SelectableUnit>();
 
-    private SelectionManager() { }
+        private SelectionManager() { }
 
-    public void Select(SelectableUnit unit)
-    {
-        unit.OnSelected();
-        SelectedUnits.Add(unit);
-    }
+        public void Select(SelectableUnit unit)
+        {
+            unit.OnSelected();
+            SelectedUnits.Add(unit);
+        }
 
-    public void Deselect(SelectableUnit unit)
-    {
-        unit.OnDeselected();
-        SelectedUnits.Remove(unit);
-    }
-
-    public void DeselectAll()
-    {
-        foreach (SelectableUnit unit in SelectedUnits)
+        public void Deselect(SelectableUnit unit)
         {
             unit.OnDeselected();
+            SelectedUnits.Remove(unit);
         }
-        
-        SelectedUnits.Clear();
-    }
 
-    public bool IsSelected(SelectableUnit unit)
-    {
-        return SelectedUnits.Contains(unit);
+        public void DeselectAll()
+        {
+            foreach (SelectableUnit unit in SelectedUnits)
+            {
+                unit.OnDeselected();
+            }
+        
+            SelectedUnits.Clear();
+        }
+
+        public bool IsSelected(SelectableUnit unit)
+        {
+            return SelectedUnits.Contains(unit);
+        }
     }
 }
