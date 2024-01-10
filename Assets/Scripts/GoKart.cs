@@ -16,8 +16,21 @@ public class GoKart : MonoBehaviour
     {
         RollCarComponentsStatus();
         ListInOrderOfStatus();
+        AddCarComponentsToTaskManager();
 
         DEBUG_CarComponents();
+    }
+
+    private void AddCarComponentsToTaskManager()
+    {
+        foreach (CarComponent brokenPart in brokenParts)
+        {
+            TaskManager.Instance.AddBrokenPart(brokenPart);
+        }
+        foreach (CarComponent damagedPart in damagedParts)
+        {
+            TaskManager.Instance.AddDamagedPart(damagedPart);
+        }
     }
 
     private void RollCarComponentsStatus()

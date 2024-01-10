@@ -84,6 +84,13 @@ public class PlayerInput : MonoBehaviour
                         unit.GetTool(hit.point, hit.transform);
                     }
                 }
+                else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Kart")
+                {
+                    foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        unit.RepairKart(hit.point);
+                    }
+                }
                 else
                 {
                     foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)

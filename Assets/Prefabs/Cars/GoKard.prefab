@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 1
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &604552831261333212
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 15
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &684919664762003785
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 3
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &1011125001379605322
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 6
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &1602080111261084732
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 8
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &2184044786374364231
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 10
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &2366919389814109970
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 11
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &2535038473549061158
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 9
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &2854391758782219540
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 12
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &3619039370193752250
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 7
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &3722787671518837474
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 2
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &3765404205315548549
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 13
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &5190580365541812511
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 1081337061335127735}
   - component: {fileID: 8867474027661061234}
   - component: {fileID: 8344087229313591808}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GoKard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,6 +715,10 @@ MonoBehaviour:
   - {fileID: 2746625707472258188}
   - {fileID: 100633852653180651}
   - {fileID: 7765909635380595000}
+  brokenParts: []
+  damagedParts: []
+  intactParts: []
+  debugCarComponents: 0
 --- !u!1 &5319131414108926562
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 0
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &6403183052656700718
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 14
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &7764571373103055983
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 4
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}
 --- !u!1 &8311261231918130403
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,4 +906,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPart: 5
   status: 0
-  toolToRepair: {fileID: 96295912309382189, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
+  toolStationToRepair: {fileID: 0}

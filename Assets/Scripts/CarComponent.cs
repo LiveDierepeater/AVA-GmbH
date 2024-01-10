@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CarComponent : MonoBehaviour
 {
@@ -32,5 +33,5 @@ public class CarComponent : MonoBehaviour
     public CarPart carPart;
     public Status status;
 
-    public Tool toolToRepair;
+    [FormerlySerializedAs("toolToRepair")] public ToolStation toolStationToRepair;
 }

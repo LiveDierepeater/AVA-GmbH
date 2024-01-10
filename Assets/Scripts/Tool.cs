@@ -2,5 +2,12 @@ using UnityEngine;
 
 public class Tool : MonoBehaviour
 {
-    public GameObject toolPrefab;
+    public enum Type
+    {
+        Wrench,
+        Rag,
+        Oil
+    }
+
+    public Type toolType;
 }

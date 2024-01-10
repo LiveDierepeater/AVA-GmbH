@@ -10,7 +10,10 @@ namespace Charcters
         public SpriteRenderer selectionSprite;
         
         private NavMeshAgent agent;
-        private Tool lastToolToReach;
+        private ToolStation lastToolStationToReach;
+        private GoKart currentGoKart;
+        
+        private Transform toolSlot;
 
         public enum States
         {
@@ -26,6 +29,8 @@ namespace Charcters
         {
             SelectionManager.Instance.AvailableUnits.Add(this);
             agent = GetComponent<NavMeshAgent>();
+            currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            toolSlot = transform.Find("Tool Slot");
             
             currentState = States.Idle;
         }
@@ -49,8 +54,18 @@ namespace Charcters
         public void GetTool(Vector3 newDestination, Transform toolToReach)
         {
             currentState = States.GetTool;
-            lastToolToReach = toolToReach.GetComponent<Tool>();
+            lastToolStationToReach = toolToReach.GetComponent<ToolStation>();
             agent.SetDestination(newDestination);
+        }
+
+        public void RepairKart(Vector3 newDestination)
+        {
+            currentState = States.RepairKart;
+            agent.SetDestination(newDestination);
+            
+            // TODO: Implement Repair Kart Mechanic
+            
+            
         }
 
         private void Update()
@@ -68,13 +83,17 @@ namespace Charcters
                 case States.GetTool:
                     if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
                     {
-                        CheckForToolSlot();
                         GrabTool();
                         currentState = States.Idle;
                     }
                     break;
                 
                 case States.RepairKart:
+                    if (agent.remainingDistance <= agent.stoppingDistance)  // Checks if unit reached Kart
+                    {
+                        RepairCarComponents();
+                        currentState = States.Idle;
+                    }
                     break;
                 
                 default:
@@ -83,15 +102,31 @@ namespace Charcters
             
         }
 
-        private void CheckForToolSlot()
-        {
-            // TODO: Check if Unit already has a tool in hand.
-        }
-
         private void GrabTool()
         {
-            // TODO: Add Tool to Unit's Tool Slot (transform)
-            Debug.Log("Tool grabbed");
+            // Check if Unit already has a tool in hand.
+            if (toolSlot.transform.childCount != 0)
+            {
+                if (toolSlot.transform.GetChild(0).GetComponent<Tool>().toolType == Tool.Type.Wrench)
+                    Destroy(toolSlot.transform.GetChild(0).gameObject);
+                return;
+            }
+            
+            // Add Tool to Unit's Tool Slot (transform)
+            Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
+        }
+
+        private void RepairCarComponents()
+        {
+            if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
+            
+            if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
+
+            CarComponent currentPart = currentGoKart.damagedParts.ToArray()[0];
+            
+            currentGoKart.damagedParts.Remove(currentPart);
+            currentGoKart.intactParts.Add(currentPart);
+            TaskManager.Instance.RemoveDamagedPart(currentPart);
         }
     }
 }

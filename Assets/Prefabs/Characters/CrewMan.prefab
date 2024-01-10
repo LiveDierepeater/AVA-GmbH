@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 4296921670060711199}
   - component: {fileID: 1081656217889363346}
   - component: {fileID: 1997208998626200329}
-  - component: {fileID: 2314648962651021923}
   m_Layer: 6
   m_Name: CrewMan
   m_TagString: Untagged
@@ -232,18 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 4998868423959809009}
---- !u!114 &2314648962651021923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7298546806244789632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dbab8ad98b41248bee350636966158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1 &8288977418812237128
 GameObject:
   m_ObjectHideFlags: 0
