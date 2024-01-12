@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Task;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,9 @@ namespace Karts
         public List<CarComponent> intactParts;
 
         public bool debugCarComponents;
+        public bool debugCarComponentsUI;
+
+        public TextMeshProUGUI carComponentsUI;
     
         private void Start()
         {
@@ -22,6 +26,7 @@ namespace Karts
             AddCarComponentsToTaskManager();
 
             DEBUG_CarComponents();
+            DEBUG_CarComponentsUI();
         }
 
         private void AddCarComponentsToTaskManager()
@@ -91,6 +96,22 @@ namespace Karts
             foreach (CarComponent carComponent in intactParts)
             {
                 Debug.Log(carComponent.carPart + ", " + carComponent.status);
+            }
+        }
+
+        private void DEBUG_CarComponentsUI()
+        {
+            if (!debugCarComponentsUI) return;
+
+            carComponentsUI.text = "";
+            
+            foreach (CarComponent carComponent in carComponents)
+            {
+                if (carComponent.status == CarComponent.Status.Damaged)
+                {
+                    carComponentsUI.text += "\n";
+                    carComponentsUI.text += carComponent.name + ", Tool: " + carComponent.toolToRepair.name;
+                }
             }
         }
     }

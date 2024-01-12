@@ -155,6 +155,8 @@ MonoBehaviour:
   damagedParts: []
   intactParts: []
   debugCarComponents: 0
+  debugCarComponentsUI: 1
+  carComponentsUI: {fileID: 0}
 --- !u!1001 &781513792508382756
 PrefabInstance:
   m_ObjectHideFlags: 0
