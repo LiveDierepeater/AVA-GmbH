@@ -1,5 +1,6 @@
-using Characters;
+using System.Linq;
 using UnityEngine;
+using Characters;
 
 namespace Player
 {
@@ -85,9 +86,40 @@ namespace Player
                 
                     // If we clicked on a Kart.
                     else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Kart")
-                        foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
-                            unit.RepairKart(hit.point);
-                
+                        
+                        // If one selected unit has no equipped Tool and wants to Remove or Add CarComponent.
+                        if (SelectionManager.Instance.SelectedUnits.Count == 1)
+                        {
+                            
+                            // If no Tool equipped nor CarComponent.
+                            if (SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 0 &&
+                                SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 0)
+                            {
+                                SelectionManager.Instance.SelectedUnits.ToArray()[0].RemoveCarComponent(hit.point);
+                            }
+                            
+                            // If unit only has a CarComponent and not a Tool equipped.
+                            else if (SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 1 &&
+                                     SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 0)     // TODO: Check here later if it functions properly.
+                            {
+                                SelectionManager.Instance.SelectedUnits.ToArray()[0].AddCarComponent(hit.point);
+                            }
+                            
+                            // If unit only has a Tool and not a CarComponent equipped.
+                            else if (SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 1 &&
+                                     SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 0)
+                            {
+                                SelectionManager.Instance.SelectedUnits.ToArray()[0].RepairKart(hit.point);
+                            }
+                        }
+                        
+                        // If there are multiple units who want to repair things.
+                        else
+                        {
+                            foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                                unit.RepairKart(hit.point);
+                        }
+                    
                     // If we clicked on the Ground.
                     else
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
