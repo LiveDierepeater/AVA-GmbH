@@ -99,7 +99,7 @@ namespace Karts
             }
         }
 
-        private void DEBUG_CarComponentsUI()
+        private void DEBUG_CarComponentsUI() // Shows CarComponents in UI
         {
             if (!debugCarComponentsUI) return;
 
@@ -107,11 +107,10 @@ namespace Karts
             
             foreach (CarComponent carComponent in carComponents)
             {
-                if (carComponent.status == CarComponent.Status.Damaged)
-                {
-                    carComponentsUI.text += "\n";
-                    carComponentsUI.text += carComponent.name + ", Tool: " + carComponent.toolToRepair.name;
-                }
+                if (carComponent.status != CarComponent.Status.Damaged) continue;
+                
+                carComponentsUI.text += carComponent.name + ", Tool: " + carComponent.toolToRepair.name;
+                carComponentsUI.text += "\n";
             }
         }
     }
