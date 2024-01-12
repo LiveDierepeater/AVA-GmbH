@@ -9,7 +9,7 @@ namespace Player
         private new Camera camera;
         [SerializeField] private RectTransform selectionBox;
         [SerializeField] private LayerMask unitLayers;
-        [SerializeField] private LayerMask goundAndToolLayerMask;
+        [SerializeField] private LayerMask groundAndToolLayerMask;
         [SerializeField] private float dragDelay = 0.1f;
 
         private float mouseDownTime;
@@ -77,7 +77,7 @@ namespace Player
         {
             if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, goundAndToolLayerMask))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundAndToolLayerMask))
                 {
                     // If we clicked on a Tool.
                     if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools")

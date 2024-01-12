@@ -109,7 +109,7 @@ MonoBehaviour:
   unitLayers:
     serializedVersion: 2
     m_Bits: 64
-  goundAndToolLayerMask:
+  groundAndToolLayerMask:
     serializedVersion: 2
     m_Bits: 384
   dragDelay: 0.1
