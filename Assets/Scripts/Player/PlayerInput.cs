@@ -9,7 +9,7 @@ namespace Player
         private new Camera camera;
         [SerializeField] private RectTransform selectionBox;
         [SerializeField] private LayerMask unitLayers;
-        [SerializeField] private LayerMask groundAndToolLayerMask;
+        [SerializeField] private LayerMask groundToolComponentLayerMask;
         [SerializeField] private float dragDelay = 0.1f;
 
         private float mouseDownTime;
@@ -77,7 +77,7 @@ namespace Player
         {
             if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundAndToolLayerMask))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {
                     // If we clicked on a Tool.
                     if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools")
@@ -119,6 +119,13 @@ namespace Player
                             foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                                 unit.RepairKart(hit.point);
                         }
+                    
+                    // If we clicked on a CarComponent.
+                    else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "CarComponent")
+                    {
+                        foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                            unit.GetCarComponent(hit.point, hit.transform);
+                    }
                     
                     // If we clicked on the Ground.
                     else

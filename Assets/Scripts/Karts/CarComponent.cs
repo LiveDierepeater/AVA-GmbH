@@ -1,5 +1,6 @@
 using Task;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Karts
 {
@@ -32,7 +33,7 @@ namespace Karts
             Intact
         }
 
-        public CarPart carPart;
+        [FormerlySerializedAs("carPart")] public CarPart carPartType;
         public Status status;
 
         public Tool toolToRepair;

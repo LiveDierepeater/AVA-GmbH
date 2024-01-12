@@ -87,15 +87,15 @@ namespace Karts
         
             foreach (CarComponent carComponent in brokenParts)
             {
-                Debug.Log(carComponent.carPart + ", " + carComponent.status);
+                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
             }
             foreach (CarComponent carComponent in damagedParts)
             {
-                Debug.Log(carComponent.carPart + ", " + carComponent.status);
+                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
             }
             foreach (CarComponent carComponent in intactParts)
             {
-                Debug.Log(carComponent.carPart + ", " + carComponent.status);
+                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
             }
         }
 

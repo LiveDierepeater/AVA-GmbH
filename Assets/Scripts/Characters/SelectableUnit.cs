@@ -19,6 +19,7 @@ namespace Characters
         public Transform toolSlot;
         public Transform componentSlot;
         private Tool equippedTool;
+        private CarComponent equippedCarComponent;
 
         public enum States
         {
@@ -100,38 +101,48 @@ namespace Characters
                     break;
                 
                 case States.MoveToDestination:
-                    if (agent.remainingDistance <= agent.stoppingDistance)  // Checks if destination is reached
+                    if (CheckIfUnitReachedDestination() == false) break;
                         currentState = States.Idle;
                     break;
                 
                 case States.GetTool:
-                    if (!CheckIfUnitReachedDestination()) break;
-                    UPDATE_GrabTool();
-                    currentState = States.Idle;
+                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
+                       UPDATE_GrabTool();
+                       currentState = States.Idle;
+                    }
                     break;
                 
                 case States.GetCarComponent:
-                    if (!CheckIfUnitReachedDestination()) break;
-                    UPDATE_GetCarComponent();
-                    currentState = States.Idle;
+                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
+                        UPDATE_GetCarComponent();
+                        currentState = States.Idle;
+                    }
                     break;
                 
                 case States.RepairKart:
-                    if (!CheckIfUnitReachedDestination()) break;
-                    UPDATE_RepairCarComponents();
-                    currentState = States.Idle;
+                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
+                        UPDATE_RepairCarComponents();
+                        currentState = States.Idle;
+                    }
                     break;
 
                 case States.RemoveCarComponent:
-                    if (!CheckIfUnitReachedDestination()) break;
-                    UPDATE_RemoveCarComponent();
-                    currentState = States.Idle;
+                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
+                        UPDATE_RemoveCarComponent();
+                        currentState = States.Idle;
+                    }
                     break;
                 
                 case States.AddCarComponent :
-                    if (!CheckIfUnitReachedDestination()) break;
-                    UPDATE_AddCarComponent();
-                    currentState = States.Idle;
+                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
+                        UPDATE_AddCarComponent();
+                        currentState = States.Idle;
+                    }
                     break;
 
                 default:
@@ -147,27 +158,49 @@ namespace Characters
 
         private void UPDATE_GrabTool()
         {
-            // Check if Unit already has a tool in hand.
-            if (toolSlot.transform.childCount != 0)
+            // Check if Unit already has a Tool in hand.
+            if (toolSlot.childCount != 0)
             {
                 // Check if equipped Tool is from this ToolStation.
-                if (toolSlot.transform.GetChild(0).GetComponent<Tool>().toolType ==
+                if (toolSlot.GetChild(0).GetComponent<Tool>().toolType ==
                     lastToolStationToReach.toolPrefab.GetComponent<Tool>().toolType)
                 {
-                    Destroy(toolSlot.transform.GetChild(0).gameObject);
+                    Destroy(toolSlot.GetChild(0).gameObject);
                     equippedTool = null;
                 }
                 return;
             }
+            
+            // Check if Unit already has a CarComponent in hand.
+            if (componentSlot.childCount != 0) return;
             
             // Add Tool to Unit's Tool Slot (transform)
             Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
             equippedTool = lastToolStationToReach.toolPrefab.GetComponent<Tool>();
         }
 
-        private void UPDATE_GetCarComponent()
+        private void UPDATE_GetCarComponent()               // TODO: TEST THIS MECHANIC
         {
             Debug.Log("UPDATE_GetCarComponent");
+            // Check if Unit already has a CarComponent in hand
+            if (componentSlot.childCount != 0)
+            {
+                // Check if equipped CarComponent is from this ComponentStation
+                if (componentSlot.GetChild(0).GetComponent<CarComponent>().carPartType ==
+                    lastComponentStationToReach.carComponentPrefab.GetComponent<CarComponent>().carPartType)
+                {
+                    Destroy(componentSlot.GetChild(0).gameObject);
+                    equippedCarComponent = null;
+                }
+                return;
+            }
+            
+            // Check if Unit already has a Tool in hand.
+            if (toolSlot.childCount != 0) return;
+            
+            // Add CarComponent to Unit's Component Slot (transform)
+            Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot);
+            equippedCarComponent = lastComponentStationToReach.carComponentPrefab.GetComponent<CarComponent>();
         }
 
         private void UPDATE_RepairCarComponents()

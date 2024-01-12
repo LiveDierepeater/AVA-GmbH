@@ -232,8 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 4998868423959809009}
-  toolSlot: {fileID: 0}
-  componentSlot: {fileID: 0}
+  toolSlot: {fileID: 4135588209975931353}
+  componentSlot: {fileID: 1893101824070772633}
   currentState: 0
 --- !u!1 &7326341899487041483
 GameObject:
