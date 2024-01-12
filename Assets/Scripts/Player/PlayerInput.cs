@@ -1,4 +1,4 @@
-using Charcters;
+using Characters;
 using UnityEngine;
 
 namespace Player

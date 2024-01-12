@@ -4,7 +4,7 @@ using Task;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Charcters
+namespace Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class SelectableUnit : MonoBehaviour

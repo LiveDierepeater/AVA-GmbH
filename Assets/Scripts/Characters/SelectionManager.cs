@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Charcters
+namespace Characters
 {
     public class SelectionManager
     {
