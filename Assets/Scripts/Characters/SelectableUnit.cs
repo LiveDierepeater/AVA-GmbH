@@ -21,6 +21,8 @@ namespace Characters
         private Tool equippedTool;
         private CarComponent equippedCarComponent;
 
+        private Vector3 currentNewDestination;
+
         public enum States
         {
             Idle,
@@ -58,14 +60,18 @@ namespace Characters
         public void MoveToDestination(Vector3 newDestination)
         {
             currentState = States.MoveToDestination;
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(transform.position, currentNewDestination);
         }
 
         public void GetTool(Vector3 newDestination, Transform toolToReach)
         {
             currentState = States.GetTool;
             lastToolStationToReach = toolToReach.GetComponent<ToolStation>();
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
         }
 
         public void GetCarComponent(Vector3 newDestination, Transform componentToReach)
@@ -95,21 +101,32 @@ namespace Characters
 
         private void Update()
         {
+            float distanceToDestination = Vector3.Distance(transform.position, currentNewDestination);
+            
             switch (currentState)
             {
                 case States.Idle:
                     break;
                 
                 case States.MoveToDestination:
-                    if (CheckIfUnitReachedDestination() == false) break;
+                    if (distanceToDestination <= agent.stoppingDistance) // Checks if unit reached tool
+                    {
                         currentState = States.Idle;
+                    }
+                    Debug.Log(distanceToDestination);
+
                     break;
                 
                 case States.GetTool:
-                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (distanceToDestination <= agent.stoppingDistance) // Checks if unit reached tool
                     {
-                       UPDATE_GrabTool();
-                       currentState = States.Idle;
+                        Debug.Log("Get Tool");
+                        UPDATE_GrabTool();
+                        currentState = States.Idle;
+                        Debug.Log("A: " + transform.position +
+                                  "   B: " + agent.pathEndPosition +
+                                  "    Dist.: " + Vector3.Distance(agent.destination, agent.pathEndPosition) +
+                                  "    C: " +agent.remainingDistance);
                     }
                     break;
                 
