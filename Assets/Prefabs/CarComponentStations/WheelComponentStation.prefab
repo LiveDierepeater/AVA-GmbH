@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6309724589413987431}
   - component: {fileID: 1552568826679747812}
   - component: {fileID: 7601467653804959114}
+  - component: {fileID: 7590843976840752277}
   m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
@@ -106,6 +107,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7590843976840752277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604479317484497907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 755561fab1ea5cb4e8a8903ae8f4d8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carComponentPrefab: {fileID: 8219081868088174267, guid: 010f9d6def1fce54f99f96ba370171d9, type: 3}
 --- !u!1 &5170900025818109557
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +300,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7388579331763375054}
-  - component: {fileID: 6393960620793241131}
   m_Layer: 9
   m_Name: WheelComponentStation
   m_TagString: Untagged
@@ -311,16 +324,3 @@ Transform:
   - {fileID: 4664657890632751819}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6393960620793241131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7767370179310099825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 755561fab1ea5cb4e8a8903ae8f4d8fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carComponentPrefab: {fileID: 8219081868088174267, guid: 010f9d6def1fce54f99f96ba370171d9, type: 3}

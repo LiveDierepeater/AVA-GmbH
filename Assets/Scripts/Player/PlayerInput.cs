@@ -82,6 +82,7 @@ namespace Player
                     // If we clicked on a Tool.
                     if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools")
                     {
+                        Debug.Log("Tool");
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             unit.GetTool(hit.point, hit.transform);
                     }
@@ -89,6 +90,7 @@ namespace Player
                     // If we clicked on a Kart.
                     else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Kart")
                     {
+                        Debug.Log("Kart");
                         // If one selected unit has no equipped Tool and wants to Remove or Add CarComponent.
                         if (SelectionManager.Instance.SelectedUnits.Count == 1)
                         {
@@ -123,8 +125,9 @@ namespace Player
                     }
                     
                     // If we clicked on a CarComponent.
-                    else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "CarComponent")
+                    else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "CarComponents")
                     {
+                        Debug.Log("CarComponent");
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             unit.GetCarComponent(hit.point, hit.transform);
                     }
@@ -132,6 +135,7 @@ namespace Player
                     // If we clicked on the Ground.
                     else
                     {
+                        Debug.Log("Ground");
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             unit.MoveToDestination(hit.point);
                     }

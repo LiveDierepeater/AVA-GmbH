@@ -139,7 +139,7 @@ namespace Characters
                 case States.GetCarComponent:
                     if (DoesUnitReachedDestination(distanceToDestination)) // Checks if unit reached tool
                     {
-                        UPDATE_GetCarComponent();
+                        UPDATE_GrabCarComponent();
                         currentState = States.Idle;
                     }
                     break;
@@ -198,7 +198,7 @@ namespace Characters
             equippedTool = lastToolStationToReach.toolPrefab.GetComponent<Tool>();
         }
 
-        private void UPDATE_GetCarComponent()               // TODO: TEST THIS MECHANIC
+        private void UPDATE_GrabCarComponent()               // TODO: TEST THIS MECHANIC
         {
             Debug.Log("UPDATE_GetCarComponent");
             // Check if Unit already has a CarComponent in hand

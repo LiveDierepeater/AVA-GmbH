@@ -111,5 +111,5 @@ MonoBehaviour:
     m_Bits: 64
   groundToolComponentLayerMask:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 1920
   dragDelay: 0.1
