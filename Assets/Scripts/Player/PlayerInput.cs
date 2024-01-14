@@ -19,25 +19,12 @@ namespace Player
         {
             camera = GetComponent<Camera>();
         }
-        
+
         private void Update()
         {
             HandleSelectionInputs();
             HandleMovementInputs();
             HandleKeyInputs();
-        }
-
-        private void HandleKeyInputs()
-        {
-            // TODO: Checks if Drop-Of-Key was pressed.
-            // TODO: Checks if Units are selected.
-            // TODO: Checks if Units have anything in hands to drop.
-
-            if (Input.GetKeyUp(KeyCode.G) && SelectionManager.Instance.SelectedUnits.Count > 0)
-            {
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
-                    Debug.Log("test");
-            }
         }
 
         private void HandleSelectionInputs()
@@ -181,6 +168,28 @@ namespace Player
                    && position.x < bounds.max.x
                    && position.y > bounds.min.y
                    && position.y < bounds.max.y;
+        }
+
+        private void HandleKeyInputs()
+        {
+            if (Input.GetKeyUp(KeyCode.G) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            {
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
+                {
+                    // If Mouse is not hovering over the ground -> Drops-Off the Item directly at current Position.
+                    if (LayerMask.LayerToName(hit.transform.gameObject.layer) != "Ground")
+                        foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+                        {
+                            selectedUnit.DropOffItem(selectedUnit.transform.position);
+                        }
+                    
+                    // If Mouse is hovering over the ground -> Unit walks to new Destination and Drops the Item there.
+                    else
+                        foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+                            if (selectedUnit.DoesUnitHaveAnythingInHand())
+                                selectedUnit.DropOffItem(hit.point);
+                }
+            }
         }
     }
 }

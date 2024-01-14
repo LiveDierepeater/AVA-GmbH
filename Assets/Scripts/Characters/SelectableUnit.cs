@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Karts;
@@ -20,6 +21,9 @@ namespace Characters
         private Tool equippedTool;
         private CarComponent equippedCarComponent;
 
+        private Tool newTool;
+        private CarComponent newCarComponent;
+
         private Vector3 currentNewDestination;
 
         public enum States
@@ -30,7 +34,8 @@ namespace Characters
             GetCarComponent,
             RepairKart,
             RemoveCarComponent,
-            AddCarComponent
+            AddCarComponent,
+            DropOffItem
         }
         
         public States currentState;
@@ -78,7 +83,10 @@ namespace Characters
         public void GetCarComponent(Vector3 newDestination, Transform componentToReach)
         {
             currentState = States.GetCarComponent;
+            
             lastComponentStationToReach = componentToReach.GetComponent<ComponentStation>();
+            newCarComponent = componentToReach.GetComponent<CarComponent>();
+
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
             
@@ -106,6 +114,15 @@ namespace Characters
         public void AddCarComponent(Vector3 newDestination)
         {
             currentState = States.AddCarComponent;
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+        }
+
+        public void DropOffItem(Vector3 newDestination)
+        {
+            currentState = States.DropOffItem;
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
             
@@ -167,6 +184,14 @@ namespace Characters
                         currentState = States.Idle;
                     }
                     break;
+                
+                case States.DropOffItem:
+                    if (DoesUnitReachedDestination(distanceToDestination))
+                    {
+                        UPDATE_DropOffItem();
+                        currentState = States.Idle;
+                    }
+                    break;
             }
         }
 
@@ -215,6 +240,17 @@ namespace Characters
             
             // Check if Unit already has a Tool in hand.
             if (toolSlot.childCount != 0) return;
+            
+            // Check if CarComponent is taken from Ground (and not from Station).
+            if (newCarComponent != null)
+            {
+                Destroy(newCarComponent.gameObject.GetComponent<Rigidbody>());
+                newCarComponent.transform.SetParent(componentSlot);
+                newCarComponent.transform.localPosition = Vector3.zero;
+                newCarComponent.transform.localRotation = Quaternion.identity;
+                equippedCarComponent = newCarComponent.GetComponent<CarComponent>();
+                return;
+            }
             
             // Add CarComponent to Unit's Component Slot (transform)
             Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot);
@@ -279,6 +315,42 @@ namespace Characters
             // TODO: Add Car Component to List<CarComponent> intactComponents.
             
             // TODO: Remove instantiated CarComponent.
+        }
+
+        private void UPDATE_DropOffItem()
+        {
+            // If Unit has a Tool in Hand:
+            // Un-Parents the Tool -> Activates Rigidbody -> Sets equippedTool to Null.
+            if (equippedTool != null)
+            {
+                Transform toolToDrop = toolSlot.GetChild(0);
+                toolToDrop.SetParent(null);
+                
+                // TODO: Activate Rigidbody
+                Rigidbody newRigidbody = toolToDrop.gameObject.AddComponent<Rigidbody>();
+                newRigidbody.mass = 30;
+
+                equippedTool = null;
+            }
+            
+            // If Unit has a CarComponent in Hand:
+            // Un-Parents the CarComponent -> Activates Rigidbody -> Sets equippedCarComponent to Null.
+            else if (equippedCarComponent != null)
+            {
+                Transform componentToDrop = componentSlot.GetChild(0);
+                componentToDrop.SetParent(null);
+                
+                // TODO: Activate Rigidbody
+                Rigidbody newRigidbody = componentToDrop.gameObject.AddComponent<Rigidbody>();
+                newRigidbody.mass = 30;
+                
+                equippedCarComponent = null;
+            }
+        }
+
+        public bool DoesUnitHaveAnythingInHand()
+        {
+            return toolSlot.childCount != 0 || componentSlot.childCount != 0;
         }
     }
 }

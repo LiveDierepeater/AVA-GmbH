@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5815182889294378298}
   m_Layer: 8
   m_Name: Screwdriver Station
-  m_TagString: Untagged
+  m_TagString: Station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
