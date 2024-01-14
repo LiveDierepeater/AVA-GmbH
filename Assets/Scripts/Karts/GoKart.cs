@@ -1,13 +1,15 @@
-using System.Collections.Generic;
-using Task;
-using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.AI;
+using System.Collections.Generic;
+using TMPro;
+using Task;
 
 namespace Karts
 {
     public class GoKart : MonoBehaviour
     {
+        public List<Transform> distanceSlots;
+
         public CarComponent[] carComponents;
 
         public List<CarComponent> brokenParts;
@@ -18,7 +20,7 @@ namespace Karts
         public bool debugCarComponentsUI;
 
         public TextMeshProUGUI carComponentsUI;
-    
+
         private void Start()
         {
             RollCarComponentsStatus();
@@ -35,6 +37,7 @@ namespace Karts
             {
                 TaskManager.Instance.AddBrokenPart(brokenPart);
             }
+
             foreach (CarComponent damagedPart in damagedParts)
             {
                 TaskManager.Instance.AddDamagedPart(damagedPart);
@@ -66,14 +69,14 @@ namespace Karts
                     case CarComponent.Status.Broken:
                         brokenParts.Add(part);
                         break;
-                
+
                     case CarComponent.Status.Damaged:
                         damagedParts.Add(part);
                         break;
-                
+
                     case CarComponent.Status.Intact:
                         break;
-                
+
                     default:
                         intactParts.Add(part);
                         break;
@@ -84,15 +87,17 @@ namespace Karts
         private void DEBUG_CarComponents()
         {
             if (!debugCarComponents) return;
-        
+
             foreach (CarComponent carComponent in brokenParts)
             {
                 Debug.Log(carComponent.carPartType + ", " + carComponent.status);
             }
+
             foreach (CarComponent carComponent in damagedParts)
             {
                 Debug.Log(carComponent.carPartType + ", " + carComponent.status);
             }
+
             foreach (CarComponent carComponent in intactParts)
             {
                 Debug.Log(carComponent.carPartType + ", " + carComponent.status);
@@ -104,14 +109,27 @@ namespace Karts
             if (!debugCarComponentsUI) return;
 
             carComponentsUI.text = "";
-            
+
             foreach (CarComponent carComponent in carComponents)
             {
                 if (carComponent.status != CarComponent.Status.Damaged) continue;
-                
+
                 carComponentsUI.text += carComponent.name + ", Tool: " + carComponent.toolToRepair.name;
                 carComponentsUI.text += "\n";
             }
+        }
+
+        public bool IsUnitInRange(NavMeshAgent unitAgent)
+        {
+            foreach (Transform distanceSlot in distanceSlots)
+            {
+                if (Vector3.Distance(new Vector3(unitAgent.transform.position.x, distanceSlot.position.y, unitAgent.transform.position.z), distanceSlot.position) <= unitAgent.stoppingDistance * 1.8)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

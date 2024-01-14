@@ -19,7 +19,7 @@ namespace Player
         {
             camera = GetComponent<Camera>();
         }
-
+        
         private void Update()
         {
             HandleSelectionInputs();
@@ -81,16 +81,17 @@ namespace Player
                 {
                     // If we clicked on a Tool.
                     if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools")
+                    {
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             unit.GetTool(hit.point, hit.transform);
+                    }
                 
                     // If we clicked on a Kart.
                     else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Kart")
-                        
+                    {
                         // If one selected unit has no equipped Tool and wants to Remove or Add CarComponent.
                         if (SelectionManager.Instance.SelectedUnits.Count == 1)
                         {
-                            
                             // If no Tool equipped nor CarComponent.
                             if (SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 0 &&
                                 SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 0)
@@ -119,6 +120,7 @@ namespace Player
                             foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                                 unit.RepairKart(hit.point);
                         }
+                    }
                     
                     // If we clicked on a CarComponent.
                     else if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "CarComponent")
@@ -129,8 +131,10 @@ namespace Player
                     
                     // If we clicked on the Ground.
                     else
+                    {
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             unit.MoveToDestination(hit.point);
+                    }
                 }
             }
         }
@@ -145,15 +149,12 @@ namespace Player
 
             Bounds bounds = new Bounds(selectionBox.anchoredPosition, selectionBox.sizeDelta);
 
-            for (int i = 0; i < SelectionManager.Instance.AvailableUnits.Count; i++)
+            foreach (var availableUnit in SelectionManager.Instance.AvailableUnits)
             {
-                if (UnitIsInSelectionBox(
-                        camera.WorldToScreenPoint(SelectionManager.Instance.AvailableUnits[i].transform.position), bounds))
-                {
-                    SelectionManager.Instance.Select(SelectionManager.Instance.AvailableUnits[i]);
-                
-                }
-                else SelectionManager.Instance.Deselect(SelectionManager.Instance.AvailableUnits[i]);
+                if (UnitIsInSelectionBox(camera.WorldToScreenPoint(availableUnit.transform.position), bounds))
+                    SelectionManager.Instance.Select(availableUnit);
+                else
+                    SelectionManager.Instance.Deselect(availableUnit);
             }
         }
 

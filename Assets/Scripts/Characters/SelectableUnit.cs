@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 using Karts;
 using Task;
 
@@ -63,7 +62,7 @@ namespace Characters
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
             
-            Debug.DrawLine(transform.position, currentNewDestination);
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         public void GetTool(Vector3 newDestination, Transform toolToReach)
@@ -72,36 +71,50 @@ namespace Characters
             lastToolStationToReach = toolToReach.GetComponent<ToolStation>();
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         public void GetCarComponent(Vector3 newDestination, Transform componentToReach)
         {
             currentState = States.GetCarComponent;
             lastComponentStationToReach = componentToReach.GetComponent<ComponentStation>();
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         public void RepairKart(Vector3 newDestination)
         {
             currentState = States.RepairKart;
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         public void RemoveCarComponent(Vector3 newDestination)
         {
             currentState = States.RemoveCarComponent;
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         public void AddCarComponent(Vector3 newDestination)
         {
             currentState = States.AddCarComponent;
-            agent.SetDestination(newDestination);
+            currentNewDestination = newDestination;
+            agent.SetDestination(currentNewDestination);
+            
+            Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
         }
 
         private void Update()
         {
-            float distanceToDestination = Vector3.Distance(transform.position, currentNewDestination);
+            float distanceToDestination = Vector3.Distance(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination);
             
             switch (currentState)
             {
@@ -109,29 +122,22 @@ namespace Characters
                     break;
                 
                 case States.MoveToDestination:
-                    if (distanceToDestination <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (DoesUnitReachedDestination(distanceToDestination)) // Checks if unit reached tool
                     {
                         currentState = States.Idle;
                     }
-                    Debug.Log(distanceToDestination);
-
                     break;
                 
                 case States.GetTool:
-                    if (distanceToDestination <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (DoesUnitReachedDestination(distanceToDestination)) // Checks if unit reached tool
                     {
-                        Debug.Log("Get Tool");
                         UPDATE_GrabTool();
                         currentState = States.Idle;
-                        Debug.Log("A: " + transform.position +
-                                  "   B: " + agent.pathEndPosition +
-                                  "    Dist.: " + Vector3.Distance(agent.destination, agent.pathEndPosition) +
-                                  "    C: " +agent.remainingDistance);
                     }
                     break;
                 
                 case States.GetCarComponent:
-                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (DoesUnitReachedDestination(distanceToDestination)) // Checks if unit reached tool
                     {
                         UPDATE_GetCarComponent();
                         currentState = States.Idle;
@@ -139,7 +145,7 @@ namespace Characters
                     break;
                 
                 case States.RepairKart:
-                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_RepairCarComponents();
                         currentState = States.Idle;
@@ -147,7 +153,7 @@ namespace Characters
                     break;
 
                 case States.RemoveCarComponent:
-                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_RemoveCarComponent();
                         currentState = States.Idle;
@@ -155,22 +161,18 @@ namespace Characters
                     break;
                 
                 case States.AddCarComponent :
-                    if (agent.remainingDistance <= agent.stoppingDistance) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_AddCarComponent();
                         currentState = States.Idle;
                     }
                     break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
-            
         }
 
-        private bool CheckIfUnitReachedDestination()
+        private bool DoesUnitReachedDestination(float distanceToDestination)
         {
-            return agent.remainingDistance <= agent.stoppingDistance;
+            return distanceToDestination <= agent.stoppingDistance * 1.5f;
         }
 
         private void UPDATE_GrabTool()
@@ -222,6 +224,7 @@ namespace Characters
 
         private void UPDATE_RepairCarComponents()
         {
+            Debug.Log("UPDATE_RepairCarComponents");
             if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
             
             if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
