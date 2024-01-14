@@ -244,6 +244,11 @@ namespace Characters
             // Check if CarComponent is taken from Ground (and not from Station).
             if (newCarComponent != null)
             {
+                // Return if CarComponent was taken by another Unit.
+                if (newCarComponent.transform.parent != null) return;
+                
+                // Destroy Rigidbody to grab CarComponent Properly
+                // Takes newCarComponent.transform as a Child-Object into his componentSlot.
                 Destroy(newCarComponent.gameObject.GetComponent<Rigidbody>());
                 newCarComponent.transform.SetParent(componentSlot);
                 newCarComponent.transform.localPosition = Vector3.zero;
