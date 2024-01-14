@@ -22,7 +22,7 @@ namespace Karts
             Seat,
             Seatbelt,
             Axe,
-            Gasoline,
+            GasolineTank,
             Pedals
         }
     
