@@ -1,6 +1,6 @@
-using Task;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Task;
 
 namespace Karts
 {
