@@ -200,7 +200,6 @@ namespace Characters
 
         private void UPDATE_GrabCarComponent()               // TODO: TEST THIS MECHANIC
         {
-            Debug.Log("UPDATE_GetCarComponent");
             // Check if Unit already has a CarComponent in hand
             if (componentSlot.childCount != 0)
             {
@@ -224,7 +223,6 @@ namespace Characters
 
         private void UPDATE_RepairCarComponents()
         {
-            Debug.Log("UPDATE_RepairCarComponents");
             if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
             
             if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
@@ -248,20 +246,35 @@ namespace Characters
 
         private void UPDATE_RemoveCarComponent()
         {
-            Debug.Log("UPDATE_RemoveCarComponent");
             // TODO: QuickTime-Event
+            Debug.Log("QuickTime-Event");
 
-            // TODO: Remove Car Component from List<CarComponent> brokenComponents.
+            // Set the first CarComponent in Array currentGoKart.carComponents[] to Null.
+            // Remove Car Component from List<CarComponent> brokenComponents.
+            CarComponent carComponentToRemove = currentGoKart.brokenParts[0];
+            equippedCarComponent = carComponentToRemove;
+
+            // Goes Through Array currentGoKart.carComponents[] and finds the CarComponent which should be removed.
+            // Sets the found CarComponent to Null.
+            for (int i = 0; i < currentGoKart.carComponents.Length; i++)
+                if (currentGoKart.carComponents[i] == carComponentToRemove)
+                    currentGoKart.carComponents[i] = null;
             
-            // TODO: Add Mesh-Instance per Instantiate at units ToolSlot.
-            
-            // TODO: Unit should be able to through it away in a "trash-bin".
+            // Sets the CarComponent which will get removed to Null.
+            currentGoKart.brokenParts.Remove(carComponentToRemove);
+            currentGoKart.looseParts.Add(carComponentToRemove);
+
+            // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
+            equippedCarComponent.transform.SetParent(transform.Find("Component Slot"));
+            equippedCarComponent.transform.localPosition = Vector3.zero;
+
+            // TODO: Unit should be able to throw it away in a "trash-bin".
         }
 
         private void UPDATE_AddCarComponent()
         {
-            Debug.Log("UPDATE_AddCarComponent");
             // TODO: QuickTime-Event
+            Debug.Log("QuickTime-Event");
             
             // TODO: Add Car Component to List<CarComponent> intactComponents.
             

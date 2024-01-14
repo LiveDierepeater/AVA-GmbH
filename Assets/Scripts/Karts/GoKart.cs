@@ -15,6 +15,7 @@ namespace Karts
         public List<CarComponent> brokenParts;
         public List<CarComponent> damagedParts;
         public List<CarComponent> intactParts;
+        public List<CarComponent> looseParts;
 
         public bool debugCarComponents;
         public bool debugCarComponentsUI;
