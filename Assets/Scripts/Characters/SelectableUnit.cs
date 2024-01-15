@@ -308,26 +308,20 @@ namespace Characters
             // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
             equippedCarComponent.transform.SetParent(transform.Find("Component Slot"));
             equippedCarComponent.transform.localPosition = Vector3.zero;
-
-            // TODO: Unit should be able to throw it away in a "trash-bin".
         }
 
         private void UPDATE_AddCarComponent()
         {
             // TODO: QuickTime-Event
-            Debug.Log("QuickTime-Event");
             
             // Return if equippedCarComponent matches a CarCoponent in List<CarComponent> carComponents.
             if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
-            print("No Doubles");
             
             // Return if List<CarComponent> carComponents has no free slots.
             if (currentGoKart.GetFreeCarComponentSlotIndex() < 0) return;
-            print("Free Slot");
             
             // Return if equippedCarComponent is not intact.
             if (equippedCarComponent.status != CarComponent.Status.Intact) return;
-            print("Intact");
 
             // Add Car Component to List<CarComponent> carComponents & List<CarComponent> intactComponents.
             currentGoKart.carComponents[currentGoKart.GetFreeCarComponentSlotIndex()] = equippedCarComponent;
@@ -352,7 +346,7 @@ namespace Characters
                 Transform toolToDrop = toolSlot.GetChild(0);
                 toolToDrop.SetParent(null);
                 
-                // TODO: Activate Rigidbody
+                // Activate Rigidbody
                 Rigidbody newRigidbody = toolToDrop.gameObject.AddComponent<Rigidbody>();
                 newRigidbody.mass = 30;
 
@@ -366,7 +360,7 @@ namespace Characters
                 Transform componentToDrop = componentSlot.GetChild(0);
                 componentToDrop.SetParent(null);
                 
-                // TODO: Activate Rigidbody
+                // Activate Rigidbody
                 Rigidbody newRigidbody = componentToDrop.gameObject.AddComponent<Rigidbody>();
                 newRigidbody.mass = 30;
                 
