@@ -290,7 +290,7 @@ MonoBehaviour:
   damagedParts: []
   intactParts: []
   debugCarComponents: 0
-  debugCarComponentsUI: 1
+  debugCarComponentsUI: 0
   carComponentsUI: {fileID: 0}
 --- !u!1 &8717291343203371999
 GameObject:

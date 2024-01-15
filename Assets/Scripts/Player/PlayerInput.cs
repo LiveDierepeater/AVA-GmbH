@@ -102,7 +102,7 @@ namespace Player
                             
                             // If unit only has a CarComponent and not a Tool equipped.
                             else if (SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 1 &&
-                                     SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 0)     // TODO: Check here later if it functions properly.
+                                     SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 0)
                             {
                                 SelectionManager.Instance.SelectedUnits.ToArray()[0].AddCarComponent(hit.point);
                             }
