@@ -303,7 +303,6 @@ namespace Characters
             
             // Sets the CarComponent which will get removed to Null.
             currentGoKart.brokenParts.Remove(carComponentToRemove);
-            currentGoKart.looseParts.Add(carComponentToRemove);
 
             // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
             equippedCarComponent.transform.SetParent(transform.Find("Component Slot"));
