@@ -218,7 +218,6 @@ namespace Characters
             if (componentSlot.childCount != 0) return;
             
             // Add Tool to Unit's Tool Slot (transform)
-            Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
             equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
         }
 
@@ -266,16 +265,16 @@ namespace Characters
         {
             if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
             
-            if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
+            if (currentGoKart.damagedParts.Count == 0) return;              // Checks if car has damaged parts
             
             CarComponent partToRepair = null;                               // Creates place for partToRepair
-
+            
             // Goes through all damaged parts.
             // The last damaged part which toolToGetRepaired matches the equipped tool gets saved.
-            foreach (CarComponent damagedPart in TaskManager.Instance.damagedParts)
-                if (damagedPart.toolToRepair.name == equippedTool.name)
+            foreach (CarComponent damagedPart in currentGoKart.damagedParts)
+                if (damagedPart.toolToRepair.toolType == equippedTool.toolType)
                     partToRepair = damagedPart;
-            
+
             // If there is no part which could get repaired witch the currently equipped tool -> return.
             if (partToRepair == null) return;
             

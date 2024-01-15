@@ -111,6 +111,7 @@ namespace Player
                             else if (SelectionManager.Instance.SelectedUnits.ToArray()[0].toolSlot.childCount == 1 &&
                                      SelectionManager.Instance.SelectedUnits.ToArray()[0].componentSlot.childCount == 0)
                             {
+                                Debug.Log("Drin");
                                 SelectionManager.Instance.SelectedUnits.ToArray()[0].RepairKart(hit.point);
                             }
                         }
