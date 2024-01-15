@@ -76,7 +76,7 @@ namespace Player
 
         private void HandleMovementInputs()
         {
-            if (Input.GetKey(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {

@@ -219,10 +219,10 @@ namespace Characters
             
             // Add Tool to Unit's Tool Slot (transform)
             Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
-            equippedTool = lastToolStationToReach.toolPrefab.GetComponent<Tool>();
+            equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
         }
 
-        private void UPDATE_GrabCarComponent()               // TODO: TEST THIS MECHANIC
+        private void UPDATE_GrabCarComponent()
         {
             // Check if Unit already has a CarComponent in hand
             if (componentSlot.childCount != 0)
@@ -257,8 +257,9 @@ namespace Characters
             }
             
             // Add CarComponent to Unit's Component Slot (transform)
-            Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot);
-            equippedCarComponent = lastComponentStationToReach.carComponentPrefab.GetComponent<CarComponent>();
+            equippedCarComponent = 
+                Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot).GetComponent<CarComponent>();
+            equippedCarComponent.status = CarComponent.Status.Intact;
         }
 
         private void UPDATE_RepairCarComponents()
@@ -316,9 +317,30 @@ namespace Characters
             // TODO: QuickTime-Event
             Debug.Log("QuickTime-Event");
             
-            // TODO: Add Car Component to List<CarComponent> intactComponents.
+            // Return if equippedCarComponent matches a CarCoponent in List<CarComponent> carComponents.
+            if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
+            print("No Doubles");
             
-            // TODO: Remove instantiated CarComponent.
+            // Return if List<CarComponent> carComponents has no free slots.
+            if (currentGoKart.GetFreeCarComponentSlotIndex() < 0) return;
+            print("Free Slot");
+            
+            // Return if equippedCarComponent is not intact.
+            if (equippedCarComponent.status != CarComponent.Status.Intact) return;
+            print("Intact");
+
+            // Add Car Component to List<CarComponent> carComponents & List<CarComponent> intactComponents.
+            currentGoKart.carComponents[currentGoKart.GetFreeCarComponentSlotIndex()] = equippedCarComponent;
+            currentGoKart.intactParts.Add(equippedCarComponent);
+
+            // Change CarComponent transform to currentGoKart in localspace.zero.
+            equippedCarComponent.transform.SetParent(currentGoKart.transform);
+            equippedCarComponent.transform.localPosition = Vector3.zero;
+            equippedCarComponent.transform.localRotation = Quaternion.identity;
+            equippedCarComponent.transform.localScale = Vector3.one;
+            
+            // Eliminating Reference to equippedCarComponent, as it isn't in hand anymore.
+            equippedCarComponent = null;
         }
 
         private void UPDATE_DropOffItem()

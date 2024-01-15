@@ -132,5 +132,25 @@ namespace Karts
 
             return false;
         }
+
+        public bool CheckForDoubledCarComponents(CarComponent newCarComponent)
+        {
+            foreach (CarComponent carComponent in carComponents)
+            {
+                return newCarComponent == carComponent;
+            }
+
+            return false;
+        }
+        
+        public int GetFreeCarComponentSlotIndex()
+        {
+            for (var i = 0; i < carComponents.Length; i++)
+            {
+                if (carComponents[i] is null) return i;
+            }
+
+            return -1;
+        }
     }
 }
