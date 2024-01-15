@@ -278,6 +278,10 @@ namespace Characters
             // If there is no part which could get repaired witch the currently equipped tool -> return.
             if (partToRepair == null) return;
             
+            // TODO: RepairWithTool()
+            
+            
+            // TODO: Should be initialized when finished with Repair-Time.
             // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
             currentGoKart.damagedParts.Remove(partToRepair);
             currentGoKart.intactParts.Add(partToRepair);
