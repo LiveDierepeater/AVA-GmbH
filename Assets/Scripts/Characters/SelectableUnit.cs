@@ -18,7 +18,7 @@ namespace Characters
         public Transform toolSlot;
         public Transform componentSlot;
         private Tool equippedTool;
-        private CarComponent equippedCarComponent;
+        public CarComponent equippedCarComponent;
 
         private Tool newTool;
         private CarComponent newCarComponent;
@@ -278,8 +278,9 @@ namespace Characters
             // If there is no part which could get repaired witch the currently equipped tool -> return.
             if (partToRepair is null) return;
             
-            // Return if there is already a RepairTimer Component on the partToRepair.
-            if (partToRepair.TryGetComponent(out RepairTimer existingRepairTimer)) return;
+            // TODO: Here the QuickTime-Event will be played in future.
+            // Return if there is already a RepairTimer.cs Component on the partToRepair.
+            if (partToRepair.TryGetComponent(out RepairTimer _)) return;
             
             // Timer which simulates the time an Unit needs to repair a CarComponent with Tool.
             RepairTimer repairTimer = partToRepair.gameObject.AddComponent<RepairTimer>();
@@ -294,33 +295,23 @@ namespace Characters
 
         private void UPDATE_RemoveCarComponent()
         {
-            // TODO: QuickTime-Event
-            Debug.Log("QuickTime-Event");
-
-            // Set the first CarComponent in Array currentGoKart.carComponents[] to Null.
-            // Remove Car Component from List<CarComponent> brokenComponents.
+            // Gets reference to the first CarComponent in List<CarComponent> currentGoKart.brokenParts.
+            // This carComponentToRemove will get removed in future from the currentGoKart.
             CarComponent carComponentToRemove = currentGoKart.brokenParts[0];
-            equippedCarComponent = carComponentToRemove;
-
-            // Goes Through Array currentGoKart.carComponents[] and finds the CarComponent which should be removed.
-            // Sets the found CarComponent to Null.
-            for (int i = 0; i < currentGoKart.carComponents.Length; i++)
-                if (currentGoKart.carComponents[i] == carComponentToRemove)
-                    currentGoKart.carComponents[i] = null;
             
-            // Sets the CarComponent which will get removed to Null.
-            currentGoKart.brokenParts.Remove(carComponentToRemove);
-
-            // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
-            equippedCarComponent.transform.SetParent(transform.Find("Component Slot"));
-            equippedCarComponent.transform.localPosition = Vector3.zero;
+            // TODO: Here the QuickTime-Event will be played in future.
+            // Return if there is already a Unit removing the CarComponent...
+            // ... by checking if a RemovingTimer.cs is on this carComponentToRemove.
+            if (carComponentToRemove.TryGetComponent(out RemovingTimer _)) return;
+            
+            // Timer which simulates the time an Unit needs to remove a CarComponent.
+            RemovingTimer removingTimer = carComponentToRemove.gameObject.AddComponent<RemovingTimer>();
+            removingTimer.SetUnitToRemoveCarComponent(agent);
         }
 
         private void UPDATE_AddCarComponent()
         {
-            // TODO: QuickTime-Event
-            
-            // Return if equippedCarComponent matches a CarCoponent in List<CarComponent> carComponents.
+            // Return if equippedCarComponent matches a CarComponent in List<CarComponent> carComponents.
             if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
             
             // Return if List<CarComponent> carComponents has no free slots.
@@ -329,18 +320,15 @@ namespace Characters
             // Return if equippedCarComponent is not intact.
             if (equippedCarComponent.status != CarComponent.Status.Intact) return;
 
-            // Add Car Component to List<CarComponent> carComponents & List<CarComponent> intactComponents.
-            currentGoKart.carComponents[currentGoKart.GetFreeCarComponentSlotIndex()] = equippedCarComponent;
-            currentGoKart.intactParts.Add(equippedCarComponent);
-
-            // Change CarComponent transform to currentGoKart in localspace.zero.
-            equippedCarComponent.transform.SetParent(currentGoKart.transform);
-            equippedCarComponent.transform.localPosition = Vector3.zero;
-            equippedCarComponent.transform.localRotation = Quaternion.identity;
-            equippedCarComponent.transform.localScale = Vector3.one;
+            // TODO: Here the QuickTime-Event will be played in future.
             
-            // Eliminating Reference to equippedCarComponent, as it isn't in hand anymore.
-            equippedCarComponent = null;
+            // Return if there is already another Unit adding the currently equippedCarComponent...
+            // ... by checking if an AddingTimer.cs is on this equippedCarComponent.
+            if (equippedCarComponent.TryGetComponent(out AddingTimer _)) return;
+            
+            // Timer which simulates the time an Unit needs to add a CarComponent.
+            AddingTimer addingTimer = equippedCarComponent.gameObject.AddComponent<AddingTimer>();
+            addingTimer.SetUnitToAddCarComponent(agent);
         }
 
         private void UPDATE_DropOffItem()

@@ -38,13 +38,13 @@ public class RepairTimer : MonoBehaviour
             case < 0:
                 remainingRepairTime = 0;
                 thisCarComponent.status = CarComponent.Status.Intact;
-                UpdateGoKartLists();
+                UPDATE_GoKartLists();
                 KillRepairTimerComponent();
                 break;
         }
     }
 
-    private void UpdateGoKartLists()
+    private void UPDATE_GoKartLists()
     {
         // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
         currentGoKart.damagedParts.Remove(thisCarComponent);
