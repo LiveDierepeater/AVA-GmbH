@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Karts;
@@ -219,11 +218,10 @@ namespace Characters
             if (componentSlot.childCount != 0) return;
             
             // Add Tool to Unit's Tool Slot (transform)
-            Instantiate(lastToolStationToReach.toolPrefab, toolSlot);
-            equippedTool = lastToolStationToReach.toolPrefab.GetComponent<Tool>();
+            equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
         }
 
-        private void UPDATE_GrabCarComponent()               // TODO: TEST THIS MECHANIC
+        private void UPDATE_GrabCarComponent()
         {
             // Check if Unit already has a CarComponent in hand
             if (componentSlot.childCount != 0)
@@ -258,27 +256,32 @@ namespace Characters
             }
             
             // Add CarComponent to Unit's Component Slot (transform)
-            Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot);
-            equippedCarComponent = lastComponentStationToReach.carComponentPrefab.GetComponent<CarComponent>();
+            equippedCarComponent = 
+                Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot).GetComponent<CarComponent>();
+            equippedCarComponent.status = CarComponent.Status.Intact;
         }
 
         private void UPDATE_RepairCarComponents()
         {
             if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
             
-            if (TaskManager.Instance.damagedParts.Count == 0) return;       // Checks if car has damaged parts
+            if (TaskManager.Instance.damagedParts.Count == 0) return;              // Checks if car has damaged parts
             
             CarComponent partToRepair = null;                               // Creates place for partToRepair
-
+            
             // Goes through all damaged parts.
             // The last damaged part which toolToGetRepaired matches the equipped tool gets saved.
             foreach (CarComponent damagedPart in TaskManager.Instance.damagedParts)
-                if (damagedPart.toolToRepair.name == equippedTool.name)
+                if (damagedPart.toolToRepair.toolType == equippedTool.toolType)
                     partToRepair = damagedPart;
-            
+
             // If there is no part which could get repaired witch the currently equipped tool -> return.
             if (partToRepair == null) return;
             
+            // TODO: RepairWithTool()
+            
+            
+            // TODO: Should be initialized when finished with Repair-Time.
             // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
             currentGoKart.damagedParts.Remove(partToRepair);
             currentGoKart.intactParts.Add(partToRepair);
@@ -303,23 +306,37 @@ namespace Characters
             
             // Sets the CarComponent which will get removed to Null.
             currentGoKart.brokenParts.Remove(carComponentToRemove);
-            currentGoKart.looseParts.Add(carComponentToRemove);
 
             // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
             equippedCarComponent.transform.SetParent(transform.Find("Component Slot"));
             equippedCarComponent.transform.localPosition = Vector3.zero;
-
-            // TODO: Unit should be able to throw it away in a "trash-bin".
         }
 
         private void UPDATE_AddCarComponent()
         {
             // TODO: QuickTime-Event
-            Debug.Log("QuickTime-Event");
             
-            // TODO: Add Car Component to List<CarComponent> intactComponents.
+            // Return if equippedCarComponent matches a CarCoponent in List<CarComponent> carComponents.
+            if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
             
-            // TODO: Remove instantiated CarComponent.
+            // Return if List<CarComponent> carComponents has no free slots.
+            if (currentGoKart.GetFreeCarComponentSlotIndex() < 0) return;
+            
+            // Return if equippedCarComponent is not intact.
+            if (equippedCarComponent.status != CarComponent.Status.Intact) return;
+
+            // Add Car Component to List<CarComponent> carComponents & List<CarComponent> intactComponents.
+            currentGoKart.carComponents[currentGoKart.GetFreeCarComponentSlotIndex()] = equippedCarComponent;
+            currentGoKart.intactParts.Add(equippedCarComponent);
+
+            // Change CarComponent transform to currentGoKart in localspace.zero.
+            equippedCarComponent.transform.SetParent(currentGoKart.transform);
+            equippedCarComponent.transform.localPosition = Vector3.zero;
+            equippedCarComponent.transform.localRotation = Quaternion.identity;
+            equippedCarComponent.transform.localScale = Vector3.one;
+            
+            // Eliminating Reference to equippedCarComponent, as it isn't in hand anymore.
+            equippedCarComponent = null;
         }
 
         private void UPDATE_DropOffItem()
@@ -331,7 +348,7 @@ namespace Characters
                 Transform toolToDrop = toolSlot.GetChild(0);
                 toolToDrop.SetParent(null);
                 
-                // TODO: Activate Rigidbody
+                // Activate Rigidbody
                 Rigidbody newRigidbody = toolToDrop.gameObject.AddComponent<Rigidbody>();
                 newRigidbody.mass = 30;
 
@@ -345,7 +362,7 @@ namespace Characters
                 Transform componentToDrop = componentSlot.GetChild(0);
                 componentToDrop.SetParent(null);
                 
-                // TODO: Activate Rigidbody
+                // Activate Rigidbody
                 Rigidbody newRigidbody = componentToDrop.gameObject.AddComponent<Rigidbody>();
                 newRigidbody.mass = 30;
                 

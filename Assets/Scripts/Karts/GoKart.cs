@@ -15,7 +15,6 @@ namespace Karts
         public List<CarComponent> brokenParts;
         public List<CarComponent> damagedParts;
         public List<CarComponent> intactParts;
-        public List<CarComponent> looseParts;
 
         public bool debugCarComponents;
         public bool debugCarComponentsUI;
@@ -76,6 +75,7 @@ namespace Karts
                         break;
 
                     case CarComponent.Status.Intact:
+                        intactParts.Add(part);
                         break;
 
                     default:
@@ -131,6 +131,26 @@ namespace Karts
             }
 
             return false;
+        }
+
+        public bool CheckForDoubledCarComponents(CarComponent newCarComponent)
+        {
+            foreach (CarComponent carComponent in carComponents)
+            {
+                return newCarComponent == carComponent;
+            }
+
+            return false;
+        }
+        
+        public int GetFreeCarComponentSlotIndex()
+        {
+            for (var i = 0; i < carComponents.Length; i++)
+            {
+                if (carComponents[i] is null) return i;
+            }
+
+            return -1;
         }
     }
 }
