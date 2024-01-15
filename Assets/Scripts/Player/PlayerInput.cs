@@ -76,7 +76,7 @@ namespace Player
 
         private void HandleMovementInputs()
         {
-            if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            if (Input.GetKey(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {
@@ -120,7 +120,8 @@ namespace Player
                         {
                             foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                             {
-                                if (unit.toolSlot.childCount != 0 && unit.componentSlot.childCount == 0)                // Checks if Unit has only a Tool in hand.
+                                // Checks if Unit has only a Tool in hand.
+                                if (unit.toolSlot.childCount != 0 && unit.componentSlot.childCount == 0)
                                     unit.RepairKart(hit.point);
                             }
                         }
@@ -172,7 +173,7 @@ namespace Player
 
         private void HandleKeyInputs()
         {
-            if (Input.GetKeyUp(KeyCode.G) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            if (Input.GetKeyUp(KeyCode.Q) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {
