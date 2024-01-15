@@ -276,16 +276,20 @@ namespace Characters
                     partToRepair = damagedPart;
 
             // If there is no part which could get repaired witch the currently equipped tool -> return.
-            if (partToRepair == null) return;
+            if (partToRepair is null) return;
             
-            // TODO: RepairWithTool()
+            // Return if there is already a RepairTimer Component on the partToRepair.
+            if (partToRepair.TryGetComponent(out RepairTimer existingRepairTimer)) return;
             
+            // Timer which simulates the time an Unit needs to repair a CarComponent with Tool.
+            RepairTimer repairTimer = partToRepair.gameObject.AddComponent<RepairTimer>();
+            repairTimer.SetUnitToRepair(agent);
             
             // TODO: Should be initialized when finished with Repair-Time.
             // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
-            currentGoKart.damagedParts.Remove(partToRepair);
-            currentGoKart.intactParts.Add(partToRepair);
-            TaskManager.Instance.RemoveDamagedPart(partToRepair);
+            // currentGoKart.damagedParts.Remove(partToRepair);
+            // currentGoKart.intactParts.Add(partToRepair);
+            // TaskManager.Instance.RemoveDamagedPart(partToRepair);
         }
 
         private void UPDATE_RemoveCarComponent()
