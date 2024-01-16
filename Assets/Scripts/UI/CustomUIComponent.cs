@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public abstract class CustomUIComponent : MonoBehaviour
+namespace UI
 {
-    private void Awake()
+    public abstract class CustomUIComponent : MonoBehaviour
     {
-        Init();
-    }
+        private void Awake()
+        {
+            Init();
+        }
 
-    public abstract void Setup();
-    public abstract void Configure();
+        public abstract void Setup();
+        public abstract void Configure();
 
-    private void Init()
-    {
-        Setup();
-        Configure();
-    }
+        private void Init()
+        {
+            Setup();
+            Configure();
+        }
 
-    private void OnValidate()
-    {
-        Init();
+        private void OnValidate()
+        {
+            Init();
+        }
     }
 }

@@ -1,4 +1,5 @@
 using TMPro;
+using UI;
 
 public class Text : CustomUIComponent
 {

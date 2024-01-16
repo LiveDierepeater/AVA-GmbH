@@ -285,12 +285,6 @@ namespace Characters
             // Timer which simulates the time an Unit needs to repair a CarComponent with Tool.
             RepairTimer repairTimer = partToRepair.gameObject.AddComponent<RepairTimer>();
             repairTimer.SetUnitToRepair(agent);
-            
-            // TODO: Should be initialized when finished with Repair-Time.
-            // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
-            // currentGoKart.damagedParts.Remove(partToRepair);
-            // currentGoKart.intactParts.Add(partToRepair);
-            // TaskManager.Instance.RemoveDamagedPart(partToRepair);
         }
 
         private void UPDATE_RemoveCarComponent()

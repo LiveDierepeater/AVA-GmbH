@@ -11,11 +11,13 @@ public class RepairTimer : MonoBehaviour
 
     private GoKart currentGoKart;
     private CarComponent thisCarComponent;
+    private GameManager gameManager;
 
     private void Awake()
     {
         currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
         thisCarComponent = GetComponent<CarComponent>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -49,7 +51,7 @@ public class RepairTimer : MonoBehaviour
         // Removes the damagedPart from Damaged-List and Adds it to Intact-List.
         currentGoKart.damagedParts.Remove(thisCarComponent);
         currentGoKart.intactParts.Add(thisCarComponent);
-        TaskManager.Instance.RemoveDamagedPart(thisCarComponent);
+        gameManager.UPDATE_RemoveDamagedPart(thisCarComponent);
     }
 
     private void KillRepairTimerComponent()
