@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8370667916336252235}
   - component: {fileID: 1172128814520400369}
   - component: {fileID: 8378400679165222360}
+  - component: {fileID: 8021545092832128790}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -113,3 +114,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1920
   dragDelay: 0.1
+--- !u!114 &8021545092832128790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046795045905090045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6967b872a55ef2e4ebb0594977ba7d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camPosGarage: {fileID: 0}
+  camPosStorage: {fileID: 0}
+  cameraFlySpeed: 10
+  room: 0

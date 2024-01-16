@@ -289,6 +289,9 @@ namespace Characters
 
         private void UPDATE_RemoveCarComponent()
         {
+            // Return if Car has no more CarComponents build in.
+            if (currentGoKart.brokenParts.Count == 0) return;
+            
             // Gets reference to the first CarComponent in List<CarComponent> currentGoKart.brokenParts.
             // This carComponentToRemove will get removed in future from the currentGoKart.
             CarComponent carComponentToRemove = currentGoKart.brokenParts[0];
