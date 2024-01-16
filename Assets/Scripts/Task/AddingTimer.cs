@@ -67,6 +67,9 @@ namespace Task
 
         private void KillAddingTimerComponent()
         {
+            // Update Units UI.
+            unitToAddCarComponent.GetComponent<SelectableUnit>().UPDATE_UnitUI();
+            
             Destroy(this);
         }
 

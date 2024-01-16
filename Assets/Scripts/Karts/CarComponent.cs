@@ -37,5 +37,7 @@ namespace Karts
         public Status status;
 
         public Tool toolToRepair;
+
+        public Sprite carComponentUISprite;
     }
 }

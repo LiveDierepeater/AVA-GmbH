@@ -232,8 +232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 4998868423959809009}
+  unitsUIAvatarSprite: {fileID: 21300000, guid: d31e2a3dbb50df04c874de4e82dc233a, type: 3}
   toolSlot: {fileID: 4135588209975931353}
   componentSlot: {fileID: 1893101824070772633}
+  equippedCarComponent: {fileID: 0}
   currentState: 0
 --- !u!1 &7326341899487041483
 GameObject:

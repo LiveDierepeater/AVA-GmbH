@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Karts;
 using Task;
+using UnityEngine.Serialization;
 
 namespace Characters
 {
@@ -9,6 +10,9 @@ namespace Characters
     public class SelectableUnit : MonoBehaviour
     {
         public SpriteRenderer selectionSprite;
+        public Sprite unitsUIAvatarSprite;
+
+        private UnitUIController unitUIController;
         
         private NavMeshAgent agent;
         private ToolStation lastToolStationToReach;
@@ -67,6 +71,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void GetTool(Vector3 newDestination, Transform toolToReach)
@@ -77,6 +84,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void GetCarComponent(Vector3 newDestination, Transform componentToReach)
@@ -90,6 +100,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void RepairKart(Vector3 newDestination)
@@ -99,6 +112,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void RemoveCarComponent(Vector3 newDestination)
@@ -108,6 +124,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void AddCarComponent(Vector3 newDestination)
@@ -117,6 +136,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         public void DropOffItem(Vector3 newDestination)
@@ -126,6 +148,9 @@ namespace Characters
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         private void Update()
@@ -141,6 +166,9 @@ namespace Characters
                     if (DoesUnitReachedDestination(distanceToDestination)) // Checks if unit reached tool
                     {
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
                 
@@ -149,6 +177,9 @@ namespace Characters
                     {
                         UPDATE_GrabTool();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
                 
@@ -157,6 +188,9 @@ namespace Characters
                     {
                         UPDATE_GrabCarComponent();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
                 
@@ -165,6 +199,9 @@ namespace Characters
                     {
                         UPDATE_RepairCarComponents();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
 
@@ -173,6 +210,9 @@ namespace Characters
                     {
                         UPDATE_RemoveCarComponent();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
                 
@@ -181,6 +221,9 @@ namespace Characters
                     {
                         UPDATE_AddCarComponent();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
                 
@@ -189,6 +232,9 @@ namespace Characters
                     {
                         UPDATE_DropOffItem();
                         currentState = States.Idle;
+            
+                        // Update Units UI.
+                        unitUIController.UPDATE_UnitUI();
                     }
                     break;
             }
@@ -208,8 +254,12 @@ namespace Characters
                 if (toolSlot.GetChild(0).GetComponent<Tool>().toolType ==
                     lastToolStationToReach.toolPrefab.GetComponent<Tool>().toolType)
                 {
+                    // Lays the Tool back onto the Tool Station.
                     Destroy(toolSlot.GetChild(0).gameObject);
                     equippedTool = null;
+                    
+                    // Update Units UI.
+                    unitUIController.ClearItemUISprite();
                 }
                 return;
             }
@@ -219,19 +269,26 @@ namespace Characters
             
             // Add Tool to Unit's Tool Slot (transform)
             equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         private void UPDATE_GrabCarComponent()
         {
-            // Check if Unit already has a CarComponent in hand
+            // Check if Unit already has a CarComponent in hand.
             if (componentSlot.childCount != 0)
             {
-                // Check if equipped CarComponent is from this ComponentStation
+                // Check if equipped CarComponent is from this ComponentStation.
                 if (componentSlot.GetChild(0).GetComponent<CarComponent>().carPartType ==
                     lastComponentStationToReach.carComponentPrefab.GetComponent<CarComponent>().carPartType)
                 {
+                    // Lays it back onto CarComponent Station.
                     Destroy(componentSlot.GetChild(0).gameObject);
                     equippedCarComponent = null;
+                    
+                    // Update Units UI:
+                    unitUIController.ClearItemUISprite();
                 }
                 return;
             }
@@ -252,6 +309,10 @@ namespace Characters
                 newCarComponent.transform.localPosition = Vector3.zero;
                 newCarComponent.transform.localRotation = Quaternion.identity;
                 equippedCarComponent = newCarComponent.GetComponent<CarComponent>();
+                
+                // Update Units UI:
+                unitUIController.UPDATE_UnitUI();
+                
                 return;
             }
             
@@ -259,6 +320,9 @@ namespace Characters
             equippedCarComponent = 
                 Instantiate(lastComponentStationToReach.carComponentPrefab, componentSlot).GetComponent<CarComponent>();
             equippedCarComponent.status = CarComponent.Status.Intact;
+            
+            // Update Units UI.
+            unitUIController.UPDATE_UnitUI();
         }
 
         private void UPDATE_RepairCarComponents()
@@ -357,11 +421,36 @@ namespace Characters
                 
                 equippedCarComponent = null;
             }
+
+            unitUIController.ClearItemUISprite();
         }
 
         public bool DoesUnitHaveAnythingInHand()
         {
             return toolSlot.childCount != 0 || componentSlot.childCount != 0;
+        }
+
+        public Sprite GetEquippedItemUISprite()
+        {
+            // Return if unit has nothing in hand.
+            if (!DoesUnitHaveAnythingInHand()) return null;
+            
+            // Return Tool.
+            if (toolSlot.childCount == 1)
+                return toolSlot.GetChild(0).transform.GetComponent<Tool>().toolUISprite;
+            
+            // Return CarComponent.
+            return componentSlot.GetChild(0).transform.GetComponent<CarComponent>().carComponentUISprite;
+        }
+
+        public void SetUnitUIController(UnitUIController UI)
+        {
+            unitUIController = UI;
+        }
+
+        public void UPDATE_UnitUI()
+        {
+            unitUIController.UPDATE_UnitUI();
         }
     }
 }

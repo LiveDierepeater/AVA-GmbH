@@ -204,7 +204,7 @@ namespace Player
         private void SpawnMoveToSprite(Vector3 destination)
         {
             GameObject newMoveToSprite = Instantiate(moveToSpritePrefab, destination, Quaternion.identity);
-            newMoveToSprite.transform.position = destination;
+            newMoveToSprite.transform.position = destination + new Vector3(0f, 0.05f, 0f);
             Destroy(newMoveToSprite, 1f);
         }
     }

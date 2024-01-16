@@ -15,5 +15,7 @@ namespace Task
         }
 
         public Type toolType;
+
+        public Sprite toolUISprite;
     }
 }

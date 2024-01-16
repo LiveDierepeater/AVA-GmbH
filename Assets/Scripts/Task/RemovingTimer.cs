@@ -64,6 +64,9 @@ public class RemovingTimer : MonoBehaviour
 
     private void KillRemovingTimerComponent()
     {
+        // Update Units UI.
+        unitToRemoveCarComponent.GetComponent<SelectableUnit>().UPDATE_UnitUI();
+        
         Destroy(this);
     }
 
