@@ -142,9 +142,7 @@ namespace Player
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                         {
                             unit.MoveToDestination(hit.point);
-                            GameObject newMoveToSprite = Instantiate(moveToSpritePrefab, hit.point, Quaternion.identity);
-                            newMoveToSprite.transform.position = hit.point;
-                            Destroy(newMoveToSprite, 1f);
+                            SpawnMoveToSprite(hit.point);
                         }
                     }
                 }
@@ -195,9 +193,19 @@ namespace Player
                     else
                         foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
                             if (selectedUnit.DoesUnitHaveAnythingInHand())
+                            {
                                 selectedUnit.DropOffItem(hit.point);
+                                SpawnMoveToSprite(hit.point);
+                            }
                 }
             }
+        }
+
+        private void SpawnMoveToSprite(Vector3 destination)
+        {
+            GameObject newMoveToSprite = Instantiate(moveToSpritePrefab, destination, Quaternion.identity);
+            newMoveToSprite.transform.position = destination;
+            Destroy(newMoveToSprite, 1f);
         }
     }
 }
