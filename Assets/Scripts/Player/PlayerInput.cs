@@ -14,6 +14,8 @@ namespace Player
 
         private float mouseDownTime;
         private Vector2 startMousePosition;
+        
+        public GameObject moveToSpritePrefab;
 
         private void Awake()
         {
@@ -138,7 +140,12 @@ namespace Player
                     else
                     {
                         foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                        {
                             unit.MoveToDestination(hit.point);
+                            GameObject newMoveToSprite = Instantiate(moveToSpritePrefab, hit.point, Quaternion.identity);
+                            newMoveToSprite.transform.position = hit.point;
+                            Destroy(newMoveToSprite, 1f);
+                        }
                     }
                 }
             }
