@@ -24,27 +24,7 @@ namespace UI
         private void Awake()
         {
             currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                if (status == Status.Broken)
-                    foreach (CarComponent brokenPart in currentGoKart.brokenParts)
-                    {
-                        GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
-                        newText.GetComponentInChildren<TextMeshProUGUI>().text = brokenPart.carPartType.ToString();
-                        carComponentsUIList.Add(newText);
-                    }
-                else if (status == Status.Damaged)
-                    foreach (CarComponent damagedPart in currentGoKart.damagedParts)
-                    {
-                        GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
-                        newText.GetComponentInChildren<TextMeshProUGUI>().text = damagedPart.carPartType.ToString();
-                        carComponentsUIList.Add(newText);
-                    }
-            }
+            Invoke(nameof(InitializeLists), 0.1f);
         }
 
         public void UDPATE_UILists()
@@ -66,6 +46,24 @@ namespace UI
         
             carComponentsUIList.Remove(carComponentUIToDelete);
             Destroy(carComponentUIToDelete);
+        }
+
+        public void InitializeLists()
+        {
+            if (status == Status.Broken)
+                foreach (CarComponent brokenPart in currentGoKart.brokenParts)
+                {
+                    GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
+                    newText.GetComponentInChildren<TextMeshProUGUI>().text = brokenPart.carPartType.ToString();
+                    carComponentsUIList.Add(newText);
+                }
+            else if (status == Status.Damaged)
+                foreach (CarComponent damagedPart in currentGoKart.damagedParts)
+                {
+                    GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
+                    newText.GetComponentInChildren<TextMeshProUGUI>().text = damagedPart.carPartType.ToString();
+                    carComponentsUIList.Add(newText);
+                }
         }
     }
 }
