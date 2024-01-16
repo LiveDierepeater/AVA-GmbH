@@ -3581,6 +3581,10 @@ PrefabInstance:
       propertyPath: selectionBox
       value: 
       objectReference: {fileID: 5103907210326319605}
+    - target: {fileID: 8378400679165222360, guid: 636ac3b8fb769ca408f0d3b69cea7a64, type: 3}
+      propertyPath: moveToSpritePrefab
+      value: 
+      objectReference: {fileID: 1503025913438206171, guid: 86eeba415550ece4aa5ec47dabfb2c22, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
