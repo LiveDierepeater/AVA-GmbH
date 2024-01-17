@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using Karts;
 using Task;
-using UnityEngine.Serialization;
 
 namespace Characters
 {
@@ -209,7 +208,7 @@ namespace Characters
                     if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_RemoveCarComponent();
-                        currentState = States.Idle;
+                        //currentState = States.Idle;
             
                         // Update Units UI.
                         unitUIController.UPDATE_UnitUI();
@@ -220,7 +219,6 @@ namespace Characters
                     if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_AddCarComponent();
-                        currentState = States.Idle;
             
                         // Update Units UI.
                         unitUIController.UPDATE_UnitUI();
@@ -376,7 +374,11 @@ namespace Characters
             if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
             
             // Return if List<CarComponent> carComponents has no free slots.
-            if (currentGoKart.GetFreeCarComponentSlotIndex() < 0) return;
+            if (currentGoKart.GetFreeCarComponentSlotIndex() < 0)
+            {
+                currentState = States.Idle;
+                return;
+            }
             
             // Return if equippedCarComponent is not intact.
             if (equippedCarComponent.status != CarComponent.Status.Intact) return;

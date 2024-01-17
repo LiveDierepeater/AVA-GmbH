@@ -5,12 +5,13 @@ using Karts;
 
 public class RemovingTimer : MonoBehaviour
 {
-    public NavMeshAgent unitToRemoveCarComponent;
+    public NavMeshAgent unitToRemoveCarComponentAgent;
     
     public float remainingRemovingTime = 3f;
 
     private GoKart currentGoKart;
     private CarComponent thisCarComponent;
+    private SelectableUnit unitToRemoveCarComponent;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class RemovingTimer : MonoBehaviour
     private void Update()
     {
         // Return if Unit is not in range.
-        if (!currentGoKart.IsUnitInRange(unitToRemoveCarComponent)) return;
+        if (!currentGoKart.IsUnitInRange(unitToRemoveCarComponentAgent)) return;
 
         // Tick time.
         TickTimer();
@@ -55,23 +56,27 @@ public class RemovingTimer : MonoBehaviour
         currentGoKart.brokenParts.Remove(thisCarComponent);
 
         // Sets Mesh-Transform of CarComponent under units ToolSlot.transform.
-        thisCarComponent.transform.SetParent(unitToRemoveCarComponent.transform.Find("Component Slot"));
+        thisCarComponent.transform.SetParent(unitToRemoveCarComponentAgent.transform.Find("Component Slot"));
         thisCarComponent.transform.localPosition = Vector3.zero;
             
         // Sets reference to removed and now equipped CarComponent.
-        unitToRemoveCarComponent.GetComponent<SelectableUnit>().equippedCarComponent = thisCarComponent;
+        unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().equippedCarComponent = thisCarComponent;
+        
+        // Change Units state to Idle.
+        unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().currentState = SelectableUnit.States.Idle;
     }
 
     private void KillRemovingTimerComponent()
     {
         // Update Units UI.
-        unitToRemoveCarComponent.GetComponent<SelectableUnit>().UPDATE_UnitUI();
+        unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().UPDATE_UnitUI();
         
         Destroy(this);
     }
 
     public void SetUnitToRemoveCarComponent(NavMeshAgent newUnitToRemoveAgent)
     {
-        unitToRemoveCarComponent = newUnitToRemoveAgent;
+        unitToRemoveCarComponentAgent = newUnitToRemoveAgent;
+        unitToRemoveCarComponent = unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>();
     }
 }
