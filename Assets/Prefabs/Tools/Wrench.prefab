@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolType: 0
-  toolUISprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  toolUISprite: {fileID: 21300000, guid: e3af81d393b00cd49a3db612b470fc5d, type: 3}

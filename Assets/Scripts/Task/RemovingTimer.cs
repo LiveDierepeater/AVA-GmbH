@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Characters;
 using Karts;
+using Task;
 
 public class RemovingTimer : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class RemovingTimer : MonoBehaviour
 
     private GoKart currentGoKart;
     private CarComponent thisCarComponent;
+    private GameManager gameManager;
     private SelectableUnit unitToRemoveCarComponent;
 
     private void Awake()
     {
         currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
         thisCarComponent = GetComponent<CarComponent>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -61,6 +64,7 @@ public class RemovingTimer : MonoBehaviour
             
         // Sets reference to removed and now equipped CarComponent.
         unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().equippedCarComponent = thisCarComponent;
+        gameManager.UPDATE_RemovedCarComponentUI(thisCarComponent);
         
         // Change Units state to Idle.
         unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().currentState = SelectableUnit.States.Idle;

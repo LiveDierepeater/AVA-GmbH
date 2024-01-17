@@ -17,7 +17,7 @@ namespace Task
         public void UPDATE_RemoveDamagedPart(CarComponent carComponent)
         {
             TaskManager.Instance.RemoveDamagedPart(carComponent);
-            carComponentsRightListUI.UDPATE_UILists();
+            carComponentsRightListUI.RemoveBrokenCarComponentFromUIList(carComponent);
             currentMoneyAmount += 10;
             moneyCounterUI.text = moneyCounterUILabel + currentMoneyAmount;
         }
@@ -25,9 +25,14 @@ namespace Task
         public void UPDATE_RemoveBrokenPart(CarComponent carComponent)
         {
             TaskManager.Instance.RemoveBrokenPart(carComponent);
-            carComponentsLeftListUI.UDPATE_UILists();
+            carComponentsLeftListUI.RemoveBrokenCarComponentFromUIList(carComponent);
             currentMoneyAmount += 10;
             moneyCounterUI.text = moneyCounterUILabel + currentMoneyAmount;
+        }
+
+        public void UPDATE_RemovedCarComponentUI(CarComponent carComponent)
+        {
+            carComponentsLeftListUI.UPDATE_LooseCarComponentUI(carComponent);
         }
     }
 }

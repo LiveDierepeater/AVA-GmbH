@@ -195,8 +195,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 631747999105576738}
   m_HandleRect: {fileID: 310939903061724135}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  carComponentTextUIPrefab: {fileID: 7905395068375184893, guid: 5b99edc65639b93409fbf09ea2b4f331, type: 3}
+  carComponentUIPrefab: {fileID: 2337489777455899055, guid: 3450b5fb9b756f74b8d4f887f980b618, type: 3}
 --- !u!1 &5841039998861121693
 GameObject:
   m_ObjectHideFlags: 0

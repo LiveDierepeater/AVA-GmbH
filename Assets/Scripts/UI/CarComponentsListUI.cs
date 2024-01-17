@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Karts;
-using TMPro;
 
 namespace UI
 {
@@ -15,11 +14,16 @@ namespace UI
 
         public Status status;
 
-        public GameObject carComponentTextUIPrefab;
+        public GameObject brokenCarComponentUIPrefab;
+        public GameObject damagedCarComponentUIPrefab;
     
         private GoKart currentGoKart;
 
-        private List<GameObject> carComponentsUIList = new List<GameObject>();
+        private List<CarComponentUI> damagedCarComponentsUIList = new List<CarComponentUI>();
+        private List<CarComponentUI> brokenCarComponentsUIList = new List<CarComponentUI>();
+
+        private string brokenCarComponentUIInstruction_01 = "Remove Component";
+        private string brokenCarComponentUIInstruction_02 = "Add new Component";
 
         private void Awake()
         {
@@ -27,25 +31,47 @@ namespace UI
             Invoke(nameof(InitializeLists), 0.1f);
         }
 
-        public void UDPATE_UILists()
+        public void RemoveBrokenCarComponentFromUIList(CarComponent fixedCarComponent)
         {
-            GameObject carComponentUIToDelete = null;
-        
-            foreach (CarComponent intactPart in currentGoKart.intactParts)
+            CarComponentUI carComponentUIToDelete = null;
+
+            foreach (CarComponentUI brokenCarComponentUI in brokenCarComponentsUIList)
             {
-                foreach (GameObject ui in carComponentsUIList)
+                if (fixedCarComponent.name == brokenCarComponentUI.carComponentNameReference)
                 {
-                    if (intactPart.carPartType.ToString() == ui.GetComponentInChildren<TextMeshProUGUI>().text)
-                    {
-                        carComponentUIToDelete = ui;
-                    }
+                    carComponentUIToDelete = brokenCarComponentUI;
                 }
             }
-        
+            
             if (carComponentUIToDelete is null) return;
-        
-            carComponentsUIList.Remove(carComponentUIToDelete);
-            Destroy(carComponentUIToDelete);
+
+            brokenCarComponentsUIList.Remove(carComponentUIToDelete);
+            Destroy(carComponentUIToDelete.gameObject);
+        }
+
+        public void RemoveDamagedCarComponentsFromUIList(CarComponent fixedCarComponent)
+        {
+            CarComponentUI carComponentUIToDelete = null;
+            
+            foreach (CarComponentUI damagedCarComponentUI in damagedCarComponentsUIList)
+            {
+                if (fixedCarComponent.name == damagedCarComponentUI.carComponentNameReference)
+                {
+                    carComponentUIToDelete = damagedCarComponentUI;
+                }
+            }
+        }
+
+        public void UPDATE_LooseCarComponentUI(CarComponent looseCarComponent)
+        {
+            foreach (CarComponentUI brokenCarComponentUI in brokenCarComponentsUIList)
+            {
+                
+                if (looseCarComponent.name + "(Clone)" == brokenCarComponentUI.carComponentNameReference)
+                {
+                    brokenCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_02;
+                }
+            }
         }
 
         public void InitializeLists()
@@ -53,17 +79,23 @@ namespace UI
             if (status == Status.Broken)
                 foreach (CarComponent brokenPart in currentGoKart.brokenParts)
                 {
-                    GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
-                    newText.GetComponentInChildren<TextMeshProUGUI>().text = brokenPart.carPartType.ToString();
-                    carComponentsUIList.Add(newText);
+                    GameObject newCarComponentUIInstance = Instantiate(brokenCarComponentUIPrefab, transform);
+                    CarComponentUI newCarComponentUI = newCarComponentUIInstance.GetComponent<CarComponentUI>();
+
+                    newCarComponentUI.carComponentIconImage.sprite = brokenPart.carComponentUISprite;
+                    newCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_01;
+                    newCarComponentUI.carComponentNameReference = brokenPart.name + "(Clone)";
+                    brokenCarComponentsUIList.Add(newCarComponentUI);
                 }
-            else if (status == Status.Damaged)
-                foreach (CarComponent damagedPart in currentGoKart.damagedParts)
-                {
-                    GameObject newText = Instantiate(carComponentTextUIPrefab, transform);
-                    newText.GetComponentInChildren<TextMeshProUGUI>().text = damagedPart.carPartType.ToString();
-                    carComponentsUIList.Add(newText);
-                }
+            // else if (status == Status.Damaged)
+            //     foreach (CarComponent damagedPart in currentGoKart.damagedParts)
+            //     {
+            //         GameObject newText = Instantiate(brokenCarComponentUIPrefab, transform);
+            //         newText.GetComponentInChildren<TextMeshProUGUI>().text = damagedPart.carPartType.ToString();
+            //         damagedCarComponentsUIList.Add(newText);
+            //
+            //         GameObject newCarComponentInstance = Instantiate(damagedCarComponentUIPrefab, transform);
+            //     }
         }
     }
 }
