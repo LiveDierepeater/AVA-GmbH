@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Karts;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -55,11 +56,16 @@ namespace UI
             
             foreach (CarComponentUI damagedCarComponentUI in damagedCarComponentsUIList)
             {
-                if (fixedCarComponent.name == damagedCarComponentUI.carComponentNameReference)
+                if (fixedCarComponent.name + "(Clone)" == damagedCarComponentUI.carComponentNameReference)
                 {
                     carComponentUIToDelete = damagedCarComponentUI;
                 }
             }
+            
+            if (carComponentUIToDelete is null) return;
+
+            damagedCarComponentsUIList.Remove(carComponentUIToDelete);
+            Destroy(carComponentUIToDelete.gameObject);
         }
 
         public void UPDATE_LooseCarComponentUI(CarComponent looseCarComponent)
@@ -87,15 +93,17 @@ namespace UI
                     newCarComponentUI.carComponentNameReference = brokenPart.name + "(Clone)";
                     brokenCarComponentsUIList.Add(newCarComponentUI);
                 }
-            // else if (status == Status.Damaged)
-            //     foreach (CarComponent damagedPart in currentGoKart.damagedParts)
-            //     {
-            //         GameObject newText = Instantiate(brokenCarComponentUIPrefab, transform);
-            //         newText.GetComponentInChildren<TextMeshProUGUI>().text = damagedPart.carPartType.ToString();
-            //         damagedCarComponentsUIList.Add(newText);
-            //
-            //         GameObject newCarComponentInstance = Instantiate(damagedCarComponentUIPrefab, transform);
-            //     }
+            else if (status == Status.Damaged)
+                foreach (CarComponent damagedPart in currentGoKart.damagedParts)
+                {
+                    GameObject newCarComponentUIInstance = Instantiate(damagedCarComponentUIPrefab, transform);
+                    CarComponentUI newCarComponentUI = newCarComponentUIInstance.GetComponent<CarComponentUI>();
+
+                    newCarComponentUI.carComponentIconImage.sprite = damagedPart.carComponentUISprite;
+                    newCarComponentUI.toolToRepairIconImage.sprite = damagedPart.toolToRepair.toolUISprite;
+                    newCarComponentUI.carComponentNameReference = damagedPart.name + "(Clone)";
+                    damagedCarComponentsUIList.Add(newCarComponentUI);
+                }
         }
     }
 }
