@@ -114,6 +114,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1920
   dragDelay: 0.1
+  moveToSpritePrefab: {fileID: 1503025913438206171, guid: 86eeba415550ece4aa5ec47dabfb2c22, type: 3}
 --- !u!114 &8021545092832128790
 MonoBehaviour:
   m_ObjectHideFlags: 0
