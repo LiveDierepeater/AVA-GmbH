@@ -69,6 +69,8 @@ public class CharacterAnimationController : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(RollRandomIdlingChance), 1f);
+        var state = unitAnimator.GetCurrentAnimatorStateInfo(0);
+        unitAnimator.Play(state.fullPathHash, 0, Random.Range(0f, 1f));
     }
 
     private void RollRandomIdlingChance()
