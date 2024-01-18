@@ -133,13 +133,17 @@ namespace Karts
             return false;
         }
 
-        public bool CheckForDoubledCarComponents(CarComponent newCarComponent)
+        public bool CheckForDoubledCarComponents(CarComponent equippedCarComponent)
         {
             foreach (CarComponent carComponent in carComponents)
             {
-                return newCarComponent == carComponent;
+                if (carComponent is null) continue;
+                
+                if (carComponent.carPartType == equippedCarComponent.carPartType)
+                {
+                    return true;
+                }
             }
-
             return false;
         }
         
