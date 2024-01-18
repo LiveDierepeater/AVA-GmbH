@@ -30,8 +30,14 @@ namespace Player
 
         private void HandleMovementInput()
         {
-            if (Input.GetKeyDown(KeyCode.A)) room = Room.Garage;
-            if (Input.GetKeyDown(KeyCode.D)) room = Room.Storage;
+            float direction = Input.GetAxisRaw("Horizontal");
+
+            room = direction switch
+            {
+                < 0 => Room.Garage,
+                > 0 => Room.Storage,
+                _ => room
+            };
         }
 
         private void ExecuteMovement()

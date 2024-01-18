@@ -48,7 +48,7 @@ MonoBehaviour:
   carPartType: 15
   status: 0
   toolToRepair: {fileID: 8878841736358590584, guid: e555bfda193ee2c4d92f5fc5b1f4722d, type: 3}
-  carComponentUISprite: {fileID: 21300000, guid: a1ca2c616fcb8a3409d84ba8b2c723c8, type: 3}
+  carComponentUISprite: {fileID: 21300000, guid: 4ff403848ccc91641a968f703a42d3eb, type: 3}
 --- !u!1 &3216401721854063480
 GameObject:
   m_ObjectHideFlags: 0
