@@ -39,6 +39,6 @@ public class UnitUIController : MonoBehaviour
         equippedItemIcon.sprite = null;
         equippedItemIcon.color = Color.clear;
         
-        UPDATE_UnitUI();
+        Invoke(nameof(UPDATE_UnitUI), 0.03f);
     }
 }
