@@ -114,6 +114,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1920
   dragDelay: 0.1
+  defaultMouseCursor: {fileID: 2800000, guid: 10d4ebdf34acda540b2ab61d38f39633, type: 3}
+  leftClickCursor: {fileID: 2800000, guid: 8c8eb489c1d93424cb2fc0ab5bf1fb8f, type: 3}
+  rightClickCursor: {fileID: 2800000, guid: dd1e2f5736275a74babb06eb1b0ed697, type: 3}
+  rightClickOnGroundCursor: {fileID: 2800000, guid: 02354c01d5704ca42ba78374496a7be7, type: 3}
   moveToSpritePrefab: {fileID: 1503025913438206171, guid: 86eeba415550ece4aa5ec47dabfb2c22, type: 3}
 --- !u!114 &8021545092832128790
 MonoBehaviour:

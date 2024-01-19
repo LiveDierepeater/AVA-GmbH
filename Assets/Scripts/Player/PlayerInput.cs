@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using Characters;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -12,7 +13,10 @@ namespace Player
         [SerializeField] private LayerMask groundToolComponentLayerMask;
         [SerializeField] private float dragDelay = 0.1f;
         
-        public Texture2D mouseCursor;
+        public Texture2D defaultMouseCursor;
+        public Texture2D leftClickCursor;
+        public Texture2D rightClickCursor;
+        public Texture2D rightClickOnGroundCursor;
 
         private float mouseDownTime;
         private Vector2 startMousePosition;
@@ -22,7 +26,7 @@ namespace Player
         private void Awake()
         {
             camera = GetComponent<Camera>();
-            ChangeMouseCursor();
+            InitializeMouseCursor();
         }
 
         private void Update()
@@ -30,6 +34,7 @@ namespace Player
             HandleSelectionInputs();
             HandleMovementInputs();
             HandleKeyInputs();
+            HandleMouseCursor();
         }
 
         private void HandleSelectionInputs()
@@ -152,6 +157,28 @@ namespace Player
             }
         }
 
+        private void HandleMouseCursor()
+        {
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,
+                    groundToolComponentLayerMask))
+            {
+                if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Tools" ||
+                    LayerMask.LayerToName(hit.transform.gameObject.layer) == "CarComponents" ||
+                    LayerMask.LayerToName(hit.transform.gameObject.layer) == "Kart")
+                    if (SelectionManager.Instance.SelectedUnits.Count != 0)
+                        Cursor.SetCursor(rightClickCursor, new Vector2(50, 50), CursorMode.Auto);
+                
+                if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Units")
+                    Cursor.SetCursor(leftClickCursor, new Vector2(0, 0), CursorMode.Auto);
+                
+                if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Ground")
+                    if (SelectionManager.Instance.SelectedUnits.Count != 0)
+                        Cursor.SetCursor(rightClickOnGroundCursor, new Vector2(50, 50), CursorMode.Auto);
+                    else
+                        Cursor.SetCursor(defaultMouseCursor, new Vector2(0, 0), CursorMode.Auto);
+            }
+        }
+
         private void ResizeSelectionBox()
         {
             float width = Input.mousePosition.x - startMousePosition.x;
@@ -211,9 +238,9 @@ namespace Player
             Destroy(newMoveToSprite, 1f);
         }
 
-        private void ChangeMouseCursor()
+        private void InitializeMouseCursor()
         {
-            Cursor.SetCursor(mouseCursor, new Vector2(0, 0), CursorMode.Auto);
+            Cursor.SetCursor(defaultMouseCursor, new Vector2(0, 0), CursorMode.Auto);
         }
     }
 }

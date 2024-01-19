@@ -197,7 +197,7 @@ namespace Characters
                     if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
                     {
                         UPDATE_RepairCarComponents();
-                        currentState = States.Idle;
+                        //currentState = States.Idle;
             
                         // Update Units UI.
                         unitUIController.UPDATE_UnitUI();
@@ -338,7 +338,13 @@ namespace Characters
                     partToRepair = damagedPart;
 
             // If there is no part which could get repaired witch the currently equipped tool -> return.
-            if (partToRepair is null) return;
+            if (partToRepair is null)
+            {
+                // Change Units state to Idle.
+                currentState = States.Idle;
+                
+                return;
+            }
             
             // TODO: Here the QuickTime-Event will be played in future.
             // Return if there is already a RepairTimer.cs Component on the partToRepair.
