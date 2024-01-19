@@ -325,11 +325,15 @@ namespace Characters
 
         private void UPDATE_RepairCarComponents()
         {
-            if (toolSlot.childCount == 0) return;                           // Checks if unit has tool
+            if (toolSlot.childCount == 0) return;                           // Checks if unit has tool.
             
-            if (TaskManager.Instance.damagedParts.Count == 0) return;              // Checks if car has damaged parts
+            if (TaskManager.Instance.damagedParts.Count == 0)               // Check if there are damaged Parts left.
+            {
+                currentState = States.Idle;
+                return;
+            }
             
-            CarComponent partToRepair = null;                               // Creates place for partToRepair
+            CarComponent partToRepair = null;                               // Creates place for partToRepair.
             
             // Goes through all damaged parts.
             // The last damaged part which toolToGetRepaired matches the equipped tool gets saved.
@@ -358,7 +362,11 @@ namespace Characters
         private void UPDATE_RemoveCarComponent()
         {
             // Return if Car has no more CarComponents build in.
-            if (currentGoKart.brokenParts.Count == 0) return;
+            if (currentGoKart.brokenParts.Count == 0)
+            {
+                currentState = States.Idle;
+                return;
+            }
             
             // Gets reference to the first CarComponent in List<CarComponent> currentGoKart.brokenParts.
             // This carComponentToRemove will get removed in future from the currentGoKart.
@@ -377,7 +385,11 @@ namespace Characters
         private void UPDATE_AddCarComponent()
         {
             // Return if equippedCarComponent matches a CarComponent in List<CarComponent> carComponents.
-            if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent)) return;
+            if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent))
+            {
+                currentState = States.Idle;
+                return;
+            }
             
             // Return if List<CarComponent> carComponents has no free slots.
             if (currentGoKart.GetFreeCarComponentSlotIndex() < 0)

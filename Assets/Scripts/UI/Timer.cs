@@ -12,6 +12,7 @@ namespace UI
         private Image clockIcon;
     
         public float remainingTime;
+        public float alertTime = 30;
 
         public Color emergencyColor = Color.red;
 
@@ -23,7 +24,7 @@ namespace UI
 
         private void Update()
         {
-            if (remainingTime < 11)
+            if (remainingTime < alertTime + 1)
             {
                 timerUI.color = emergencyColor;
                 clockIcon.color = emergencyColor;

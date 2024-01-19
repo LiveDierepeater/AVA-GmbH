@@ -76,6 +76,9 @@ namespace UI
                 if (looseCarComponent.name + "(Clone)" == brokenCarComponentUI.carComponentNameReference)
                 {
                     brokenCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_02;
+                    
+                    // Set UI color.
+                    brokenCarComponentUI.carComponentInstructionField.color = Color.yellow;
                 }
             }
         }
@@ -92,6 +95,9 @@ namespace UI
                     newCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_01;
                     newCarComponentUI.carComponentNameReference = brokenPart.name + "(Clone)";
                     brokenCarComponentsUIList.Add(newCarComponentUI);
+                    
+                    // Set UI color.
+                    newCarComponentUI.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
                 }
             else if (status == Status.Damaged)
                 foreach (CarComponent damagedPart in currentGoKart.damagedParts)

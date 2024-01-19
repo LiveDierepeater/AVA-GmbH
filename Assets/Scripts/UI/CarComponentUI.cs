@@ -2,13 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CarComponentUI : MonoBehaviour
+namespace UI
 {
-    public Image carComponentIconImage;
+    public class CarComponentUI : MonoBehaviour
+    {
+        public Image carComponentIconImage;
     
-    public string carComponentNameReference;
+        public string carComponentNameReference;
     
-    [Header("UI Left Side")] public TextMeshProUGUI carComponentInstructionUGUI;
+        [Header("UI Left Side")] public TextMeshProUGUI carComponentInstructionUGUI;
+        
+        public Image carComponentInstructionField;
 
-    [Header("UI Right Side")] public Image toolToRepairIconImage;
+        [Header("UI Right Side")] public Image toolToRepairIconImage;
+    }
 }
