@@ -11,6 +11,8 @@ namespace Player
         [SerializeField] private LayerMask unitLayers;
         [SerializeField] private LayerMask groundToolComponentLayerMask;
         [SerializeField] private float dragDelay = 0.1f;
+        
+        public Texture2D mouseCursor;
 
         private float mouseDownTime;
         private Vector2 startMousePosition;
@@ -20,6 +22,7 @@ namespace Player
         private void Awake()
         {
             camera = GetComponent<Camera>();
+            ChangeMouseCursor();
         }
 
         private void Update()
@@ -178,7 +181,7 @@ namespace Player
 
         private void HandleKeyInputs()
         {
-            if (Input.GetKeyUp(KeyCode.Q) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            if (Input.GetKeyUp(KeyCode.S) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {
@@ -206,6 +209,11 @@ namespace Player
             GameObject newMoveToSprite = Instantiate(moveToSpritePrefab, destination, Quaternion.identity);
             newMoveToSprite.transform.position = destination + new Vector3(0f, 0.05f, 0f);
             Destroy(newMoveToSprite, 1f);
+        }
+
+        private void ChangeMouseCursor()
+        {
+            Cursor.SetCursor(mouseCursor, new Vector2(0, 0), CursorMode.Auto);
         }
     }
 }
