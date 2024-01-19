@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7caa646e7864bc141801ba71e0f1bb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 1
+  status: 0
   brokenCarComponentUIPrefab: {fileID: 2337489777455899055, guid: 3450b5fb9b756f74b8d4f887f980b618, type: 3}
   damagedCarComponentUIPrefab: {fileID: 2337489777455899055, guid: 9c87eb7965aa99748b0ee72e616168b9, type: 3}
 --- !u!1 &9132059045620517970

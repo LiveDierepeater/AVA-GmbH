@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Characters;
 using Karts;
-using UnityEngine.UI;
+using Task;
 
 namespace UI
 {
@@ -109,7 +110,37 @@ namespace UI
                     newCarComponentUI.toolToRepairIconImage.sprite = damagedPart.toolToRepair.toolUISprite;
                     newCarComponentUI.carComponentNameReference = damagedPart.name + "(Clone)";
                     damagedCarComponentsUIList.Add(newCarComponentUI);
+                    
+                    // Set UI color.
+                    newCarComponentUI.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
                 }
+        }
+
+        private void Update()
+        {
+            if (status == Status.Broken) return;
+
+            foreach (CarComponentUI ui in damagedCarComponentsUIList)
+            {
+                ui.carComponentInstructionUGUI.text = "Get Tool";
+                ui.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
+            }
+            
+            foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+            {
+                foreach (CarComponentUI ui in damagedCarComponentsUIList)
+                {
+                    
+                    if (unit.toolSlot.childCount == 0) return;
+                    
+                    if (ui.toolToRepairIconImage.sprite.name ==
+                        unit.toolSlot.GetChild(0).GetComponent<Tool>().toolUISprite.name)
+                    {
+                        ui.carComponentInstructionUGUI.text = "Repair Kart";
+                        ui.carComponentInstructionField.color = Color.yellow;
+                    }
+                }
+            }
         }
     }
 }
