@@ -78,7 +78,7 @@ namespace Characters
         public void GetTool(Vector3 newDestination, Transform toolToReach)
         {
             currentState = States.GetTool;
-            lastToolStationToReach = toolToReach.GetComponent<ToolStation>();
+            lastToolStationToReach = toolToReach.parent.GetComponent<ToolStation>();
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
             
@@ -264,10 +264,10 @@ namespace Characters
             
             // Check if Unit already has a CarComponent in hand.
             if (componentSlot.childCount != 0) return;
-            
+
             // Add Tool to Unit's Tool Slot (transform)
             equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
-            
+
             // Update Units UI.
             unitUIController.UPDATE_UnitUI();
         }

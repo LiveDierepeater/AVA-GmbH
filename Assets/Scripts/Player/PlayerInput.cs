@@ -1,7 +1,6 @@
 using System.Linq;
 using UnityEngine;
 using Characters;
-using UnityEngine.Serialization;
 
 namespace Player
 {
