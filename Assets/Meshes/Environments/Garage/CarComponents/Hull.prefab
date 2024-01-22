@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3479155409346869679}
   - component: {fileID: 9059459212039266333}
   - component: {fileID: 940502019856541525}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hull
   m_TagString: Untagged
   m_Icon: {fileID: 0}

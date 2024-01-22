@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7101302571716900103}
   - component: {fileID: 2213402755770482247}
   - component: {fileID: 5706120517142092364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Auspuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
