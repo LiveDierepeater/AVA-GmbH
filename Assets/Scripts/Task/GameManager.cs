@@ -16,6 +16,8 @@ namespace Task
 
         [Header("GoKartTarget")] public Transform goKartTargetDestination;
 
+        [Header("GoKartPrefab")] public GameObject goKartPrefab;
+
         public void UPDATE_RemoveDamagedPart(CarComponent carComponent)
         {
             TaskManager.Instance.RemoveDamagedPart(carComponent);
@@ -49,15 +51,22 @@ namespace Task
         {
             // TODO: Drive current GoKart out of Garage.
             TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
-            print("Drove");
-
-            // TODO: Kill current GoKart.
-
-            // TODO: Create new GoKart.
 
             // TODO: Replace old GoKart References with new GoKart.
 
             // TODO: Update UI.
+        }
+
+        public void NextGoKart()
+        {
+            // Kills finished GoKart.
+            Destroy(TaskManager.Instance.currentGoKart.gameObject);
+
+            // Creates new GoKart.
+            TaskManager.Instance.currentGoKart =
+                Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity).GetComponent<GoKart>();
+            
+            
         }
     }
 }

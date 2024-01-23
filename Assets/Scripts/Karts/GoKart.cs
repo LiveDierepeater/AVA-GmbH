@@ -196,7 +196,10 @@ namespace Karts
             transform.position = Vector3.Lerp(transform.position, newDestination, speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, newDestination) <= 0.5f)   // Reset status to GetRepaired (Standing) when GoKart arrives at Destination.
-                goKartStatus = Status.GetRepaired;
+                if (goKartStatus == Status.DrivingIn)
+                    goKartStatus = Status.GetRepaired;
+                else
+                    gameManager.NextGoKart();
         }
     }
 }
