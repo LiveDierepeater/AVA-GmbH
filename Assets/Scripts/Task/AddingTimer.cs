@@ -63,6 +63,7 @@ namespace Task
             // Eliminating Reference to equippedCarComponent, as it isn't in hand anymore.
             unitToAddCarComponent.GetComponent<SelectableUnit>().equippedCarComponent = null;
             gameManager.UPDATE_RemoveBrokenPart(thisCarComponent);
+            TaskManager.Instance.AddedCarComponent();
             
             // Set Units State to Idle.
             unitToAddCarComponent.GetComponent<SelectableUnit>().currentState = SelectableUnit.States.Idle;

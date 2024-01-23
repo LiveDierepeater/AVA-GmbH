@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Principal;
 using Karts;
 
 namespace Task
@@ -37,14 +38,24 @@ namespace Task
             damagedParts.Add(damagedPart);
         }
 
-        public void RemoveBrokenPart(CarComponent part)
+        public void RemoveBrokenPart(CarComponent part)    // Component replaced.
         {
             brokenParts.Remove(part);
         }
 
-        public void RemoveDamagedPart(CarComponent part)
+        public void RemoveDamagedPart(CarComponent part)    // Component repaired.
         {
             damagedParts.Remove(part);
+        }
+
+        public void AddedCarComponent()                     // Component added.
+        {
+            
+        }
+
+        public void GoKartFinished()
+        {
+            
         }
     }
 }

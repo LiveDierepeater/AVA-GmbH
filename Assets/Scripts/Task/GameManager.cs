@@ -35,7 +35,7 @@ namespace Task
             carComponentsLeftListUI.UPDATE_LooseCarComponentUI(carComponent);
         }
 
-        private void Start()
+        private void Awake()
         {
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
         }
