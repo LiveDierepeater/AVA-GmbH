@@ -11,8 +11,8 @@ namespace Task
         public CarComponentsListUI carComponentsRightListUI;
         public TextMeshProUGUI moneyCounterUI;
 
-        private string moneyCounterUILabel = "Money: ";
-        private int currentMoneyAmount = 0;
+        private readonly string moneyCounterUILabel = "Money: ";
+        private int currentMoneyAmount;
 
         public void UPDATE_RemoveDamagedPart(CarComponent carComponent)
         {
