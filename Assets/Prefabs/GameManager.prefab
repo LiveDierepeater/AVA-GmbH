@@ -48,7 +48,7 @@ MonoBehaviour:
   carComponentsLeftListUI: {fileID: 0}
   carComponentsRightListUI: {fileID: 0}
   moneyCounterUI: {fileID: 0}
-  goKartDestination: {fileID: 3848273379824343026}
+  goKartTargetDestination: {fileID: 3848273379824343026}
 --- !u!1 &8381559916304746371
 GameObject:
   m_ObjectHideFlags: 0

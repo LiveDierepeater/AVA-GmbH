@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 using TMPro;
 using Task;
+using Random = UnityEngine.Random;
 
 namespace Karts
 {
@@ -20,8 +21,18 @@ namespace Karts
         public bool debugCarComponentsUI;
 
         public TextMeshProUGUI carComponentsUI;
-        
-        public float speed = 20f;
+
+        public GameManager gameManager;
+        public float speed = 5f;
+
+        public enum Status
+        {
+            DrivingIn,
+            GetRepaired,
+            DrivingOut
+        }
+
+        public Status goKartStatus;
 
         private void Start()
         {
@@ -31,6 +42,27 @@ namespace Karts
 
             DEBUG_CarComponents();
             DEBUG_CarComponentsUI();
+
+            goKartStatus = Status.DrivingIn;
+        }
+
+        private void Update()
+        {
+            switch (goKartStatus)
+            {
+                case Status.DrivingIn:
+                    DriveToDestination(Vector3.zero);
+                    break;
+
+                case Status.GetRepaired:
+                    // Nothing.
+                    break;
+                
+                case Status.DrivingOut:
+                    speed = 0.8f;
+                    DriveToDestination(gameManager.goKartTargetDestination.position);
+                    break;
+            }
         }
 
         private void AddCarComponentsToTaskManager()
@@ -159,9 +191,12 @@ namespace Karts
             return -1;
         }
 
-        public void DriveToDestination(Vector3 newDestination)
+        private void DriveToDestination(Vector3 newDestination)
         {
-            transform.transform.position = Vector3.Lerp(transform.position, newDestination, speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, newDestination, speed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, newDestination) <= 0.5f)   // Reset status to GetRepaired (Standing) when GoKart arrives at Destination.
+                goKartStatus = Status.GetRepaired;
         }
     }
 }

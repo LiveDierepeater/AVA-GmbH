@@ -66,6 +66,9 @@ namespace Task
             thisCarComponent.transform.localRotation = Quaternion.identity;
             thisCarComponent.transform.localScale = Vector3.one;
             
+            // Makes CarComponent invisible.
+            thisCarComponent.GetComponentInChildren<MeshRenderer>().enabled = false;
+            
             // Eliminating Reference to equippedCarComponent, as it isn't in hand anymore.
             unitToAddCarComponent.GetComponent<SelectableUnit>().equippedCarComponent = null;
             gameManager.UPDATE_RemoveBrokenPart(thisCarComponent);

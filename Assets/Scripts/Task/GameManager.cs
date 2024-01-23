@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 using Karts;
 using TMPro;
 using UI;
-using UnityEngine.Serialization;
 
 namespace Task
 {
@@ -42,13 +40,16 @@ namespace Task
         private void Awake()
         {
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
-            TaskManager.Instance.OnGokartFinished += Taskmanager_OnGoKartFinished;
+            TaskManager.Instance.OnGokartFinished += TaskManager_OnGoKartFinished;
+
+            TaskManager.Instance.currentGoKart.gameManager = this;
         }
 
-        public void Taskmanager_OnGoKartFinished()
+        private void TaskManager_OnGoKartFinished()
         {
             // TODO: Drive current GoKart out of Garage.
-            TaskManager.Instance.currentGoKart.DriveToDestination(goKartTargetDestination.position);
+            TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
+            print("Drove");
 
             // TODO: Kill current GoKart.
 
