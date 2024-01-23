@@ -29,7 +29,7 @@ namespace UI
 
         private void Awake()
         {
-            currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            currentGoKart = TaskManager.Instance.currentGoKart;
             Invoke(nameof(InitializeLists), 0.1f);
         }
 

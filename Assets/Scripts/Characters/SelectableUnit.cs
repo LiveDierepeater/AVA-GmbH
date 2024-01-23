@@ -46,7 +46,7 @@ namespace Characters
         {
             SelectionManager.Instance.AvailableUnits.Add(this);
             agent = GetComponent<NavMeshAgent>();
-            currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            currentGoKart = TaskManager.Instance.currentGoKart;
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
             

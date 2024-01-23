@@ -18,7 +18,7 @@ namespace Task
 
         private void Awake()
         {
-            currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            currentGoKart = TaskManager.Instance.currentGoKart;
             thisCarComponent = GetComponent<CarComponent>();
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         }

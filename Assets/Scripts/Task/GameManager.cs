@@ -34,5 +34,23 @@ namespace Task
         {
             carComponentsLeftListUI.UPDATE_LooseCarComponentUI(carComponent);
         }
+
+        private void Start()
+        {
+            TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+        }
+
+        public void NextGoKart()
+        {
+            // TODO: Drive current GoKart out of Garage.
+            
+            // TODO: Kill current GoKart.
+            
+            // TODO: Create new GoKart.
+            
+            // TODO: Replace old GoKart References with new GoKart.
+            
+            // TODO: Update UI.
+        }
     }
 }

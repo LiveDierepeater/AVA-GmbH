@@ -1,4 +1,5 @@
 using Karts;
+using Task;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -23,7 +24,7 @@ namespace Characters
         {
             unit = GetComponent<SelectableUnit>();
             unitAgent = GetComponent<NavMeshAgent>();
-            currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            currentGoKart = TaskManager.Instance.currentGoKart;
         }
 
         private void Update()

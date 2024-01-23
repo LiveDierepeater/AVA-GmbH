@@ -23,6 +23,8 @@ namespace Task
         public readonly List<CarComponent> brokenParts = new List<CarComponent>();
         public readonly List<CarComponent> damagedParts = new List<CarComponent>();
 
+        public GoKart currentGoKart;
+
         private TaskManager() { }
 
         public void AddBrokenPart(CarComponent brokenPart)
