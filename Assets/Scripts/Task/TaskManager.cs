@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Security.Principal;
 using Karts;
 
 namespace Task
@@ -23,6 +22,9 @@ namespace Task
 
         public readonly List<CarComponent> brokenParts = new List<CarComponent>();
         public readonly List<CarComponent> damagedParts = new List<CarComponent>();
+        
+        public delegate void GoKartFinished();
+        public event GoKartFinished OnGokartFinished;
 
         public GoKart currentGoKart;
 
@@ -46,16 +48,20 @@ namespace Task
         public void RemoveDamagedPart(CarComponent part)    // Component repaired.
         {
             damagedParts.Remove(part);
+            CheckIfCurrentGoKartIsFinished();
         }
 
         public void AddedCarComponent()                     // Component added.
         {
-            
+            CheckIfCurrentGoKartIsFinished();
         }
 
-        public void GoKartFinished()
+        private void CheckIfCurrentGoKartIsFinished()
         {
-            
+            if (currentGoKart.carComponents.Length == currentGoKart.intactParts.Count)
+            {
+                OnGokartFinished?.Invoke();
+            }
         }
     }
 }

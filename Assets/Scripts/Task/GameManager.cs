@@ -2,6 +2,7 @@ using UnityEngine;
 using Karts;
 using TMPro;
 using UI;
+using UnityEngine.Serialization;
 
 namespace Task
 {
@@ -13,6 +14,8 @@ namespace Task
 
         private readonly string moneyCounterUILabel = "Money: ";
         private int currentMoneyAmount;
+
+        [Header("GoKartTarget")] public Transform goKartTargetDestination;
 
         public void UPDATE_RemoveDamagedPart(CarComponent carComponent)
         {
@@ -38,18 +41,20 @@ namespace Task
         private void Awake()
         {
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
+            TaskManager.Instance.OnGokartFinished += Taskmanager_OnGoKartFinished;
         }
 
-        public void NextGoKart()
+        public void Taskmanager_OnGoKartFinished()
         {
             // TODO: Drive current GoKart out of Garage.
-            
+            TaskManager.Instance.currentGoKart.DriveToDestination(goKartTargetDestination.position);
+
             // TODO: Kill current GoKart.
-            
+
             // TODO: Create new GoKart.
-            
+
             // TODO: Replace old GoKart References with new GoKart.
-            
+
             // TODO: Update UI.
         }
     }

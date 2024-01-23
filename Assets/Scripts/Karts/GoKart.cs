@@ -20,6 +20,8 @@ namespace Karts
         public bool debugCarComponentsUI;
 
         public TextMeshProUGUI carComponentsUI;
+        
+        public float speed = 20f;
 
         private void Start()
         {
@@ -155,6 +157,11 @@ namespace Karts
             }
 
             return -1;
+        }
+
+        public void DriveToDestination(Vector3 newDestination)
+        {
+            transform.transform.position = Vector3.Lerp(transform.position, newDestination, speed * Time.deltaTime);
         }
     }
 }
