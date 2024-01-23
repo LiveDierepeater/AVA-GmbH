@@ -24,7 +24,6 @@ namespace Characters
         {
             unit = GetComponent<SelectableUnit>();
             unitAgent = GetComponent<NavMeshAgent>();
-            currentGoKart = TaskManager.Instance.currentGoKart;
         }
 
         private void Update()
@@ -39,7 +38,7 @@ namespace Characters
                 // Units Animation without Item in hand.
                 hasUnitItemInHand = false;
             }
-
+            
             // When Unit is doing something on GoKart.
             if (currentGoKart.IsUnitInRange(unitAgent))
             {
@@ -73,6 +72,9 @@ namespace Characters
             Invoke(nameof(RollRandomIdlingChance), 1f);
             var state = unitAnimator.GetCurrentAnimatorStateInfo(0);
             unitAnimator.Play(state.fullPathHash, 0, Random.Range(0f, 1f));
+            
+            // Initializing GoKart Reference.
+            currentGoKart = TaskManager.Instance.currentGoKart;
         }
 
         private void RollRandomIdlingChance()

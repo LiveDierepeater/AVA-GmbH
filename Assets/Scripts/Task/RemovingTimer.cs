@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Characters;
@@ -17,9 +18,14 @@ public class RemovingTimer : MonoBehaviour
 
     private void Awake()
     {
-        currentGoKart = TaskManager.Instance.currentGoKart;
         thisCarComponent = GetComponent<CarComponent>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    private void Start()
+    {
+        // Initializing GoKart Reference.
+        currentGoKart = TaskManager.Instance.currentGoKart;
     }
 
     private void Update()

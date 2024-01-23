@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Characters;
@@ -29,8 +30,13 @@ namespace UI
 
         private void Awake()
         {
-            currentGoKart = TaskManager.Instance.currentGoKart;
             Invoke(nameof(InitializeLists), 0.1f);
+        }
+
+        private void Start()
+        {
+            // Initializing GoKart Reference.
+            currentGoKart = TaskManager.Instance.currentGoKart;
         }
 
         public void RemoveBrokenCarComponentFromUIList(CarComponent fixedCarComponent)

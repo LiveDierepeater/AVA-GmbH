@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Karts;
@@ -46,13 +47,18 @@ namespace Characters
         {
             SelectionManager.Instance.AvailableUnits.Add(this);
             agent = GetComponent<NavMeshAgent>();
-            currentGoKart = TaskManager.Instance.currentGoKart;
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
             
             currentState = States.Idle;
         }
-        
+
+        private void Start()
+        {
+            // Initializing GoKart Reference.
+            currentGoKart = TaskManager.Instance.currentGoKart;
+        }
+
         public void OnSelected()
         {
             selectionSprite.gameObject.SetActive(true);
