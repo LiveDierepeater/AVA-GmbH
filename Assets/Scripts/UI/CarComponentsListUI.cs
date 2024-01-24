@@ -34,7 +34,10 @@ namespace UI
 
         private void NewGoKartReference()
         {
+            // Initialize new GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
+            
+            // Refresh CarComponentUI Lists after new GoKart arrived.
             Invoke(nameof(ClearLists), 0.1f);
             Invoke(nameof(InitializeLists), 0.1f);
         }

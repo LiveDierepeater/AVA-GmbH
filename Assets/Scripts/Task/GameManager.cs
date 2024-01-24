@@ -54,8 +54,6 @@ namespace Task
         {
             // Drive current GoKart out of Garage.
             TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
-            
-            // TODO: Update UI.
         }
 
         public void NextGoKart()
