@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Characters;
@@ -37,6 +36,13 @@ namespace UI
         {
             // Initializing GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
+
+            // Red Coloring.
+            foreach (CarComponentUI ui in damagedCarComponentsUIList)
+            {
+                ui.carComponentInstructionUGUI.text = "Get Tool";
+                ui.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);    
+            }
         }
 
         public void RemoveBrokenCarComponentFromUIList(CarComponent fixedCarComponent)
@@ -130,15 +136,11 @@ namespace UI
             {
                 ui.carComponentInstructionUGUI.text = "Get Tool";
                 ui.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
-            }
-            
-            foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
-            {
-                foreach (CarComponentUI ui in damagedCarComponentsUIList)
+                
+                foreach (SelectableUnit unit in SelectionManager.Instance.AvailableUnits)
                 {
-                    
-                    if (unit.toolSlot.childCount == 0) return;
-                    
+                    if (unit.toolSlot.childCount == 0) continue;
+
                     if (ui.toolToRepairIconImage.sprite.name ==
                         unit.toolSlot.GetChild(0).GetComponent<Tool>().toolUISprite.name)
                     {
