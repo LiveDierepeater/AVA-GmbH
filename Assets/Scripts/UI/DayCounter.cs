@@ -1,3 +1,5 @@
+using System;
+using Task;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +12,8 @@ namespace UI
         private int internalCurrentDay = 1;
         private const string dayLABEL = "Day: ";
 
+        private MoneyEconomy moneyEconomy;
+
         public int CurrentDay
         {
             get => internalCurrentDay;
@@ -18,7 +22,7 @@ namespace UI
                 internalCurrentDay = value;
                 UpdateUI();
                 
-                // TODO: End of Day Screen.
+                moneyEconomy.EndOfTheDay();
             }
         }
 
@@ -26,6 +30,11 @@ namespace UI
         {
             dayCounterUI = GetComponent<TextMeshProUGUI>();
             UpdateUI();
+        }
+
+        private void Start()
+        {
+            moneyEconomy = TaskManager.Instance.gameManager.gameObject.GetComponent<MoneyEconomy>();
         }
 
         private void UpdateUI()

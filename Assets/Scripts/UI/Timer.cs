@@ -10,7 +10,9 @@ namespace UI
     
         private TextMeshProUGUI timerUI;
         private Image clockIcon;
-    
+
+        public float startTimer = 60f;
+        
         public float remainingTime;
         public float alertTime = 30;
 
