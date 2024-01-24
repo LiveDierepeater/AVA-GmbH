@@ -40,9 +40,6 @@ namespace Karts
             ListInOrderOfStatus();
             AddCarComponentsToTaskManager();
 
-            DEBUG_CarComponents();
-            DEBUG_CarComponentsUI();
-
             goKartStatus = Status.DrivingIn;
             gameManager = TaskManager.Instance.gameManager;
         }
@@ -117,41 +114,6 @@ namespace Karts
                         intactParts.Add(part);
                         break;
                 }
-            }
-        }
-
-        private void DEBUG_CarComponents()
-        {
-            if (!debugCarComponents) return;
-
-            foreach (CarComponent carComponent in brokenParts)
-            {
-                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
-            }
-
-            foreach (CarComponent carComponent in damagedParts)
-            {
-                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
-            }
-
-            foreach (CarComponent carComponent in intactParts)
-            {
-                Debug.Log(carComponent.carPartType + ", " + carComponent.status);
-            }
-        }
-
-        private void DEBUG_CarComponentsUI() // Shows CarComponents in UI
-        {
-            if (!debugCarComponentsUI) return;
-
-            carComponentsUI.text = "";
-
-            foreach (CarComponent carComponent in carComponents)
-            {
-                if (carComponent.status != CarComponent.Status.Damaged) continue;
-
-                carComponentsUI.text += carComponent.name + ", Tool: " + carComponent.toolToRepair.name;
-                carComponentsUI.text += "\n";
             }
         }
 

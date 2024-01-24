@@ -35,6 +35,8 @@ namespace UI
         private void NewGoKartReference()
         {
             currentGoKart = TaskManager.Instance.currentGoKart;
+            Invoke(nameof(ClearLists), 0.1f);
+            Invoke(nameof(InitializeLists), 0.1f);
         }
 
         private void Start()
@@ -117,7 +119,7 @@ namespace UI
                     newCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_01;
                     newCarComponentUI.carComponentNameReference = brokenPart.name + "(Clone)";
                     brokenCarComponentsUIList.Add(newCarComponentUI);
-                    
+
                     // Set UI color.
                     newCarComponentUI.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
                 }
@@ -131,10 +133,16 @@ namespace UI
                     newCarComponentUI.toolToRepairIconImage.sprite = damagedPart.toolToRepair.toolUISprite;
                     newCarComponentUI.carComponentNameReference = damagedPart.name + "(Clone)";
                     damagedCarComponentsUIList.Add(newCarComponentUI);
-                    
+
                     // Set UI color.
                     newCarComponentUI.carComponentInstructionField.color = new Color(0.8f, 0.05f, 0.05f, 1);
                 }
+        }
+
+        private void ClearLists()
+        {
+            damagedCarComponentsUIList.Clear();
+            brokenCarComponentsUIList.Clear();
         }
 
         private void Update()

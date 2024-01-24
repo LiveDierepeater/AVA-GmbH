@@ -52,12 +52,9 @@ namespace Task
 
         private void TaskManager_OnGoKartFinished()
         {
-            // TODO: Drive current GoKart out of Garage.
+            // Drive current GoKart out of Garage.
             TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
-
-            // TODO: Replace old GoKart References with new GoKart.
             
-
             // TODO: Update UI.
         }
 
@@ -67,8 +64,8 @@ namespace Task
             Destroy(TaskManager.Instance.currentGoKart.gameObject);
 
             // Creates new GoKart.
-            TaskManager.Instance.currentGoKart =
-                Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity).GetComponent<GoKart>();
+            GameObject newGoKart = Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity);
+            TaskManager.Instance.currentGoKart = newGoKart.GetComponent<GoKart>();
             
             // Refresh GoKart references.
             OnNextGoKart?.Invoke();
