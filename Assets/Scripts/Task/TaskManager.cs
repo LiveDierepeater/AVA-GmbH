@@ -28,6 +28,7 @@ namespace Task
 
         public GoKart currentGoKart;
         public GameManager gameManager;
+        public SoundManager soundManager;
 
         private TaskManager() { }
 

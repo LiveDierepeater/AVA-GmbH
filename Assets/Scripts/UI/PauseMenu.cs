@@ -1,3 +1,4 @@
+using Task;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
+                TaskManager.Instance.soundManager.PauseMenuMusic();
             }
         }
     }
@@ -29,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+        TaskManager.Instance.soundManager.ResumeMusic();
     }
 
     public void LoadMainMenu()
