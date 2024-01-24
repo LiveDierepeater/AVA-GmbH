@@ -32,8 +32,17 @@ namespace UI
             Invoke(nameof(InitializeLists), 0.1f);
         }
 
+        private void NewGoKartReference()
+        {
+            currentGoKart = TaskManager.Instance.currentGoKart;
+        }
+
         private void Start()
         {
+            // Initializing GameManager Reference for OnNextGoKart Event.
+            GameManager gameManager = TaskManager.Instance.gameManager;
+            gameManager.OnNextGoKart += NewGoKartReference;
+            
             // Initializing GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
 

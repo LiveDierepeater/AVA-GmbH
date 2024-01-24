@@ -22,7 +22,7 @@ namespace Karts
 
         public TextMeshProUGUI carComponentsUI;
 
-        public GameManager gameManager;
+        private GameManager gameManager;
         public float speed = 5f;
 
         public enum Status
@@ -44,6 +44,7 @@ namespace Karts
             DEBUG_CarComponentsUI();
 
             goKartStatus = Status.DrivingIn;
+            gameManager = TaskManager.Instance.gameManager;
         }
 
         private void Update()

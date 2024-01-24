@@ -24,9 +24,10 @@ namespace Task
         public readonly List<CarComponent> damagedParts = new List<CarComponent>();
         
         public delegate void GoKartFinished();
-        public event GoKartFinished OnGokartFinished;
+        public event GoKartFinished OnGoKartFinished;
 
         public GoKart currentGoKart;
+        public GameManager gameManager;
 
         private TaskManager() { }
 
@@ -60,7 +61,7 @@ namespace Task
         {
             if (currentGoKart.carComponents.Length == currentGoKart.intactParts.Count)
             {
-                OnGokartFinished?.Invoke();
+                OnGoKartFinished?.Invoke();
             }
         }
     }

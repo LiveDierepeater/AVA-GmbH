@@ -17,6 +17,9 @@ namespace Task
         [Header("GoKartTarget")] public Transform goKartTargetDestination;
 
         [Header("GoKartPrefab")] public GameObject goKartPrefab;
+        
+        public delegate void ENextGoKart();
+        public event ENextGoKart OnNextGoKart;
 
         public void UPDATE_RemoveDamagedPart(CarComponent carComponent)
         {
@@ -41,10 +44,10 @@ namespace Task
 
         private void Awake()
         {
+            TaskManager.Instance.gameManager = this;
+            
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
-            TaskManager.Instance.OnGokartFinished += TaskManager_OnGoKartFinished;
-
-            TaskManager.Instance.currentGoKart.gameManager = this;
+            TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;
         }
 
         private void TaskManager_OnGoKartFinished()
@@ -53,6 +56,7 @@ namespace Task
             TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
 
             // TODO: Replace old GoKart References with new GoKart.
+            
 
             // TODO: Update UI.
         }
@@ -66,7 +70,8 @@ namespace Task
             TaskManager.Instance.currentGoKart =
                 Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity).GetComponent<GoKart>();
             
-            
+            // Refresh GoKart references.
+            OnNextGoKart?.Invoke();
         }
     }
 }
