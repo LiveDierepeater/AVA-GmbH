@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 3434469630166372888}
-  unitsUIAvatarSprite: {fileID: 21300000, guid: d31e2a3dbb50df04c874de4e82dc233a, type: 3}
+  unitsUIAvatarSprite: {fileID: 21300000, guid: 6b139cf9e82d9bd4e8b8f66de857a61f, type: 3}
   toolSlot: {fileID: 7435548166349052246}
   componentSlot: {fileID: 7258020210707435333}
   equippedCarComponent: {fileID: 0}
