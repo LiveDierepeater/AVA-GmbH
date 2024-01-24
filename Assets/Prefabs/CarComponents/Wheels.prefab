@@ -155,4 +155,4 @@ MonoBehaviour:
   carPartType: 1
   status: 0
   toolToRepair: {fileID: 8878841736358590584, guid: cf2dc741b33d7a441b755e21fb3e674c, type: 3}
-  carComponentUISprite: {fileID: 21300000, guid: d57e1cf7f98497047aa41dd0b8485117, type: 3}
+  carComponentUISprite: {fileID: 21300000, guid: a79f24b9199a726428a45f9a95c9f39b, type: 3}
