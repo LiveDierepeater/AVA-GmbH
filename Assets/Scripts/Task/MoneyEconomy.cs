@@ -1,11 +1,17 @@
 using UnityEngine;
-using Task;
-using TMPro;
-using UI;
 using UnityEngine.SceneManagement;
+using Task;
+using UI;
+using TMPro;
 
 public class MoneyEconomy : MonoBehaviour
 {
+    private AudioSource audioSource;
+    
+    [Header("Audio CLips")]
+    public AudioClip SFX;
+    
+    [Space(20)]
     [Header("UI Top Bar")]
     public TextMeshProUGUI moneyUI;
     public Timer timer;
@@ -46,6 +52,9 @@ public class MoneyEconomy : MonoBehaviour
     
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = SFX;
+            
         TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;
         UpdateMoneyUI();
     }
@@ -81,6 +90,8 @@ public class MoneyEconomy : MonoBehaviour
         UPDATE_EconomyOverview();
         
         EconomyOverviewUI.SetActive(true);
+        
+        audioSource.Play();
         
         Time.timeScale = 0;
     }

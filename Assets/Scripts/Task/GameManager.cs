@@ -54,6 +54,9 @@ namespace Task
         {
             // Drive current GoKart out of Garage.
             TaskManager.Instance.currentGoKart.goKartStatus = GoKart.Status.DrivingOut;
+            
+            // Calls goKart DrivingOut Sound in GoKart.
+            TaskManager.Instance.currentGoKart.PlayDrivingOutSFX();
         }
 
         public void NextGoKart()

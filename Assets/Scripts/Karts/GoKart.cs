@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
@@ -9,6 +10,14 @@ namespace Karts
 {
     public class GoKart : MonoBehaviour
     {
+        private AudioSource audioSource;
+
+        [Header("UI")]
+        [Space(5)]
+        public AudioClip drivingInSFX;
+        public AudioClip drivingOutSFX;
+        
+        [Space(20)]
         [Header("Car Component Lists")]
         [Space(5)]
         
@@ -50,6 +59,12 @@ namespace Karts
         // Private Fields
         private GameManager gameManager;
 
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = drivingInSFX;
+        }
+
         private void Start()
         {
             if (!isTutorialGoKart)
@@ -60,6 +75,9 @@ namespace Karts
 
             goKartStatus = Status.DrivingIn;
             gameManager = TaskManager.Instance.gameManager;
+            
+            // Sound
+            audioSource.Play();
         }
 
         private void Update()
@@ -181,6 +199,12 @@ namespace Karts
                     goKartStatus = Status.GetRepaired;
                 else
                     gameManager.NextGoKart();
+        }
+
+        public void PlayDrivingOutSFX()
+        {
+            audioSource.clip = drivingOutSFX;
+            audioSource.Play();
         }
     }
 }
