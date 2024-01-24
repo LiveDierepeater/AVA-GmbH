@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2328748019535674436}
   - component: {fileID: 619729259812596086}
+  - component: {fileID: 4298587819886053233}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,9 +48,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carComponentsLeftListUI: {fileID: 0}
   carComponentsRightListUI: {fileID: 0}
-  moneyCounterUI: {fileID: 0}
   goKartTargetDestination: {fileID: 3848273379824343026}
   goKartPrefab: {fileID: 5190580365541812511, guid: 5e530b3d1b2f3e44286dfa1864e50630, type: 3}
+  tutorialKart: {fileID: 0}
+--- !u!114 &4298587819886053233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449510813708449505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98719ded312f6a44900a4b8d8e18eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyUI: {fileID: 0}
+  rentAmount: 50
 --- !u!1 &8381559916304746371
 GameObject:
   m_ObjectHideFlags: 0

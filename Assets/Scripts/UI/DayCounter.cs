@@ -17,6 +17,8 @@ namespace UI
             {
                 internalCurrentDay = value;
                 UpdateUI();
+                
+                // TODO: End of Day Screen.
             }
         }
 

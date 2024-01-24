@@ -1,18 +1,16 @@
 using UnityEngine;
 using Karts;
-using TMPro;
 using UI;
 
 namespace Task
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("UI")]
         public CarComponentsListUI carComponentsLeftListUI;
         public CarComponentsListUI carComponentsRightListUI;
-        public TextMeshProUGUI moneyCounterUI;
 
-        private readonly string moneyCounterUILabel = "Money: ";
-        private int currentMoneyAmount;
+        private MoneyEconomy moneyEconomy;
 
         [Header("GoKartTarget")] public Transform goKartTargetDestination;
 
@@ -27,16 +25,14 @@ namespace Task
         {
             TaskManager.Instance.RemoveDamagedPart(carComponent);
             carComponentsRightListUI.RemoveDamagedCarComponentsFromUIList(carComponent);
-            currentMoneyAmount += 10;
-            moneyCounterUI.text = moneyCounterUILabel + currentMoneyAmount;
+            moneyEconomy.RemoveDamagedPart();
         }
 
         public void UPDATE_RemoveBrokenPart(CarComponent carComponent)
         {
             TaskManager.Instance.RemoveBrokenPart(carComponent);
             carComponentsLeftListUI.RemoveBrokenCarComponentFromUIList(carComponent);
-            currentMoneyAmount += 10;
-            moneyCounterUI.text = moneyCounterUILabel + currentMoneyAmount;
+            moneyEconomy.RemoveBrokenPart();
         }
 
         public void UPDATE_RemovedCarComponentUI(CarComponent carComponent)
@@ -50,6 +46,8 @@ namespace Task
             
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
             TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;
+
+            moneyEconomy = GetComponentInChildren<MoneyEconomy>();
         }
 
         private void TaskManager_OnGoKartFinished()

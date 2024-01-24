@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.0009999871, z: 0.11}
-  m_LocalScale: {x: 1.8071667, y: 2.2281032, z: 2.6003678}
+  m_LocalScale: {x: 2.4158204, y: 2.2281032, z: 3.0928774}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4566851806951108692}
@@ -344,12 +344,10 @@ MonoBehaviour:
   brokenParts: []
   damagedParts: []
   intactParts: []
-  debugCarComponents: 0
-  debugCarComponentsUI: 0
   carComponentsUI: {fileID: 0}
-  gameManager: {fileID: 0}
   speed: 5
   goKartStatus: 0
+  isTutorialGoKart: 0
 --- !u!1 &8717291343203371999
 GameObject:
   m_ObjectHideFlags: 0
