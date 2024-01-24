@@ -2,6 +2,7 @@ using UnityEngine;
 using Task;
 using TMPro;
 using UI;
+using UnityEngine.SceneManagement;
 
 public class MoneyEconomy : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class MoneyEconomy : MonoBehaviour
     private const int repairLoan = 10;
     private const int replaceLoan = 30;
     private const int finishedGoKartLoan = 50;
+    private const int raisingRentAmount = 20;
 
     private int moneyAmountLastDay;
     private int moneyAmountThroughRepairing;
@@ -38,6 +40,9 @@ public class MoneyEconomy : MonoBehaviour
     private int repairedCarComponentsAmount;
     private int replacedCarComponentsAmount;
     private int finishedGoKartsAmount;
+
+    [Space(20)] [Header("End Of The Day Economy Overview")]
+    public GameObject GameOverScreen;
     
     private void Awake()
     {
@@ -73,15 +78,21 @@ public class MoneyEconomy : MonoBehaviour
 
     public void EndOfTheDay()
     {
-        Time.timeScale = 0;
-        
         UPDATE_EconomyOverview();
         
         EconomyOverviewUI.SetActive(true);
+        
+        Time.timeScale = 0;
     }
 
     public void NextDay()
     {
+        if (currentMoneyAmount < 0)
+        {
+            EndGame();
+            return;
+        }
+        
         EconomyOverviewUI.SetActive(false);
         timer.remainingTime = timer.startTimer;
 
@@ -99,13 +110,30 @@ public class MoneyEconomy : MonoBehaviour
         moneyAmountThroughReplacing = replacedCarComponentsAmount * replaceLoan;
         moneyAmountThroughFinishingGoKarts = finishedGoKartsAmount * finishedGoKartLoan;
 
-        currentMoneyAmount -= rentAmount;
+        int currentRentAmount = (timer.dayCounter.CurrentDay - 2) * raisingRentAmount + rentAmount;
+        currentMoneyAmount -= currentRentAmount;
         
         moneyAmountLastDayUI.text = moneyAmountLastDay.ToString();
         moneyAmountThroughRepairingUI.text = moneyAmountThroughRepairing.ToString();
         moneyAmountThroughReplacingUI.text = moneyAmountThroughReplacing.ToString();
         moneyAmountThroughFinishingGoKartsUI.text = moneyAmountThroughFinishingGoKarts.ToString();
-        rentAmountUI.text = rentAmount.ToString();
+        rentAmountUI.text = currentRentAmount.ToString();
         currentMoneyAmountUI.text = currentMoneyAmount.ToString();
+
+        moneyUI.text = moneyCounterUILabel + currentMoneyAmount;
+    }
+
+    private void EndGame()
+    {
+        Time.timeScale = 1;
+        
+        EconomyOverviewUI.SetActive(false);
+        
+        GameOverScreen.SetActive(true);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
