@@ -9,6 +9,9 @@ namespace Karts
 {
     public class GoKart : MonoBehaviour
     {
+        [Header("Car Component Lists")]
+        [Space(5)]
+        
         public List<Transform> distanceSlots;
 
         public CarComponent[] carComponents;
@@ -17,12 +20,16 @@ namespace Karts
         public List<CarComponent> damagedParts;
         public List<CarComponent> intactParts;
 
-        public bool debugCarComponents;
-        public bool debugCarComponentsUI;
-
+        [Space(20)]
+        [Header("UI")]
+        [Space(5)]
+        
         public TextMeshProUGUI carComponentsUI;
 
-        private GameManager gameManager;
+        [Space(20)]
+        [Header("General Settings")]
+        [Space(5)]
+        
         public float speed = 5f;
 
         public enum Status
@@ -33,10 +40,21 @@ namespace Karts
         }
 
         public Status goKartStatus;
+        
+        [Space(20)]
+        [Header("Tutorial")]
+        [Space(5)]
+        
+        public bool isTutorialGoKart;
+        
+        // Private Fields
+        private GameManager gameManager;
 
         private void Start()
         {
-            RollCarComponentsStatus();
+            if (!isTutorialGoKart)
+                RollCarComponentsStatus();
+            
             ListInOrderOfStatus();
             AddCarComponentsToTaskManager();
 
