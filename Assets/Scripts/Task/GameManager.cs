@@ -18,6 +18,8 @@ namespace Task
 
         [Header("GoKartPrefab")] public GameObject goKartPrefab;
         
+        [Header("Tutorial GoKart")] public GameObject tutorialKart;
+        
         public delegate void ENextGoKart();
         public event ENextGoKart OnNextGoKart;
 
@@ -58,12 +60,22 @@ namespace Task
 
         public void NextGoKart()
         {
+            bool isTutorialGoKart = TaskManager.Instance.currentGoKart.isTutorialGoKart;
+            
             // Kills finished GoKart.
             Destroy(TaskManager.Instance.currentGoKart.gameObject);
 
             // Creates new GoKart.
-            GameObject newGoKart = Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity);
-            TaskManager.Instance.currentGoKart = newGoKart.GetComponent<GoKart>();
+            if (!isTutorialGoKart)
+            {
+                GameObject newGoKart = Instantiate(goKartPrefab, new Vector3(0, 0, 15), Quaternion.identity);
+                TaskManager.Instance.currentGoKart = newGoKart.GetComponent<GoKart>();
+            }
+            else
+            {
+                GameObject newGoKart = Instantiate(tutorialKart, new Vector3(0, 0, 15), Quaternion.identity);
+                TaskManager.Instance.currentGoKart = newGoKart.GetComponent<GoKart>();
+            }
             
             // Refresh GoKart references.
             OnNextGoKart?.Invoke();
