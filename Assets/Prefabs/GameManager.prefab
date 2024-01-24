@@ -51,7 +51,7 @@ MonoBehaviour:
   carComponentsRightListUI: {fileID: 0}
   goKartTargetDestination: {fileID: 3848273379824343026}
   goKartPrefab: {fileID: 5190580365541812511, guid: 5e530b3d1b2f3e44286dfa1864e50630, type: 3}
-  tutorialKart: {fileID: 0}
+  tutorialKart: {fileID: 5190580365541812511, guid: 509615c735d93c647b15473020558fd7, type: 3}
 --- !u!114 &4298587819886053233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98719ded312f6a44900a4b8d8e18eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 8300000, guid: 447ebad5716349443a7bb8be567df5ad, type: 3}
+  economySFX: {fileID: 8300000, guid: 447ebad5716349443a7bb8be567df5ad, type: 3}
+  gameOverSFX: {fileID: 8300000, guid: d075053d1ad55f14db9f2bccd79c8f9f, type: 3}
   moneyUI: {fileID: 0}
   timer: {fileID: 0}
   rentAmount: 50

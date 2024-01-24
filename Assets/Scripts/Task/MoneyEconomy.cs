@@ -9,7 +9,8 @@ public class MoneyEconomy : MonoBehaviour
     private AudioSource audioSource;
     
     [Header("Audio CLips")]
-    public AudioClip SFX;
+    public AudioClip economySFX;
+    public AudioClip gameOverSFX;
     
     [Space(20)]
     [Header("UI Top Bar")]
@@ -47,13 +48,13 @@ public class MoneyEconomy : MonoBehaviour
     private int replacedCarComponentsAmount;
     private int finishedGoKartsAmount;
 
-    [Space(20)] [Header("End Of The Day Economy Overview")]
+    [Space(20)] [Header("Game Over Screen")]
     public GameObject GameOverScreen;
     
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = SFX;
+        audioSource.clip = economySFX;
             
         TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;
         UpdateMoneyUI();
@@ -141,6 +142,12 @@ public class MoneyEconomy : MonoBehaviour
         EconomyOverviewUI.SetActive(false);
         
         GameOverScreen.SetActive(true);
+
+        Destroy(TaskManager.Instance.soundManager.GetComponent<SoundManager>());
+        Destroy(TaskManager.Instance.soundManager.GetComponent<AudioSource>());
+        
+        audioSource.clip = gameOverSFX;
+        audioSource.Play();
     }
 
     public void LoadMainMenu()
