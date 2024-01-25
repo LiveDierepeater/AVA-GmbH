@@ -1,3 +1,4 @@
+using System;
 using Characters;
 using UnityEngine;
 using Karts;
@@ -51,6 +52,21 @@ namespace Task
             TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;
 
             moneyEconomy = GetComponentInChildren<MoneyEconomy>();
+        }
+
+        private void FixedUpdate()
+        {
+            foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
+            {
+                if (availableUnit.unitUIBorder.color != availableUnit.unitUIColor)
+                    availableUnit.unitUIBorder.color = availableUnit.unitUIColor;
+            }
+            
+            foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+            {
+                if (selectedUnit.unitUIBorder.color != Color.white)
+                    selectedUnit.unitUIBorder.color = Color.white;
+            }
         }
 
         private void TaskManager_OnGoKartFinished()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Characters;
@@ -18,10 +19,14 @@ namespace UI
         [Header("Working Animation")] 
         public Image unitAnimationUI;
 
+        private Image unitUIBorder;
+
         private void Awake()
         {
             unit.SetUnitUIController(this);
             InitializeUnitAvatar();
+
+            unitUIBorder = GetComponent<Image>();
         }
 
         private void InitializeUnitAvatar()

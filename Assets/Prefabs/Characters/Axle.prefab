@@ -244,10 +244,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 3434469630166372888}
   unitsUIAvatarSprite: {fileID: 21300000, guid: 6b139cf9e82d9bd4e8b8f66de857a61f, type: 3}
+  unitUIController: {fileID: 0}
   toolSlot: {fileID: 7435548166349052246}
   componentSlot: {fileID: 7258020210707435333}
   equippedCarComponent: {fileID: 0}
   currentState: 0
+  unitUIColor: {r: 1, g: 0.4784314, b: 0, a: 1}
 --- !u!114 &8612681969415062105
 MonoBehaviour:
   m_ObjectHideFlags: 0

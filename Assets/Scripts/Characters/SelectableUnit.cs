@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using Karts;
 using Task;
 using UI;
+using UnityEngine.UI;
 
 namespace Characters
 {
@@ -42,12 +43,17 @@ namespace Characters
         }
         
         public States currentState;
+
+        public Image unitUIBorder;
+
+        public Color unitUIColor;
         
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
+            unitUIBorder = unitUIController.GetComponent<Image>();
             
             currentState = States.Idle;
         }
@@ -183,6 +189,8 @@ namespace Characters
 
         private void Update()
         {
+            
+            
             float distanceToDestination = Vector3.Distance(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination);
             
             switch (currentState)

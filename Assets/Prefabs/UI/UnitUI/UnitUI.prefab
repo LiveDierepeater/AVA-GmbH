@@ -1529,6 +1529,7 @@ MonoBehaviour:
   unitState: {fileID: 47558283446505555}
   unitAvatarIcon: {fileID: 3024125520054401404}
   equippedItemIcon: {fileID: 6837626704359639208}
+  unitAnimationUI: {fileID: 0}
 --- !u!1 &8956355934659538796
 GameObject:
   m_ObjectHideFlags: 0
