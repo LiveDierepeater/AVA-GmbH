@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -18,6 +17,7 @@ namespace Player
         public float maxFOV = 60f;
 
         private float newFOV;
+        private bool IsZooming;
 
         public enum Room
         {
@@ -39,6 +39,7 @@ namespace Player
             HandleMovementInput();
             ExecuteMovement();
             ExecuteZooming();
+            HandleRotation();
         }
 
         private void HandleMovementInput()
@@ -69,13 +70,47 @@ namespace Player
         private void ExecuteZooming()
         {
             if (Input.mouseScrollDelta.y > 0.05f)
+            {
+                IsZooming = true;
                 newFOV -= scrollAmount;
+            }
             if (Input.mouseScrollDelta.y < -0.05f)
+            {
+                IsZooming = false;
                 newFOV += scrollAmount;
+            }
 
             newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV);
             
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newFOV, Time.deltaTime * scrollSpeed);
+        }
+
+        private void HandleRotation()
+        {
+            if (room == Room.Storage)
+            {
+                if (IsZooming)
+                {
+                    cam.transform.eulerAngles = new Vector3(
+                        Mathf.Lerp(cam.transform.eulerAngles.x, 62f, Time.deltaTime * scrollSpeed),
+                        cam.transform.eulerAngles.y,
+                        cam.transform.eulerAngles.z);
+                }
+                else
+                {
+                    cam.transform.eulerAngles = new Vector3(
+                        Mathf.Lerp(cam.transform.eulerAngles.x, 65f, Time.deltaTime * scrollSpeed),
+                        cam.transform.eulerAngles.y,
+                        cam.transform.eulerAngles.z);
+                }
+            }
+            else
+            {
+                cam.transform.eulerAngles = new Vector3(
+                    Mathf.Lerp(cam.transform.eulerAngles.x, 65f, Time.deltaTime * scrollSpeed),
+                    cam.transform.eulerAngles.y,
+                    cam.transform.eulerAngles.z);
+            }
         }
     }
 }
