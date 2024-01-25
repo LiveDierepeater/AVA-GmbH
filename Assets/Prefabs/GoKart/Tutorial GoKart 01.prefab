@@ -530,6 +530,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Seatbelt
       objectReference: {fileID: 0}
+    - target: {fileID: 6703339267632297989, guid: 71224f7704e86f94381fcea6b8dd42d5, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -562,6 +566,10 @@ PrefabInstance:
     - target: {fileID: 2797798837077894008, guid: e7b5983c2810309468f3d7e8ddb10d5a, type: 3}
       propertyPath: m_Name
       value: Pedals
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005195776086408348, guid: e7b5983c2810309468f3d7e8ddb10d5a, type: 3}
+      propertyPath: status
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5809267231377437984, guid: e7b5983c2810309468f3d7e8ddb10d5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -676,6 +684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8962759758309381719, guid: 9030a2548b9918440bc92a99be57be0e, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -745,6 +757,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4318396657825922121, guid: bb69d0d6de34dcc468faf199a16683b4, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5176031036520139834, guid: bb69d0d6de34dcc468faf199a16683b4, type: 3}
       propertyPath: m_Name
       value: Motorblock
@@ -781,6 +797,10 @@ PrefabInstance:
     - target: {fileID: 608749416277500981, guid: ef7eb15b3bcf7ce4388b8df3595e86a0, type: 3}
       propertyPath: m_Name
       value: Exhaust
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913238683018143882, guid: ef7eb15b3bcf7ce4388b8df3595e86a0, type: 3}
+      propertyPath: status
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5501792012767243969, guid: ef7eb15b3bcf7ce4388b8df3595e86a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -895,6 +915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Body
       objectReference: {fileID: 0}
+    - target: {fileID: 6324827945265486512, guid: e262063d5cfe70f42802c5c2f188ac7d, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -924,6 +948,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4566851806951108692}
     m_Modifications:
+    - target: {fileID: 3524655980843072937, guid: 4cda0ca87100e2b4891a2efd6e3a3d56, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6266614171804786157, guid: 4cda0ca87100e2b4891a2efd6e3a3d56, type: 3}
       propertyPath: m_Name
       value: Tankpump
@@ -1037,6 +1065,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3167743752505293196, guid: bfcd2b536ee055a4eb23f4e49beb70d8, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3322095218239926244, guid: bfcd2b536ee055a4eb23f4e49beb70d8, type: 3}
       propertyPath: m_Name
       value: Motorchain
@@ -1114,6 +1146,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7139293081595605904, guid: 01371f7ef47494243940ab5dfd736761, type: 3}
+      propertyPath: status
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1143,6 +1179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4566851806951108692}
     m_Modifications:
+    - target: {fileID: 538620531100457121, guid: 69cd5d583b63dec42a4faeaca54ef442, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4012647218305031346, guid: 69cd5d583b63dec42a4faeaca54ef442, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1260,6 +1300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Axe
       objectReference: {fileID: 0}
+    - target: {fileID: 8678487314575298682, guid: fc248b6d830a0fd4190dfa7bb673b98e, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1333,6 +1377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oil
       objectReference: {fileID: 0}
+    - target: {fileID: 8211663970028666920, guid: f605c93a24ecc4c4da5ab2b6cd7dc309, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1362,6 +1410,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4566851806951108692}
     m_Modifications:
+    - target: {fileID: 3983271421694391695, guid: ea9f3ffc98e0da94094002ef9b53fcc5, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4812016034630869681, guid: ea9f3ffc98e0da94094002ef9b53fcc5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1435,6 +1487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4566851806951108692}
     m_Modifications:
+    - target: {fileID: 2064073465762609966, guid: 1b2621f5ee658474681270f465659e5f, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4905001928092456361, guid: 1b2621f5ee658474681270f465659e5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1508,6 +1564,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4566851806951108692}
     m_Modifications:
+    - target: {fileID: 4032286741633359438, guid: 010f9d6def1fce54f99f96ba370171d9, type: 3}
+      propertyPath: status
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6212582770079118501, guid: 010f9d6def1fce54f99f96ba370171d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1686,6 +1746,10 @@ PrefabInstance:
     - target: {fileID: 3247470939297256399, guid: 74e37cd875882214d9493933b8addfe7, type: 3}
       propertyPath: m_Name
       value: GasolineTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406106582359042058, guid: 74e37cd875882214d9493933b8addfe7, type: 3}
+      propertyPath: status
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

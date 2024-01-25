@@ -8232,6 +8232,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 82118512586916756, guid: a1a86859de7005f4b9cae949af043dc7, type: 3}
+      propertyPath: m_text
+      value: These are your workers!\n\nSelect one or more workers with your "left
+        mouse button".
+      objectReference: {fileID: 0}
     - target: {fileID: 233359064336631661, guid: a1a86859de7005f4b9cae949af043dc7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

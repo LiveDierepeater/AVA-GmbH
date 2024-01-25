@@ -10,17 +10,17 @@ public class Tutorial : MonoBehaviour
 {
     public TextMeshProUGUI textBox;
 
-    private const string label_01 = "Das sind deine Arbeiter.\n\nDu kannst einen oder mehrere Arbeiter mit der \"linken Maustaste\" auswählen.";
-    private const string label_02 = "Mit der \"rechten Maustaste\" kannst du deine Arbeiter bewegen und \"Werkzeuge\" ausrüsten lassen.";
-    private const string label_03 = "Ein Arbeiter mit dem passenden \"Werkzeug\" kann das Go-Kart reparieren.";
-    private const string label_04 = "Das ist dein erster Kunde.\n\nWähle das passende Werkzeug aus und versuche das Go-Kart zu reparieren.";
-    private const string label_05 = "Nun scheint es, als würden manche Teile ersetzt werden müssen.";
-    private const string label_06 = "Schicke einen Arbeiter ohne \"Werkzeuge\" auf das Go-Kart los, um kaputte \"Teile\" des Go-Karts auszubauen.";
-    private const string label_07 = "Werfe das kaputte Teil in den Müll.\n\nDeine Arbeiter werden mit der Taste \"S\" einen Gegenstand dort fallen lassen, wo sich deine Maus befindet.";
-    private const string label_08 = "Hole das passende \"Teil\" aus dem Lager.\n\nDen Raum kannst du mit \"D\" und \"A\" und auch mit den \"Pfeiltasten\" wechseln.";
-    private const string label_09 = "Baue das neue \"Teil\" ein.";
-    private const string label_10 = "Oben rechts siehst du dein verdientes Geld.\n\n Achte darauf, dass du genug Geld für deine Miete hast.";
-    private const string label_11 = "Nun solltest du alles gelernt haben.\n\nViel Spaß in der Werkstatt!";
+    private const string label_01 = "These are your workers!\n\nSelect one or more workers with your \"left mouse button\".";
+    private const string label_02 = "With the \"right mouse button\", you can move your workers and equip them with \"tools\".";
+    private const string label_03 = "A worker with the fitting \"tool\" can go and repair the Go-Kart.";
+    private const string label_04 = "There is your first customer!\n\nSelect the fitting tool and try repairing the Go-Kart.";
+    private const string label_05 = "Seems like you need to replace some Kart parts now.";
+    private const string label_06 = "Send your worker without any \"tools\" to remove broken parts of the Go-Kart.";
+    private const string label_07 = "Go ahead and throw away the broken part.\n\nYour worker will drop the part where your cursor is hovering over when you press \"S\"";
+    private const string label_08 = "Fetch the new fitting \"part\" from the warehouse\n\nYou can change to the warehouse and back by pressing \"D\" and \"A\".\n\nYou can also use your arrow keys.";
+    private const string label_09 = "Attach the new fitting \"part\".";
+    private const string label_10 = "Top right you can see your earned cash.\n\n Don't forget to meet rent!";
+    private const string label_11 = "Good job learning how to play.\n\nNow, Good luck with your new Go-Kart workshop!";
 
     private readonly List<string> labels = new List<string>();
 
