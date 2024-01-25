@@ -107,6 +107,8 @@ public class MoneyEconomy : MonoBehaviour
         
         EconomyOverviewUI.SetActive(false);
         timer.remainingTime = timer.startTimer;
+        timer.InternalIsEmergent = false;
+        timer.timerUI.color = Color.white;
 
         moneyAmountLastDay = currentMoneyAmount;
         repairedCarComponentsAmount = 0;

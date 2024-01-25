@@ -11,7 +11,7 @@ namespace UI
         [Header("AudioClip")]
         public AudioClip emergencySFX;
         
-        private TextMeshProUGUI timerUI;
+        public TextMeshProUGUI timerUI;
         private Image clockIcon;
         private AudioSource audioSource;
 
@@ -22,7 +22,7 @@ namespace UI
 
         public Color emergencyColor = Color.red;
 
-        private bool InternalIsEmergent;
+        public bool InternalIsEmergent;
         
         private bool IsEmergent
         {
