@@ -111,7 +111,7 @@ namespace Characters
             
             lastComponentStationToReach = componentToReach.GetComponent<ComponentStation>();
             newCarComponent = componentToReach.GetComponent<CarComponent>();
-
+            
             currentNewDestination = newDestination;
             agent.SetDestination(currentNewDestination);
             
@@ -124,7 +124,11 @@ namespace Characters
         public void RepairKart(Vector3 newDestination)
         {
             currentState = States.RepairKart;
-            currentNewDestination = newDestination;
+            
+            // Old Destination Calculation.
+            //currentNewDestination = newDestination;
+
+            currentNewDestination = GetClosestDistanceSlotToUnit().position;
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
@@ -136,7 +140,11 @@ namespace Characters
         public void RemoveCarComponent(Vector3 newDestination)
         {
             currentState = States.RemoveCarComponent;
-            currentNewDestination = newDestination;
+            
+            // Old Destination Calculation.
+            //currentNewDestination = newDestination;
+
+            currentNewDestination = GetClosestDistanceSlotToUnit().position;
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
@@ -148,7 +156,11 @@ namespace Characters
         public void AddCarComponent(Vector3 newDestination)
         {
             currentState = States.AddCarComponent;
-            currentNewDestination = newDestination;
+            
+            // Old Destination Calculation.
+            //currentNewDestination = newDestination;
+
+            currentNewDestination = GetClosestDistanceSlotToUnit().position;
             agent.SetDestination(currentNewDestination);
             
             Debug.DrawLine(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination, Color.green, 3f);
@@ -488,6 +500,24 @@ namespace Characters
         public void UPDATE_UnitUI()
         {
             unitUIController.UPDATE_UnitUI();
+        }
+
+        private Transform GetClosestDistanceSlotToUnit()
+        {
+            Transform closestDistanceSlot = null;
+            float closestDistance = 1000;
+            
+            foreach (Transform distanceSlot in currentGoKart.distanceSlots)
+            {
+                float currentDistance = Vector3.Distance(this.transform.position, distanceSlot.position);
+                if (currentDistance < closestDistance)
+                {
+                    closestDistance = currentDistance;
+                    closestDistanceSlot = distanceSlot;
+                }
+            }
+
+            return closestDistanceSlot;
         }
     }
 }
