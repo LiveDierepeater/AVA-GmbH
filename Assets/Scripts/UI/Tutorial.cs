@@ -15,7 +15,7 @@ public class Tutorial : MonoBehaviour
     private const string label_03 = "A worker with the fitting \"tool\" can go and repair the Go-Kart.";
     private const string label_04 = "There is your first customer!\n\nSelect the fitting tool and try repairing the Go-Kart.\n\nYou can drop an equipped \"tool\" by laying it back onto the Station.";
     private const string label_05 = "Seems like you need to replace some Kart parts now.";
-    private const string label_06 = "Send your worker without any \"tools\" to remove broken parts of the Go-Kart.";
+    private const string label_06 = "Send your worker without any \"tools\" to remove broken parts from the Go-Kart.\n\nYou can Zoom with your \"mouse wheel\".";
     private const string label_07 = "Go ahead and throw away the broken part.\n\nYour worker will drop the part where your cursor is hovering over when you press \"S\"";
     private const string label_08 = "Fetch the new fitting \"part\" from the warehouse\n\nYou can change to the warehouse and back by pressing \"D\" and \"A\".\n\nYou can also use your arrow keys.";
     private const string label_09 = "Attach the new fitting \"part\".";

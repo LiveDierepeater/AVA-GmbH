@@ -251,6 +251,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4566851806951108692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4930850329231840676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5786536665710108036}
+  m_Layer: 10
+  m_Name: DistanceSlots (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5786536665710108036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930850329231840676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4566851806951108692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5190580365541812511
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +332,9 @@ Transform:
   - {fileID: 1751895510045730193}
   - {fileID: 234045355883590332}
   - {fileID: 8176218568093130512}
+  - {fileID: 5957440109633526020}
   - {fileID: 1448637033516701304}
+  - {fileID: 5786536665710108036}
   - {fileID: 4278997634644316947}
   - {fileID: 4206264642594762043}
   - {fileID: 8303254810142953279}
@@ -326,6 +359,8 @@ MonoBehaviour:
   - {fileID: 234045355883590332}
   - {fileID: 8176218568093130512}
   - {fileID: 1448637033516701304}
+  - {fileID: 5957440109633526020}
+  - {fileID: 5786536665710108036}
   - {fileID: 4566851806951108692}
   carComponents:
   - {fileID: 3264335668644630103}
@@ -447,6 +482,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8178124682342476565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5957440109633526020}
+  m_Layer: 10
+  m_Name: DistanceSlots (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5957440109633526020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178124682342476565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4566851806951108692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8717291343203371999
 GameObject:
   m_ObjectHideFlags: 0

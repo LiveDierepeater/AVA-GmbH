@@ -135,6 +135,10 @@ MonoBehaviour:
   camPosGarage: {fileID: 0}
   camPosStorage: {fileID: 0}
   cameraFlySpeed: 10
+  scrollAmount: 10
+  scrollSpeed: 15
+  minFOV: 50
+  maxFOV: 60
   room: 0
 --- !u!114 &7898626169208277998
 MonoBehaviour:
