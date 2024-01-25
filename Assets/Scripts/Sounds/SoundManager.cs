@@ -114,6 +114,7 @@ public class SoundManager : MonoBehaviour
     public void PauseMenuMusic()
     {
         audioSource.clip = pauseMenu;
+        audioSource.loop = true;
         audioSource.Play();
     }
 }
