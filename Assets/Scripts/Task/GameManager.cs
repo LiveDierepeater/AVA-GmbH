@@ -1,3 +1,4 @@
+using Characters;
 using UnityEngine;
 using Karts;
 using UI;
@@ -43,6 +44,8 @@ namespace Task
         private void Awake()
         {
             TaskManager.Instance.gameManager = this;
+            
+            SelectionManager.Instance.AvailableUnits.Clear();
             
             TaskManager.Instance.currentGoKart = GameObject.Find("GoKart").GetComponent<GoKart>();
             TaskManager.Instance.OnGoKartFinished += TaskManager_OnGoKartFinished;

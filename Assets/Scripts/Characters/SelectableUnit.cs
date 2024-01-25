@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Karts;
@@ -45,7 +44,6 @@ namespace Characters
         
         private void Awake()
         {
-            SelectionManager.Instance.AvailableUnits.Add(this);
             agent = GetComponent<NavMeshAgent>();
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
@@ -60,6 +58,9 @@ namespace Characters
 
         private void Start()
         {
+            // Initialize Unit
+            SelectionManager.Instance.AvailableUnits.Add(this);
+            
             // Initializing GameManager Reference for OnNextGoKart Event.
             GameManager gameManager = TaskManager.Instance.gameManager;
             gameManager.OnNextGoKart += NewGoKartReference;
