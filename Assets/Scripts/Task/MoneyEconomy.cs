@@ -109,6 +109,7 @@ public class MoneyEconomy : MonoBehaviour
         timer.remainingTime = timer.startTimer;
         timer.InternalIsEmergent = false;
         timer.timerUI.color = Color.white;
+        timer.clockIcon.color = Color.white;
 
         moneyAmountLastDay = currentMoneyAmount;
         repairedCarComponentsAmount = 0;

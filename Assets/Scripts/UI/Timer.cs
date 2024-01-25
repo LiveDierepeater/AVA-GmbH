@@ -12,7 +12,7 @@ namespace UI
         public AudioClip emergencySFX;
         
         public TextMeshProUGUI timerUI;
-        private Image clockIcon;
+        public Image clockIcon;
         private AudioSource audioSource;
 
         public float startTimer = 60f;
