@@ -12,7 +12,7 @@ namespace Characters
         public SpriteRenderer selectionSprite;
         public Sprite unitsUIAvatarSprite;
 
-        private UnitUIController unitUIController;
+        public UnitUIController unitUIController;
         
         private NavMeshAgent agent;
         private ToolStation lastToolStationToReach;
@@ -223,7 +223,7 @@ namespace Characters
                     break;
                 
                 case States.RepairKart:
-                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached Kart
                     {
                         UPDATE_RepairCarComponents();
                         //currentState = States.Idle;
@@ -234,7 +234,7 @@ namespace Characters
                     break;
 
                 case States.RemoveCarComponent:
-                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached Kart
                     {
                         UPDATE_RemoveCarComponent();
                         //currentState = States.Idle;
@@ -245,7 +245,7 @@ namespace Characters
                     break;
                 
                 case States.AddCarComponent :
-                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached tool
+                    if (currentGoKart.IsUnitInRange(agent)) // Checks if unit reached Kart
                     {
                         UPDATE_AddCarComponent();
             

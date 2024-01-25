@@ -1,7 +1,7 @@
-using Characters;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Characters;
+using TMPro;
 
 namespace UI
 {
@@ -14,6 +14,9 @@ namespace UI
     
         public Image unitAvatarIcon;
         public Image equippedItemIcon;
+
+        [Header("Working Animation")] 
+        public Image unitAnimationUI;
 
         private void Awake()
         {
@@ -59,6 +62,18 @@ namespace UI
             equippedItemIcon.color = Color.clear;
         
             Invoke(nameof(UPDATE_UnitUI), 0.03f);
+        }
+
+        public void HideWorkingAnimationUI()
+        {
+            if (unitAnimationUI.color == Color.white)
+                unitAnimationUI.color = Color.clear;
+        }
+
+        public void ShowWorkingAnimationUI()
+        {
+            if (unitAnimationUI.color == Color.clear)
+                unitAnimationUI.color = Color.white;
         }
     }
 }

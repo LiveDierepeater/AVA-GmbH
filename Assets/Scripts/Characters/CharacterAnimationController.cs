@@ -66,10 +66,16 @@ namespace Characters
                     unit.currentState == SelectableUnit.States.RemoveCarComponent)
                 {
                     isUnitRepairing = true;
+                    
+                    // Update Unit UI
+                    unit.unitUIController.ShowWorkingAnimationUI();
                 }
                 else
                 {
                     isUnitRepairing = false;
+            
+                    // Update Unit UI
+                    unit.unitUIController.HideWorkingAnimationUI();
                 }
             }
         
