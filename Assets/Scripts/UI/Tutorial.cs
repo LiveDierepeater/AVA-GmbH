@@ -13,7 +13,7 @@ public class Tutorial : MonoBehaviour
     private const string label_01 = "These are your workers!\n\nSelect one or more workers with your \"left mouse button\".";
     private const string label_02 = "With the \"right mouse button\", you can move your workers and equip them with \"tools\".";
     private const string label_03 = "A worker with the fitting \"tool\" can go and repair the Go-Kart.";
-    private const string label_04 = "There is your first customer!\n\nSelect the fitting tool and try repairing the Go-Kart.";
+    private const string label_04 = "There is your first customer!\n\nSelect the fitting tool and try repairing the Go-Kart.\n\nYou can drop an equipped \"tool\" by laying it back onto the Station.";
     private const string label_05 = "Seems like you need to replace some Kart parts now.";
     private const string label_06 = "Send your worker without any \"tools\" to remove broken parts of the Go-Kart.";
     private const string label_07 = "Go ahead and throw away the broken part.\n\nYour worker will drop the part where your cursor is hovering over when you press \"S\"";
