@@ -1,44 +1,64 @@
-using UnityEngine;
-using UnityEngine.UI;
 using Characters;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class UnitUIController : MonoBehaviour
+namespace UI
 {
-    public SelectableUnit unit;
+    public class UnitUIController : MonoBehaviour
+    {
+        public SelectableUnit unit;
     
-    public TextMeshProUGUI unitName;
-    public TextMeshProUGUI unitState;
+        public TextMeshProUGUI unitName;
+        public TextMeshProUGUI unitState;
     
-    public Image unitAvatarIcon;
-    public Image equippedItemIcon;
+        public Image unitAvatarIcon;
+        public Image equippedItemIcon;
 
-    private void Awake()
-    {
-        unit.SetUnitUIController(this);
-        InitializeUnitAvatar();
-    }
+        private void Awake()
+        {
+            unit.SetUnitUIController(this);
+            InitializeUnitAvatar();
+        }
 
-    private void InitializeUnitAvatar()
-    {
-        unitName.text = unit.name;
-        unitAvatarIcon.sprite = unit.unitsUIAvatarSprite;
-    }
+        private void InitializeUnitAvatar()
+        {
+            unitName.text = unit.name;
+            unitAvatarIcon.sprite = unit.unitsUIAvatarSprite;
+        }
 
-    public void UPDATE_UnitUI()
-    {
-        unitState.text = unit.currentState.ToString();
-        equippedItemIcon.sprite = unit.GetEquippedItemUISprite();
+        public void UPDATE_UnitUI()
+        {
+            if (unit.currentState == SelectableUnit.States.Idle)
+                unitState.text = "";
+            
+            if (unit.currentState == SelectableUnit.States.GetTool)
+                unitState.text = "Get Tool";
+            
+            if (unit.currentState == SelectableUnit.States.GetCarComponent)
+                unitState.text = "Get Part";
+            
+            if (unit.currentState == SelectableUnit.States.AddCarComponent ||
+                unit.currentState == SelectableUnit.States.RemoveCarComponent ||
+                unit.currentState == SelectableUnit.States.RepairKart)
+                unitState.text = "Working";
+            
+            if (unit.currentState == SelectableUnit.States.MoveToDestination ||
+                unit.currentState == SelectableUnit.States.DropOffItem)
+                unitState.text = "Running";
+            
+            equippedItemIcon.sprite = unit.GetEquippedItemUISprite();
         
-        if (equippedItemIcon.sprite is null) equippedItemIcon.color = Color.clear;
-        else equippedItemIcon.color = Color.white;
-    }
+            if (equippedItemIcon.sprite is null) equippedItemIcon.color = Color.clear;
+            else equippedItemIcon.color = Color.white;
+        }
 
-    public void ClearItemUISprite()
-    {
-        equippedItemIcon.sprite = null;
-        equippedItemIcon.color = Color.clear;
+        public void ClearItemUISprite()
+        {
+            equippedItemIcon.sprite = null;
+            equippedItemIcon.color = Color.clear;
         
-        Invoke(nameof(UPDATE_UnitUI), 0.03f);
+            Invoke(nameof(UPDATE_UnitUI), 0.03f);
+        }
     }
 }

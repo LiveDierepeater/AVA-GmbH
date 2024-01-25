@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Karts;
 using Task;
+using UI;
 
 namespace Characters
 {
