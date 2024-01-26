@@ -19,7 +19,11 @@ namespace Characters
         private bool hasUnitItemInHand;
         private bool isUnitRepairing;
         private bool isUnitRandomIdling;
-    
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int IsItemEquipped = Animator.StringToHash("IsItemEquipped");
+        private static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
+        private static readonly int IsRandomIdling = Animator.StringToHash("IsRandomIdling");
+
         private void Awake()
         {
             unit = GetComponent<SelectableUnit>();
@@ -86,10 +90,10 @@ namespace Characters
             }
         
             velocity = unitAgent.velocity.magnitude / 10f;
-            unitAnimator.SetFloat("Speed", velocity);
-            unitAnimator.SetBool("IsItemEquipped", hasUnitItemInHand);
-            unitAnimator.SetBool("IsRepairing", isUnitRepairing);
-            unitAnimator.SetBool("IsRandomIdling", isUnitRandomIdling);
+            unitAnimator.SetFloat(Speed, velocity);
+            unitAnimator.SetBool(IsItemEquipped, hasUnitItemInHand);
+            unitAnimator.SetBool(IsRepairing, isUnitRepairing);
+            unitAnimator.SetBool(IsRandomIdling, isUnitRandomIdling);
         }
 
         private void RollRandomIdlingChance()
