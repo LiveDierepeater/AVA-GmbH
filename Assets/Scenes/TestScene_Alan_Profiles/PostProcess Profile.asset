@@ -27,13 +27,13 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.159
+    value: 0.501
   smoothness:
     overrideState: 1
-    value: 1
+    value: 0.101
   roundness:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.945
   rounded:
     overrideState: 0
     value: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     value: {fileID: 0}
     defaultState: 1
   tonemapper:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 2
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   temperature:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 10
   tint:
     overrideState: 0
     value: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 20
+    value: 15
   brightness:
     overrideState: 0
     value: 0
@@ -218,8 +218,8 @@ MonoBehaviour:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 1, z: 1, w: 1}
   masterCurve:
     overrideState: 0
     value:

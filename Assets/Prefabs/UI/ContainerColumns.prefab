@@ -249,7 +249,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 300, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3700470741888726078
 CanvasRenderer:
@@ -325,7 +325,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 300, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4797189698444043316
 CanvasRenderer:
@@ -498,11 +498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_fontSize
-      value: 27
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_fontSizeBase
-      value: 27
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_enableAutoSizing
@@ -632,16 +632,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_fontSize
-      value: 27
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_fontSizeBase
-      value: 27
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+      objectReference: {fileID: 8982012204691657748, guid: ebfc10ab8d284334f9ed0632e682a321, type: 2}
     - target: {fileID: 8589282760339191909, guid: c5bb66618d9ba8245811e7cec196c6c0, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
