@@ -54,6 +54,9 @@ namespace Characters
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
             
+            // Initialized Unit UI Broder
+            unitUIBorder = unitUIController.GetComponent<Image>();
+            
             currentState = States.Idle;
         }
 
@@ -73,9 +76,6 @@ namespace Characters
 
             // Initializing GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
-            
-            // Initialized Unit UI Broder
-            unitUIBorder = unitUIController.GetComponent<Image>();
         }
 
         public void OnSelected()
