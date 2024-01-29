@@ -23,7 +23,7 @@ namespace Task
         private const int repairLoan = 10;
         private const int replaceLoan = 30;
         private const int finishedGoKartLoan = 50;
-        private const int raisingRentAmount = 20;
+        private const int raisingRentAmount = 30;
 
         private int moneyAmountLastDay;
         private int moneyAmountThroughRepairing;
