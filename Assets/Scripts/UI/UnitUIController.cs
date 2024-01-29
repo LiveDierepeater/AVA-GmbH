@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Characters;
@@ -21,12 +20,33 @@ namespace UI
 
         private Image unitUIBorder;
 
+        public enum Unit
+        {
+            Bunny,
+            Elephant,
+            Horse
+        }
+
+        public Unit unitType;
+
         private void Awake()
         {
+            GetUnitReference();
             unit.SetUnitUIController(this);
             InitializeUnitAvatar();
 
             unitUIBorder = GetComponent<Image>();
+        }
+
+        private void GetUnitReference()
+        {
+            GameObject units = GameObject.Find("Units");
+            
+            foreach (SelectableUnit unitToInitialize in units.GetComponentsInChildren<SelectableUnit>())
+            {
+                if (unitToInitialize.name == unitType.ToString())
+                    unit = unitToInitialize;
+            }
         }
 
         private void InitializeUnitAvatar()
