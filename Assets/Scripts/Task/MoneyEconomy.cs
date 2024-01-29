@@ -147,6 +147,8 @@ namespace Task
             EconomyOverviewUI.SetActive(false);
         
             GameOverScreen.SetActive(true);
+            GameOverScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                "Days Persevered: " + (timer.dayCounter.CurrentDay - 1);
 
             Destroy(TaskManager.Instance.soundManager.GetComponent<SoundManager>());
             Destroy(TaskManager.Instance.soundManager.GetComponent<AudioSource>());
