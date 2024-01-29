@@ -108,7 +108,12 @@ namespace Task
         
             EconomyOverviewUI.SetActive(false);
             float decreasingTime = (timer.dayCounter.CurrentDay - 1) * 20f;
-            timer.remainingTime = timer.startTimer - decreasingTime;
+            
+            if (timer.startTimer - decreasingTime < 20f)
+                timer.remainingTime = 20f;
+            else
+                timer.remainingTime = timer.startTimer - decreasingTime;
+            
             timer.InternalIsEmergent = false;
             timer.timerUI.color = Color.white;
             timer.clockIcon.color = Color.white;

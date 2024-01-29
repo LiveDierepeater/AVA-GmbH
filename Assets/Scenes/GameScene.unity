@@ -952,6 +952,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1724617480728348060, guid: a1a86859de7005f4b9cae949af043dc7, type: 3}
+      propertyPath: startTimer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1742790691447074718, guid: a1a86859de7005f4b9cae949af043dc7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

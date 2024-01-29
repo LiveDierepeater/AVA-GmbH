@@ -24,8 +24,8 @@ namespace UI
         private List<CarComponentUI> damagedCarComponentsUIList = new List<CarComponentUI>();
         private List<CarComponentUI> brokenCarComponentsUIList = new List<CarComponentUI>();
 
-        private string brokenCarComponentUIInstruction_01 = "Remove Component";
-        private string brokenCarComponentUIInstruction_02 = "Add new Component";
+        private string brokenCarComponentUIInstruction_01 = "Remove ";
+        private string brokenCarComponentUIInstruction_02 = "Add new ";
 
         private void Awake()
         {
@@ -102,7 +102,7 @@ namespace UI
                 
                 if (looseCarComponent.name + "(Clone)" == brokenCarComponentUI.carComponentNameReference)
                 {
-                    brokenCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_02;
+                    brokenCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_02 + looseCarComponent.name;
                     
                     // Set UI color.
                     brokenCarComponentUI.carComponentInstructionField.color = Color.yellow;
@@ -119,7 +119,7 @@ namespace UI
                     CarComponentUI newCarComponentUI = newCarComponentUIInstance.GetComponent<CarComponentUI>();
 
                     newCarComponentUI.carComponentIconImage.sprite = brokenPart.carComponentUISprite;
-                    newCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_01;
+                    newCarComponentUI.carComponentInstructionUGUI.text = brokenCarComponentUIInstruction_01 + brokenPart.name;
                     newCarComponentUI.carComponentNameReference = brokenPart.name + "(Clone)";
                     brokenCarComponentsUIList.Add(newCarComponentUI);
 
