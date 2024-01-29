@@ -191,8 +191,6 @@ namespace Characters
 
         private void Update()
         {
-            
-            
             float distanceToDestination = Vector3.Distance(new Vector3(transform.position.x, currentNewDestination.y, transform.position.z), currentNewDestination);
             
             switch (currentState)

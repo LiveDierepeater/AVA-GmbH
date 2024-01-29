@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Characters;
@@ -37,6 +39,12 @@ namespace Player
         }
 
         private void HandleSelectionInputs()
+        {
+            HandleMouseInputs();
+            HandleHotKeyInputs();
+        }
+
+        private void HandleMouseInputs()
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -80,6 +88,111 @@ namespace Player
                 }
                 
                 mouseDownTime = 0;
+            }
+        }
+
+        private void HandleHotKeyInputs()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SelectableUnit bunny = null;
+                foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
+                {
+                    if (availableUnit.name == "Bunny")
+                        bunny = availableUnit;
+                }
+                
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool isUnitSelected = false;
+                    
+                    foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        if (selectedUnit == bunny)
+                        {
+                            bunny = selectedUnit;
+                            isUnitSelected = true;
+                        }
+                    }
+                    
+                    if (isUnitSelected)
+                        SelectionManager.Instance.Deselect(bunny);
+                    else
+                        SelectionManager.Instance.Select(bunny);
+                }
+                else
+                {
+                    SelectionManager.Instance.DeselectAll();
+                    SelectionManager.Instance.Select(bunny);
+                }
+            }
+            
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SelectableUnit elephant = null;
+                foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
+                {
+                    if (availableUnit.name == "Elephant")
+                        elephant = availableUnit;
+                }
+                
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool isUnitSelected = false;
+                    
+                    foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        if (selectedUnit == elephant)
+                        {
+                            elephant = selectedUnit;
+                            isUnitSelected = true;
+                        }
+                    }
+                    
+                    if (isUnitSelected)
+                        SelectionManager.Instance.Deselect(elephant);
+                    else
+                        SelectionManager.Instance.Select(elephant);
+                }
+                else
+                {
+                    SelectionManager.Instance.DeselectAll();
+                    SelectionManager.Instance.Select(elephant);
+                }
+            }
+            
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SelectableUnit horse = null;
+                foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
+                {
+                    if (availableUnit.name == "Horse")
+                        horse = availableUnit;
+                }
+                
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool isUnitSelected = false;
+                    
+                    foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
+                    {
+                        if (selectedUnit == horse)
+                        {
+                            horse = selectedUnit;
+                            isUnitSelected = true;
+                        }
+                    }
+                    
+                    if (isUnitSelected)
+                        SelectionManager.Instance.Deselect(horse);
+                    else
+                        SelectionManager.Instance.Select(horse);
+                }
+                else
+                {
+                    SelectionManager.Instance.DeselectAll();
+                    SelectionManager.Instance.Select(horse);
+                }
             }
         }
 
