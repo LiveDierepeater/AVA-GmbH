@@ -54,9 +54,6 @@ namespace Characters
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
             
-            // Initialized Unit UI Broder
-            unitUIBorder = unitUIController.GetComponent<Image>();
-            
             currentState = States.Idle;
         }
 

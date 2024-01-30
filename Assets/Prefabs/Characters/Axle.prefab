@@ -249,6 +249,7 @@ MonoBehaviour:
   componentSlot: {fileID: 7258020210707435333}
   equippedCarComponent: {fileID: 0}
   currentState: 0
+  unitUIBorder: {fileID: 0}
   unitUIColor: {r: 1, g: 0.4784314, b: 0, a: 1}
 --- !u!114 &8612681969415062105
 MonoBehaviour:

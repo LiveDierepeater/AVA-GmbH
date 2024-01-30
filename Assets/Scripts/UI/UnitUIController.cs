@@ -18,7 +18,7 @@ namespace UI
         [Header("Working Animation")] 
         public Image unitAnimationUI;
 
-        private Image unitUIBorder;
+        public Image unitUIBorder;
 
         public enum Unit
         {
