@@ -65,6 +65,7 @@ namespace Task
         {
             currentMoneyAmount += repairLoan;
             UpdateMoneyUI();
+            PlayMoneyEconomySFX();
             repairedCarComponentsAmount++;
         }
 
@@ -72,6 +73,7 @@ namespace Task
         {
             currentMoneyAmount += replaceLoan;
             UpdateMoneyUI();
+            PlayMoneyEconomySFX();
             replacedCarComponentsAmount++;
         }
 
@@ -79,12 +81,19 @@ namespace Task
         {
             currentMoneyAmount += finishedGoKartLoan;
             UpdateMoneyUI();
+            PlayMoneyEconomySFX();
             finishedGoKartsAmount++;
         }
 
         private void UpdateMoneyUI()
         {
             moneyUI.text = moneyCounterUILabel + currentMoneyAmount;
+        }
+
+        private void PlayMoneyEconomySFX()
+        {
+            audioSource.clip = economySFX;
+            audioSource.Play();
         }
 
         public void EndOfTheDay()

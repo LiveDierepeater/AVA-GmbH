@@ -19,7 +19,13 @@ namespace Characters
         private ToolStation lastToolStationToReach;
         private ComponentStation lastComponentStationToReach;
         private GoKart currentGoKart;
+        private AudioSource audioSource;
+
+        [Header("Audio Clips")]
+        public AudioClip denySFX;
+        [Space(10)]
         
+        [Header("Item Slots")]
         public Transform toolSlot;
         public Transform componentSlot;
         private Tool equippedTool;
@@ -53,6 +59,7 @@ namespace Characters
             agent = GetComponent<NavMeshAgent>();
             toolSlot = transform.Find("Tool Slot");
             componentSlot = transform.Find("Component Slot");
+            audioSource = GetComponent<AudioSource>();
             
             currentState = States.Idle;
         }
@@ -293,11 +300,19 @@ namespace Characters
                     // Update Units UI.
                     unitUIController.ClearItemUISprite();
                 }
+                else
+                    // Tool is not from this Station.
+                    PlayDenySFX();
+                
                 return;
             }
             
             // Check if Unit already has a CarComponent in hand.
-            if (componentSlot.childCount != 0) return;
+            if (componentSlot.childCount != 0)
+            {
+                PlayDenySFX();
+                return;
+            }
 
             // Add Tool to Unit's Tool Slot (transform)
             equippedTool = Instantiate(lastToolStationToReach.toolPrefab, toolSlot).GetComponent<Tool>();
@@ -322,17 +337,25 @@ namespace Characters
                     // Update Units UI:
                     unitUIController.ClearItemUISprite();
                 }
+                else
+                    // Tool is not from this Station.
+                    PlayDenySFX();
+                
                 return;
             }
             
             // Check if Unit already has a Tool in hand.
-            if (toolSlot.childCount != 0) return;
+            if (toolSlot.childCount != 0)
+            {
+                PlayDenySFX();
+                return;
+            }
             
             // Check if CarComponent is taken from Ground (and not from Station).
-            if (newCarComponent != null)
+            if (newCarComponent is not null)
             {
                 // Return if CarComponent was taken by another Unit.
-                if (newCarComponent.transform.parent != null) return;
+                if (newCarComponent.transform.parent is not null) return;
                 
                 // Destroy Rigidbody to grab CarComponent Properly
                 // Takes newCarComponent.transform as a Child-Object into his componentSlot.
@@ -363,6 +386,7 @@ namespace Characters
             
             if (TaskManager.Instance.damagedParts.Count == 0)               // Check if there are damaged Parts left.
             {
+                PlayDenySFX();
                 currentState = States.Idle;
                 return;
             }
@@ -380,7 +404,7 @@ namespace Characters
             {
                 // Change Units state to Idle.
                 currentState = States.Idle;
-                
+                PlayDenySFX();
                 return;
             }
             
@@ -399,6 +423,7 @@ namespace Characters
             if (currentGoKart.brokenParts.Count == 0)
             {
                 currentState = States.Idle;
+                PlayDenySFX();
                 return;
             }
             
@@ -422,6 +447,7 @@ namespace Characters
             if (currentGoKart.CheckForDoubledCarComponents(equippedCarComponent))
             {
                 currentState = States.Idle;
+                PlayDenySFX();
                 return;
             }
             
@@ -429,11 +455,16 @@ namespace Characters
             if (currentGoKart.GetFreeCarComponentSlotIndex() < 0)
             {
                 currentState = States.Idle;
+                PlayDenySFX();
                 return;
             }
             
             // Return if equippedCarComponent is not intact.
-            if (equippedCarComponent.status != CarComponent.Status.Intact) return;
+            if (equippedCarComponent.status != CarComponent.Status.Intact)
+            {
+                PlayDenySFX();
+                return;
+            }
 
             // TODO: Here the QuickTime-Event will be played in future.
             
@@ -450,7 +481,7 @@ namespace Characters
         {
             // If Unit has a Tool in Hand:
             // Un-Parents the Tool -> Activates Rigidbody -> Sets equippedTool to Null.
-            if (equippedTool != null)
+            if (equippedTool is not null)
             {
                 Transform toolToDrop = toolSlot.GetChild(0);
                 toolToDrop.SetParent(null);
@@ -523,6 +554,12 @@ namespace Characters
             }
 
             return closestDistanceSlot;
+        }
+
+        private void PlayDenySFX()
+        {
+            audioSource.clip = denySFX;
+            audioSource.Play();
         }
     }
 }
