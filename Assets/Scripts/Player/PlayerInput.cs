@@ -22,10 +22,8 @@ namespace Player
 
         private float mouseDownTime;
         private float keyDownTime;
-        private float keyDownCooldown = 0.1f;
+        private const float keyDownCooldown = 0.4f;
         private Vector2 startMousePosition;
-
-        private KeyCode lastHitKey;
         
         public GameObject moveToSpritePrefab;
 
@@ -52,6 +50,7 @@ namespace Player
         private void HandleSelectionInputs()
         {
             HandleMouseInputs();
+            HandleUnitFocusInputs();
             HandleHotKeyInputs();
         }
 
@@ -210,9 +209,6 @@ namespace Player
         private void HandleUnitFocusInputs()
         {
             keyDownTime -= Time.deltaTime;
-
-            if (Input.anyKeyDown)
-                lastHitKey = Event.current.keyCode;
             
             if (Input.GetKeyDown(KeyCode.Alpha1) ||
                 Input.GetKeyDown(KeyCode.Alpha2) ||
@@ -238,15 +234,15 @@ namespace Player
                             horse = availableUnit;
                     }
                 
-                    if (lastHitKey == KeyCode.Alpha1)
+                    if (Input.GetKeyDown(KeyCode.Alpha1))
                     {
                         cameraMovement.FocusOnUnit(bunny.unitsRoomLocation.ToString());
                     }
-                    else if (lastHitKey == KeyCode.Alpha2)
+                    else if (Input.GetKeyDown(KeyCode.Alpha2))
                     {
                         cameraMovement.FocusOnUnit(elephant.unitsRoomLocation.ToString());
                     }
-                    else if (lastHitKey == KeyCode.Alpha3)
+                    else if (Input.GetKeyDown(KeyCode.Alpha3))
                     {
                         cameraMovement.FocusOnUnit(horse.unitsRoomLocation.ToString());
                     }
