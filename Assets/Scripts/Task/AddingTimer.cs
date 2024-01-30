@@ -7,7 +7,6 @@ namespace Task
 {
     public class AddingTimer : MonoBehaviour
     {
-    
         public NavMeshAgent unitToAddCarComponent;
     
         public float remainingAddingTime = 3f;
@@ -35,6 +34,9 @@ namespace Task
 
             // Initializing GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
+            
+            // Play Repair-SFX.
+            unitToAddCarComponent.GetComponent<SelectableUnit>().PlayRepairSFX();
         }
 
         private void Update()

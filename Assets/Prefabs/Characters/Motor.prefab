@@ -247,10 +247,14 @@ MonoBehaviour:
   unitsUIAvatarSprite: {fileID: 21300000, guid: 8353b2d16c305394e9e545cd4d3f127a, type: 3}
   unitUIController: {fileID: 0}
   denySFX: {fileID: 8300000, guid: 0636fb439ba6a7b4a8c1fd37f2330b0f, type: 3}
+  grabSFX: {fileID: 8300000, guid: 4a11a8277e970024fb9090a6615744c0, type: 3}
+  dropSFX: {fileID: 8300000, guid: 41b2a821cd620b844b6a90f9fb097353, type: 3}
+  repairSFX: {fileID: 8300000, guid: fec3bc5a0e5048b4a93faac4ed8df19f, type: 3}
   toolSlot: {fileID: 7435548166349052246}
   componentSlot: {fileID: 7258020210707435333}
   equippedCarComponent: {fileID: 0}
   currentState: 0
+  unitsRoomLocation: 0
   unitUIBorder: {fileID: 0}
   unitUIColor: {r: 1, g: 0.47843137, b: 0, a: 1}
 --- !u!114 &8612681969415062105
@@ -279,7 +283,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -34,6 +34,9 @@ public class RemovingTimer : MonoBehaviour
 
         // Initializing GoKart Reference.
         currentGoKart = TaskManager.Instance.currentGoKart;
+        
+        // Play Repair-SFX.
+        unitToRemoveCarComponentAgent.GetComponent<SelectableUnit>().PlayRepairSFX();
     }
 
     private void Update()
@@ -57,6 +60,7 @@ public class RemovingTimer : MonoBehaviour
                 remainingRemovingTime = 0;
                 UPDATE_RemovedCarComponent();
                 KillRemovingTimerComponent();
+                unitToRemoveCarComponent.PlayGrabSFX();
                 break;
         }
     }

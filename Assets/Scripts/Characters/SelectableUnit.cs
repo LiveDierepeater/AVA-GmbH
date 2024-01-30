@@ -23,6 +23,9 @@ namespace Characters
 
         [Header("Audio Clips")]
         public AudioClip denySFX;
+        public AudioClip grabSFX;
+        public AudioClip dropSFX;
+        public AudioClip repairSFX;
         [Space(10)]
         
         [Header("Item Slots")]
@@ -308,6 +311,9 @@ namespace Characters
                     
                     // Update Units UI.
                     unitUIController.ClearItemUISprite();
+
+                    // Drop Tool SFX.
+                    PlayDropSFX();
                 }
                 else
                     // Tool is not from this Station.
@@ -328,6 +334,9 @@ namespace Characters
 
             // Update Units UI.
             unitUIController.UPDATE_UnitUI();
+
+            // Play Grab-SFX.
+            PlayGrabSFX();
         }
 
         private void UPDATE_GrabCarComponent()
@@ -345,6 +354,9 @@ namespace Characters
                     
                     // Update Units UI:
                     unitUIController.ClearItemUISprite();
+
+                    // Drop Component SFX.
+                    PlayDropSFX();
                 }
                 else
                     // Tool is not from this Station.
@@ -377,6 +389,9 @@ namespace Characters
                 // Update Units UI:
                 unitUIController.UPDATE_UnitUI();
                 
+                // Grab Component SFX.
+                PlayGrabSFX();
+                
                 return;
             }
             
@@ -387,6 +402,9 @@ namespace Characters
             
             // Update Units UI.
             unitUIController.UPDATE_UnitUI();
+
+            // Play Grab-SFX.
+            PlayGrabSFX();
         }
 
         private void UPDATE_RepairCarComponents()
@@ -395,8 +413,8 @@ namespace Characters
             
             if (TaskManager.Instance.damagedParts.Count == 0)               // Check if there are damaged Parts left.
             {
-                PlayDenySFX();
                 currentState = States.Idle;
+                PlayDenySFX();
                 return;
             }
             
@@ -471,6 +489,7 @@ namespace Characters
             // Return if equippedCarComponent is not intact.
             if (equippedCarComponent.status != CarComponent.Status.Intact)
             {
+                currentState = States.Idle;
                 PlayDenySFX();
                 return;
             }
@@ -500,11 +519,14 @@ namespace Characters
                 newRigidbody.mass = 30;
 
                 equippedTool = null;
+                
+                // Play Drop-SFX.
+                PlayDropSFX();
             }
             
             // If Unit has a CarComponent in Hand:
             // Un-Parents the CarComponent -> Activates Rigidbody -> Sets equippedCarComponent to Null.
-            else if (equippedCarComponent != null)
+            else if (equippedCarComponent is not null)
             {
                 Transform componentToDrop = componentSlot.GetChild(0);
                 componentToDrop.SetParent(null);
@@ -514,6 +536,9 @@ namespace Characters
                 newRigidbody.mass = 30;
                 
                 equippedCarComponent = null;
+                
+                // Play Drop-SFX.
+                PlayDropSFX();
             }
 
             unitUIController.ClearItemUISprite();
@@ -568,6 +593,24 @@ namespace Characters
         private void PlayDenySFX()
         {
             audioSource.clip = denySFX;
+            audioSource.Play();
+        }
+
+        public void PlayGrabSFX()
+        {
+            audioSource.clip = grabSFX;
+            audioSource.Play();
+        }
+
+        private void PlayDropSFX()
+        {
+            audioSource.clip = dropSFX;
+            audioSource.Play();
+        }
+
+        public void PlayRepairSFX()
+        {
+            audioSource.clip = repairSFX;
             audioSource.Play();
         }
     }

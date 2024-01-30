@@ -33,6 +33,9 @@ namespace Task
             
             // Initializing GoKart Reference.
             currentGoKart = TaskManager.Instance.currentGoKart;
+            
+            // Play Repair-SFX.
+            unitToRepairAgent.GetComponent<SelectableUnit>().PlayRepairSFX();
         }
 
         private void Update()
