@@ -112,5 +112,13 @@ namespace Player
                     cam.transform.eulerAngles.z);
             }
         }
+
+        public void FocusOnUnit(string roomName)
+        {
+            if (roomName == "Garage")
+                room = Room.Garage;
+            else
+                room = Room.Storage;
+        }
     }
 }

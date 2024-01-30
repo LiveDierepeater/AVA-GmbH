@@ -1,4 +1,3 @@
-using System;
 using Characters;
 using UnityEngine;
 using Karts;
@@ -13,6 +12,8 @@ namespace Task
         public CarComponentsListUI carComponentsRightListUI;
 
         private MoneyEconomy moneyEconomy;
+
+        [Header("Unit Room Indicator")] public Transform unitRoomIndicator;
 
         [Header("GoKartTarget")] public Transform goKartTargetDestination;
 
@@ -58,15 +59,27 @@ namespace Task
         {
             foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
             {
+                SetUnitsRoomLocation(availableUnit);
+                
                 if (availableUnit.unitUIBorder.color != availableUnit.unitUIColor)
                     availableUnit.unitUIBorder.color = availableUnit.unitUIColor;
             }
             
             foreach (SelectableUnit selectedUnit in SelectionManager.Instance.SelectedUnits)
             {
+                SetUnitsRoomLocation(selectedUnit);
+                
                 if (selectedUnit.unitUIBorder.color != Color.white)
                     selectedUnit.unitUIBorder.color = Color.white;
             }
+        }
+
+        private void SetUnitsRoomLocation(SelectableUnit unit)
+        {
+            if (unit.transform.position.x < unitRoomIndicator.transform.position.x)
+                unit.unitsRoomLocation = SelectableUnit.Room.Garage;
+            else
+                unit.unitsRoomLocation = SelectableUnit.Room.Storage;
         }
 
         private void TaskManager_OnGoKartFinished()

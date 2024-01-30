@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Characters;
@@ -9,6 +8,8 @@ namespace Player
     public class PlayerInput : MonoBehaviour
     {
         private new Camera camera;
+        private CameraMovement cameraMovement;
+        
         [SerializeField] private RectTransform selectionBox;
         [SerializeField] private LayerMask unitLayers;
         [SerializeField] private LayerMask groundToolComponentLayerMask;
@@ -20,14 +21,24 @@ namespace Player
         public Texture2D rightClickOnGroundCursor;
 
         private float mouseDownTime;
+        private float keyDownTime;
+        private float keyDownCooldown = 0.1f;
         private Vector2 startMousePosition;
+
+        private KeyCode lastHitKey;
         
         public GameObject moveToSpritePrefab;
 
         private void Awake()
         {
             camera = GetComponent<Camera>();
+            cameraMovement = GetComponent<CameraMovement>();
             InitializeMouseCursor();
+        }
+
+        private void Start()
+        {
+            keyDownTime = keyDownCooldown;
         }
 
         private void Update()
@@ -196,6 +207,55 @@ namespace Player
             }
         }
 
+        private void HandleUnitFocusInputs()
+        {
+            keyDownTime -= Time.deltaTime;
+
+            if (Input.anyKeyDown)
+                lastHitKey = Event.current.keyCode;
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1) ||
+                Input.GetKeyDown(KeyCode.Alpha2) ||
+                Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (keyDownTime < 0)
+                {
+                    keyDownTime = keyDownCooldown;
+                }
+                else
+                {
+                    SelectableUnit bunny = null;
+                    SelectableUnit elephant = null;
+                    SelectableUnit horse = null;
+                
+                    foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
+                    {
+                        if (availableUnit.name == "Bunny")
+                            bunny = availableUnit;
+                        else if (availableUnit.name == "Elephant")
+                            elephant = availableUnit;
+                        else
+                            horse = availableUnit;
+                    }
+                
+                    if (lastHitKey == KeyCode.Alpha1)
+                    {
+                        cameraMovement.FocusOnUnit(bunny.unitsRoomLocation.ToString());
+                    }
+                    else if (lastHitKey == KeyCode.Alpha2)
+                    {
+                        cameraMovement.FocusOnUnit(elephant.unitsRoomLocation.ToString());
+                    }
+                    else if (lastHitKey == KeyCode.Alpha3)
+                    {
+                        cameraMovement.FocusOnUnit(horse.unitsRoomLocation.ToString());
+                    }
+                    
+                    keyDownTime = keyDownCooldown;
+                }
+            }
+        }
+
         private void HandleMovementInputs()
         {
             if (Input.GetKeyUp(KeyCode.Mouse1) && SelectionManager.Instance.SelectedUnits.Count > 0)
@@ -281,7 +341,7 @@ namespace Player
                         Cursor.SetCursor(rightClickCursor, new Vector2(50, 50), CursorMode.Auto);
                 
                 if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Units")
-                    Cursor.SetCursor(leftClickCursor, new Vector2(0, 0), CursorMode.Auto);
+                    Cursor.SetCursor(leftClickCursor, new Vector2(50, 50), CursorMode.Auto);
                 
                 if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Ground")
                     if (SelectionManager.Instance.SelectedUnits.Count != 0)

@@ -49,6 +49,14 @@ namespace Characters
         }
         
         public States currentState;
+        
+        public enum Room
+        {
+            Garage,
+            Storage
+        }
+
+        public Room unitsRoomLocation;
 
         public Image unitUIBorder;
 
@@ -62,6 +70,7 @@ namespace Characters
             audioSource = GetComponent<AudioSource>();
             
             currentState = States.Idle;
+            unitsRoomLocation = Room.Garage;
         }
 
         private void NewGoKartReference()
