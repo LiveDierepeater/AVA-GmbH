@@ -46,7 +46,8 @@ namespace Task
         private void Update()
         {
             // Return if Unit is not in range.
-            if (!currentGoKart.IsUnitInRange(unitToRemoveCarComponentAgent)) return;
+            if (!currentGoKart.IsUnitInRange(unitToRemoveCarComponentAgent) ||
+                unit.currentState != SelectableUnit.States.RemoveCarComponent) return;
 
             // Tick time.
             TickTimer();
