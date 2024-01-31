@@ -8,6 +8,7 @@ namespace Task
     public class AddingTimer : MonoBehaviour
     {
         public NavMeshAgent unitToAddCarComponent;
+        public SelectableUnit unit;
     
         public float remainingAddingTime = 3f;
 
@@ -28,6 +29,8 @@ namespace Task
 
         private void Start()
         {
+            unit = unitToAddCarComponent.GetComponent<SelectableUnit>();
+            
             // Initializing GameManager Reference for OnNextGoKart Event.
             gameManager = TaskManager.Instance.gameManager;
             gameManager.OnNextGoKart += NewGoKartReference;
@@ -42,7 +45,8 @@ namespace Task
         private void Update()
         {
             // Return if Unit is not in range.
-            if (!currentGoKart.IsUnitInRange(unitToAddCarComponent)) return;
+            if (!currentGoKart.IsUnitInRange(unitToAddCarComponent) ||
+                unit.currentState != SelectableUnit.States.AddCarComponent) return;
 
             // Tick time.
             TickTimer();

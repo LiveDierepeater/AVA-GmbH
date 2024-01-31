@@ -386,6 +386,14 @@ namespace Characters
                 newCarComponent.transform.localRotation = Quaternion.identity;
                 equippedCarComponent = newCarComponent.GetComponent<CarComponent>();
                 
+                // Check if Component has AddingTimer.cs
+                // When Component has AddingTimer.cs -> Change the navMeshAgent-Reference to this.agent.
+                if (newCarComponent.TryGetComponent(out AddingTimer addingTimer))
+                {
+                    addingTimer.unitToAddCarComponent = agent;
+                    addingTimer.unit = this;
+                }
+                
                 // Update Units UI:
                 unitUIController.UPDATE_UnitUI();
                 
