@@ -8,6 +8,7 @@ namespace Task
     public class RepairTimer : MonoBehaviour
     {
         public NavMeshAgent unitToRepairAgent;
+        public SelectableUnit unit;
     
         public float remainingRepairTime = 3f;
 
@@ -27,6 +28,8 @@ namespace Task
 
         private void Start()
         {
+            unit = unitToRepairAgent.GetComponent<SelectableUnit>();
+            
             // Initializing GameManager Reference for OnNextGoKart Event.
             gameManager = TaskManager.Instance.gameManager;
             gameManager.OnNextGoKart += NewGoKartReference;
@@ -41,7 +44,8 @@ namespace Task
         private void Update()
         {
             // Return if Unit is not in range.
-            if (!currentGoKart.IsUnitInRange(unitToRepairAgent)) return;
+            if (!currentGoKart.IsUnitInRange(unitToRepairAgent) ||
+                unit.currentState != SelectableUnit.States.RepairKart) return;
 
             // Tick time.
             TickTimer();
