@@ -25,6 +25,9 @@ namespace Player
         private Vector2 startMousePosition;
         
         public GameObject moveToSpritePrefab;
+        
+        private KeyCode lastHitKey;
+        private KeyCode currentHitKey;
 
         private void Awake()
         {
@@ -204,50 +207,75 @@ namespace Player
                 }
             }
         }
-
+        
         private void HandleUnitFocusInputs()
         {
             keyDownTime -= Time.deltaTime;
+            
+            if (keyDownTime < 0)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    keyDownTime = keyDownCooldown;
+                    lastHitKey = KeyCode.Alpha1;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    keyDownTime = keyDownCooldown;
+                    lastHitKey = KeyCode.Alpha2;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    keyDownTime = keyDownCooldown;
+                    lastHitKey = KeyCode.Alpha3;
+                }
+                
+                return;
+            }
+            
+            if (keyDownTime < 0) return;
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                currentHitKey = KeyCode.Alpha1;
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                currentHitKey = KeyCode.Alpha2;
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                currentHitKey = KeyCode.Alpha3;
             
             if (Input.GetKeyDown(KeyCode.Alpha1) ||
                 Input.GetKeyDown(KeyCode.Alpha2) ||
                 Input.GetKeyDown(KeyCode.Alpha3))
             {
-                if (keyDownTime < 0)
+                SelectableUnit bunny = null;
+                SelectableUnit elephant = null;
+                SelectableUnit horse = null;
+            
+                foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
                 {
-                    keyDownTime = keyDownCooldown;
+                    if (availableUnit.name == "Bunny")
+                        bunny = availableUnit;
+                    else if (availableUnit.name == "Elephant")
+                        elephant = availableUnit;
+                    else
+                        horse = availableUnit;
                 }
-                else
-                {
-                    SelectableUnit bunny = null;
-                    SelectableUnit elephant = null;
-                    SelectableUnit horse = null;
+            
+                if (currentHitKey != lastHitKey) return;
+
+                if (currentHitKey == KeyCode.Alpha1)
+                    cameraMovement.FocusOnUnit(bunny.unitsRoomLocation.ToString());
                 
-                    foreach (SelectableUnit availableUnit in SelectionManager.Instance.AvailableUnits)
-                    {
-                        if (availableUnit.name == "Bunny")
-                            bunny = availableUnit;
-                        else if (availableUnit.name == "Elephant")
-                            elephant = availableUnit;
-                        else
-                            horse = availableUnit;
-                    }
+                else if (currentHitKey == KeyCode.Alpha2)
+                    cameraMovement.FocusOnUnit(elephant.unitsRoomLocation.ToString());
                 
-                    if (Input.GetKeyDown(KeyCode.Alpha1))
-                    {
-                        cameraMovement.FocusOnUnit(bunny.unitsRoomLocation.ToString());
-                    }
-                    else if (Input.GetKeyDown(KeyCode.Alpha2))
-                    {
-                        cameraMovement.FocusOnUnit(elephant.unitsRoomLocation.ToString());
-                    }
-                    else if (Input.GetKeyDown(KeyCode.Alpha3))
-                    {
-                        cameraMovement.FocusOnUnit(horse.unitsRoomLocation.ToString());
-                    }
-                    
-                    keyDownTime = keyDownCooldown;
-                }
+                else if (currentHitKey == KeyCode.Alpha3)
+                    cameraMovement.FocusOnUnit(horse.unitsRoomLocation.ToString());
+                
+                keyDownTime = keyDownCooldown;
             }
         }
 
