@@ -12,7 +12,7 @@ namespace UI
     {
         public TextMeshProUGUI textBox;
 
-        private const string label_01 = "These are your workers!\n\nSelect one or more workers with your \"left mouse button\".\n\n Or with the \"1, 2 and 3\" keys.";
+        private const string label_01 = "These are your workers!\n\nSelect one or more workers with your \"left mouse button\".\n\n Also you can select them by clicking on their UI at the bottom.\n\n Or with the \"1, 2 and 3\" keys.";
         private const string label_02 = "With the \"right mouse button\", you can move your workers and equip them with \"tools\".";
         private const string label_03 = "A worker with the fitting \"tool\" can go and repair the Go-Kart.";
         private const string label_04 = "There is your first customer!\n\nSelect the fitting tool and try repairing the Go-Kart.\n\nYou can put an equipped \"tool\" back onto its proper Station.";
@@ -26,7 +26,7 @@ namespace UI
 
         private readonly List<string> labels = new List<string>();
 
-        public int currentTip;
+        private int currentTip;
     
         private void Awake()
         {
