@@ -100,5 +100,16 @@ namespace UI
             if (unitAnimationUI.color == Color.clear)
                 unitAnimationUI.color = Color.white;
         }
+
+        public void AddUnitToSelection()
+        {
+            Invoke(nameof(SelectUnit), 0.05f);
+        }
+
+        private void SelectUnit()
+        {
+            SelectionManager.Instance.DeselectAll();
+            SelectionManager.Instance.Select(unit);
+        }
     }
 }

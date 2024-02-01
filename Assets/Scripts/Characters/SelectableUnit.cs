@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Karts;
 using Task;
 using UI;
-using UnityEngine.UI;
 
 namespace Characters
 {
