@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public AudioClip PauseSFX;
     public AudioClip ResumeSFX;
+
+    public Transform ControlsUI;
     
     private GameObject pauseMenu;
     private AudioSource audioSource;
@@ -41,6 +43,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+        ControlsUI.gameObject.SetActive(false);
         
         TaskManager.Instance.soundManager.ResumeMusic();
         
@@ -48,7 +51,35 @@ public class PauseMenu : MonoBehaviour
         audioSource.Play();
     }
 
-    public void LoadMainMenu()
+    public void Controls()
+    {
+        if (ControlsUI.gameObject.activeSelf)
+        {
+            audioSource.clip = ResumeSFX;
+            audioSource.Play();
+            
+            ControlsUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            audioSource.clip = PauseSFX;
+            audioSource.Play();
+            
+            ControlsUI.gameObject.SetActive(true);
+        }
+    }
+
+    public void ExitToMainMenu()
+    {
+        audioSource.clip = ResumeSFX;
+        audioSource.Play();
+        
+        Time.timeScale = 1;
+        
+        Invoke(nameof(LoadMainMenu), 0.2f);
+    }
+
+    private void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
     }

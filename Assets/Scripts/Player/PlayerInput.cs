@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using UnityEngine;
 using Characters;
-using UnityEngine.EventSystems;
 
 namespace Player
 {
@@ -377,7 +375,9 @@ namespace Player
 
         private void HandleKeyInputs()
         {
-            if (Input.GetKeyUp(KeyCode.S) && SelectionManager.Instance.SelectedUnits.Count > 0 || Input.GetKeyUp(KeyCode.DownArrow) && SelectionManager.Instance.SelectedUnits.Count > 0)
+            if (Input.GetKeyDown(KeyCode.S) && SelectionManager.Instance.SelectedUnits.Count > 0 ||
+                Input.GetKeyDown(KeyCode.DownArrow) && SelectionManager.Instance.SelectedUnits.Count > 0 || 
+                Input.GetKeyDown(KeyCode.Mouse2) && SelectionManager.Instance.SelectedUnits.Count > 0)
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, groundToolComponentLayerMask))
                 {
