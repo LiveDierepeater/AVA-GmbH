@@ -1,6 +1,5 @@
-using Karts;
 using UnityEngine;
-using Unity.VisualScripting;
+using Karts;
 
 namespace Environment
 {
