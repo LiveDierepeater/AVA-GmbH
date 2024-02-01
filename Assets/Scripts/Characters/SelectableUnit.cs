@@ -443,7 +443,6 @@ namespace Characters
                 return;
             }
             
-            // TODO: Here the QuickTime-Event will be played in future.
             // Return if there is already a RepairTimer.cs Component on the partToRepair.
             if (partToRepair.TryGetComponent(out RepairTimer _)) return;
             
@@ -466,10 +465,18 @@ namespace Characters
             // This carComponentToRemove will get removed in future from the currentGoKart.
             CarComponent carComponentToRemove = currentGoKart.brokenParts[0];
             
-            // TODO: Here the QuickTime-Event will be played in future.
             // Return if there is already a Unit removing the CarComponent...
             // ... by checking if a RemovingTimer.cs is on this carComponentToRemove.
-            if (carComponentToRemove.TryGetComponent(out RemovingTimer _)) return;
+            if (carComponentToRemove.TryGetComponent(out RemovingTimer removeTimer))
+            {
+                if (removeTimer.unit is null)
+                {
+                    removeTimer.unit = this;
+                    removeTimer.unitToRemoveCarComponentAgent = agent;
+                }
+                
+                return;
+            }
             
             // Timer which simulates the time an Unit needs to remove a CarComponent.
             RemovingTimer removingTimer = carComponentToRemove.gameObject.AddComponent<RemovingTimer>();
@@ -501,8 +508,6 @@ namespace Characters
                 PlayDenySFX();
                 return;
             }
-
-            // TODO: Here the QuickTime-Event will be played in future.
             
             // Return if there is already another Unit adding the currently equippedCarComponent...
             // ... by checking if an AddingTimer.cs is on this equippedCarComponent.
