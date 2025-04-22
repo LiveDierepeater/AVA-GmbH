@@ -1,4 +1,4 @@
-# Go-Rent Due!
+# Go-Rent Due! on [Itch.io](https://fictionmaster.itch.io/go-rent-due)!
 
 ## Game Description
 "YOU ALL OWE ME MORE MONEY TOMORROW! I SWEAR IF YOU DON'T BRING IT, I WILL CLOSE THIS PLACE DOWN!"
